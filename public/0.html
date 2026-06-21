@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Boblin</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <nav>
+    <a href="/">Main menu</a>
+  </nav>
+  <body>
+    <input id="name" autocomplete="off" value="Boblin"/> <br>
+    <label for="races">race:</label>
+    <select name="races" id="race">
+      <option value="human">Human</option>
+      <option value="elf">Elf</option>
+      <option value="halfling">Halfling</option>
+      <option value="orc">Orc</option>
+      <option value="dwarf">Dwarf</option>
+      <option value="gnome">Gnome</option>
+      <option value="nethertouched">Nethertouched</option>
+      <option value="bird-folk">Bird-folk</option>
+      <option value="reptilian">Reptilian</option>
+      <option value="elemental">Elemental</option>
+      <option value="fae">Fae</option>
+      <option value="half-Giant">Half-Giant</option>
+      <option value="forged">Forged</option>
+      <option value="triac">Triac</option>
+      <option value="half-Dragon">Half-Dragon</option>
+      <option value="minotaur">Minotaur</option>
+      <option value="custom">Custom</option>
+    </select> <br>
+
+    <label for="classes">Class:</label>
+    <select value="" name="classes" id="classs">
+      <option value="warrior">warrior</option>
+      <option value="mage">mage</option>
+      <option value="scoundrel">scoundrel</option>
+      <option value="ecc">eccentric</option>
+      <option value="psion">psion</option>
+      <option value="verdant">verdant</option>
+      <option value="harm">harmonarch</option>
+      <option value="pug">pugilist</option>
+    </select>
+
+    <label id="wlabel" for="warriors">Subclass:</label>
+    <select name="warriors" id="warrior">
+      <option value="holy">Holy knight</option>
+      <option value="death">Death knight</option>
+      <option value="spellblade">spellblade</option>
+      <option value="artillerist">Artillerist</option>
+      <option value="gladiator">Gladiator</option>
+    </select>
+
+    <label id="mlabel" for="mages">Subclass:</label>
+    <select name="mages" id="mage">
+      <option value="evoker">Evoker</option>
+      <option value="necro">Necromancer</option>
+      <option value="chrono">Chronomancer</option>
+      <option value="cryo">Cryomancer</option>
+      <option value="storm">Stormcaller</option>
+    </select>
+
+    <label id="elabel" for="eccs">Subclass:</label>
+    <select name="eccs" id="ecc">
+      <option value="occultist">Occultist</option>
+      <option value="nebulon">Nebulon</option>
+      <option value="pyromaniac">Pyromaniac</option>
+      <option value="plague">Plague doctor</option>
+      <option value="sanguine">Sanguine sorcerer</option>
+    </select>
+
+    <label id="slabel" for="scoundrels">Subclass:</label>
+    <select name="scoundrels" id="scoundrel">
+      <option value="bounty">Bounty hunter</option>
+      <option value="pirate">Pirate</option>
+      <option value="shadowblade">Shadowblade</option>
+      <option value="duelist">Duelist</option>
+      <option value="dead">Dead-eye</option>
+    </select>
+
+    <label id="vlabel" for="verdants">Subclass:</label>
+    <select name="verdants" id="verdant">
+      <option value="shapeshifter">Shapeshifter</option>
+      <option value="sylvan">Sylvan Warden</option>
+      <option value="beastmaster">Beastmaster</option>
+      <option value="elementalist">Elementalist</option>
+      <option value="infested">Infested</option>
+    </select>
+
+    <label id="plabel" for="psions">Subclass:</label>
+    <select name="psions" id="psion">
+      <option value="kineticist">Kineticist</option>
+      <option value="dream">Dreamweaver</option>
+      <option value="diviner">Diviner</option>
+      <option value="mind">Mind-Bender</option>
+      <option value="mirror">Mirrorblade</option>
+    </select>
+
+    <label id="hlabel" for="harms">Subclass:</label>
+    <select name="harms" id="harm">
+      <option value="bard">Bard</option>
+      <option value="siren">Siren</option>
+      <option value="jester">Jester</option>
+      <option value="metal">Metal head</option>
+      <option value="ghost">Ghost writer</option>
+    </select>
+
+    <label id="pulabel" for="pugs">Subclass:</label>
+    <select name="pugs" id="pug">
+      <option value="monk">Monk</option>
+      <option value="mystic">Mystic</option>
+      <option value="titan">Titan</option>
+      <option value="conduit">Conduit</option>
+      <option value="rager">Rager</option>
+    </select>
+    <table>
+      <tr>
+        <th>Mastery</th>
+        <th>Stats</th>
+        <th>bonuses</th>
+        <th>bonuses</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Body</td>
+        <td></td>
+        <td>bonuses</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Senses</td>
+        <td><data id="bodytxt" value="0">34</data></td>
+        <td>bonuses</td>
+      </tr>
+       <tr>
+        <td></td>
+        <td>Mind</td>
+        <td></td>
+        <td>bonuses</td>
+      </tr>
+       <tr>
+        <td></td>
+        <td>Fortune</td>
+        <td></td>
+        <td>bonuses</td>
+      </tr>
+    </table>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        
+        const name = document.getElementById('name');
+        const classs = document.getElementById('classs');
+        const race = document.getElementById('race');
+        const warrior = document.getElementById('warrior');
+        const wlabel = document.getElementById('wlabel');
+        const mage = document.getElementById('mage');
+        const mlabel = document.getElementById('mlabel');
+        const ecc = document.getElementById('ecc');
+        const elabel = document.getElementById('elabel');
+        const scoundrel = document.getElementById('scoundrel');
+        const slabel = document.getElementById('slabel');
+        const verdant = document.getElementById('verdant');
+        const vlabel = document.getElementById('vlabel');
+        const psion = document.getElementById('psion');
+        const plabel = document.getElementById('plabel');
+        const harm = document.getElementById('harm');
+        const hlabel = document.getElementById('hlabel');
+        const pug = document.getElementById('pug');
+        const pulabel = document.getElementById('pulabel');
+        const bodytxt = document.getElementById('bodytxt');
+        var subclass = "";
+        var body = 0, senses = 0, mind = 0, fortune = 0;
+        warrior.style.display = "none"
+        wlabel.style.display = "none"
+        mage.style.display = "none"
+        mlabel.style.display = "none"
+        ecc.style.display = "none"
+        elabel.style.display = "none"
+        scoundrel.style.display = "none"
+        slabel.style.display = "none"
+        verdant.style.display = "none"
+        vlabel.style.display = "none"
+        psion.style.display = "none"
+        plabel.style.display = "none"
+        harm.style.display = "none"
+        hlabel.style.display = "none"
+        pug.style.display = "none"
+        pulabel.style.display = "none"
+
+        socket.on('connection', (data) => {
+            name.value=data.chars[0].name
+            document.getElementsByTagName("TITLE")[0].text = data.chars[0].name
+            race.value = data.chars[0].race
+            classs.value = data.chars[0].classs
+            body = data.chars[0].body;
+            senses = data.chars[0].senses;
+            mind = data.chars[0].mind;
+            fortune = data.chars[0].fortune;
+            displaySubclasses(data.chars[0].classs, data);
+        })
+
+        classs.addEventListener('change', (e) => {
+            e.preventDefault();
+            displaySubclasses(classs.value);
+            bodytxt.textContent = "sd"
+            socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, body: body, senses: senses, mind: mind, fortune: fortune});
+        });
+
+        warrior.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = warrior.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:warrior.value});
+        });
+
+        mage.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = mage.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:mage.value});
+        });
+
+        scoundrel.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = scoundrel.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:scoundrel.value});
+        });
+
+        ecc.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = ecc.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:ecc.value});
+        });
+
+        psion.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = psion.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:psion.value});
+        });
+
+        harm.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = harm.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:harm.value});
+        });
+
+        pug.addEventListener('change', (e) => {
+          e.preventDefault();
+          subclass = pug.value;
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:pug.value});
+        });
+
+
+        race.addEventListener('change', (e) => {
+            e.preventDefault();
+            socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, body: body, senses: senses, mind: mind, fortune: fortune});
+        });
+
+        name.addEventListener('change', (e) => {
+            e.preventDefault();
+          document.getElementsByTagName("TITLE")[0].text = name.value;
+            socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:subclass});
+        });
+        function displaySubclasses(classs, data){
+            if (classs == "warrior"){
+              warrior.style.display = "inline";
+              wlabel.style.display = "inline";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              console.log(data.subclass);
+              if (data.chars[0].sheet>-1){
+                warrior.value = data.chars[0].subclass;
+              }
+            } else if (classs == "mage"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "inline";
+              mlabel.style.display = "inline"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              if (data.chars[0].sheet>-1){
+                mage.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass;
+              }
+            } else if (classs == "scoundrel"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "inline"
+              slabel.style.display = "inline"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              if (data.chars[0].sheet>-1){
+                scoundrel.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass;
+              }
+            } else if (classs == "ecc"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "inline"
+              elabel.style.display = "inline"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              if (data.chars[0].sheet>-1){
+                ecc.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass
+              }
+
+            } else if (classs == "psion"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "inline"
+              plabel.style.display = "inline"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              if (data.chars[0].sheet>-1){
+                psion.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass
+              }
+
+            } else if (classs == "harm"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "inline"
+              hlabel.style.display = "inline"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              if (data.chars[0].sheet>-1){
+                harm.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass
+              }
+
+            } else if (classs == "pug"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "none"
+              vlabel.style.display = "none"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "inline"
+              pulabel.style.display = "inline"
+              if (data.chars[0].sheet>-1){
+                pug.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass
+              }
+            } else if (classs == "verdant"){
+              warrior.style.display = "none";
+              wlabel.style.display = "none";
+              mage.style.display = "none";
+              mlabel.style.display = "none"
+              ecc.style.display = "none"
+              elabel.style.display = "none"
+              scoundrel.style.display = "none"
+              slabel.style.display = "none"
+              verdant.style.display = "inline"
+              vlabel.style.display = "inline"
+              psion.style.display = "none"
+              plabel.style.display = "none"
+              harm.style.display = "none"
+              hlabel.style.display = "none"
+              pug.style.display = "none"
+              pulabel.style.display = "none"
+              if (data.chars[0].sheet>-1){
+                verdant.value = data.chars[0].subclass;
+                subclass = data.chars[0].subclass
+              }
+            } 
+            return;
+        }
+    </script>
+  </body>
+</html>

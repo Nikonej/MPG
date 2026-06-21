@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>MPG</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+    </style>
+  </head>
+  <body>
+    <a href="/">main menu</a>
+    <form id="newchar" action="">
+      <button>new Char</button>
+    </form>
+    <ul id="characters"></ul>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const chars = [];
+        const socket = io();
+
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+        const newchar = document.getElementById('newchar');
+        const messages = document.getElementById('messages');
+        const characters = document.getElementById('characters');
+        var c = 0;
+
+        newchar.addEventListener('submit', (e) => {
+            e.preventDefault();
+            socket.emit('new sheet');
+            });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value) {
+            socket.emit('chat message', input.value);
+            input.value = '';
+            }
+        });
+
+        socket.on('chat message', (msg) => {
+            const item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        socket.on('new boblin', (l) => {
+            console.log(l)
+            while (c<l){
+                const item = document.createElement('li');
+                item.innerHTML = '<a href="/' + c + '">Boblin</a>';
+                characters.appendChild(item)
+                chars.push("Boblin")
+                window.scrollTo(0, document.body.scrollHeight);
+                c++;
+            }
+        });
+
+        socket.on('connection', (data) => {
+            while(c<data.l){
+                const item = document.createElement('li');
+                item.innerHTML = '<a href="/' + c + '">' + data.chars[c].name + '</a>';
+                characters.appendChild(item)
+                window.scrollTo(0, document.body.scrollHeight);
+                c++;
+            }
+        })
+
+        socket.on('charupdate', (data) =>{
+            //console.log(data)
+            const items = document.querySelectorAll('#characters li');
+            items[data.sheet].innerHTML = '<a href="/' + data.sheet + '">' + data.name +'</a>';
+            chars[data.sheet] = data.name
+            //characters[data.sheet].textContent = data.name;
+        })
+
+        
+    </script>
+  </body>
+</html>

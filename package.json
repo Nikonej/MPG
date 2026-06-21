@@ -1,0 +1,10 @@
+{
+  "name": "mpg-sheet",
+  "version": "0.0.1",
+  "description": "time to mathias playing game",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.22.2",
+    "socket.io": "^4.8.3"
+  }
+}
