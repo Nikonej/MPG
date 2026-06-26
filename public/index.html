@@ -27,6 +27,7 @@
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/classes/warrior.js"></script>
     <script>
         const chars = [];
         const socket = io();
@@ -59,7 +60,6 @@
         });
 
         socket.on('new boblin', (l) => {
-            console.log(l)
             while (c<l){
                 const item = document.createElement('li');
                 item.innerHTML = '<a href="/' + c + '">Boblin</a>';
@@ -81,7 +81,6 @@
         })
 
         socket.on('charupdate', (data) =>{
-            //console.log(data)
             const items = document.querySelectorAll('#characters li');
             items[data.sheet].innerHTML = '<a href="/' + data.sheet + '">' + data.name +'</a>';
             chars[data.sheet] = data.name

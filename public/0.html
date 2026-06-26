@@ -11,158 +11,462 @@
       #input:focus { outline: none; }
       #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
 
+      
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
       table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
+        tr:nth-child(even) { background: #efefef; }
       }
+      /* Tooltip container */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted rgb(0, 0, 0); /* Add dots under the hoverable text */
+      cursor: pointer;
+    }
+
+    .line2 {
+      position: relative;
+      display: inline-block;
+      bottom: 43px;
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      width: 300px;
+      background-color: rgb(255, 255, 255);
+      color: #000000;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1; 
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+    .subclass {
+      display:block; 
+      position:absolute; 
+      left:0px;
+      top:75px
+    }
+
+    .subclasses {
+      display:block; 
+      position:relative; 
+      bottom: 19px;
+      right:220px;
+    }
     </style>
   </head>
   <nav>
     <a href="/">Main menu</a>
   </nav>
   <body>
-    <input id="name" autocomplete="off" value="Boblin"/> <br>
-    <label for="races">race:</label>
-    <select name="races" id="race">
-      <option value="human">Human</option>
-      <option value="elf">Elf</option>
-      <option value="halfling">Halfling</option>
-      <option value="orc">Orc</option>
-      <option value="dwarf">Dwarf</option>
-      <option value="gnome">Gnome</option>
-      <option value="nethertouched">Nethertouched</option>
-      <option value="bird-folk">Bird-folk</option>
-      <option value="reptilian">Reptilian</option>
-      <option value="elemental">Elemental</option>
-      <option value="fae">Fae</option>
-      <option value="half-Giant">Half-Giant</option>
-      <option value="forged">Forged</option>
-      <option value="triac">Triac</option>
-      <option value="half-Dragon">Half-Dragon</option>
-      <option value="minotaur">Minotaur</option>
-      <option value="custom">Custom</option>
-    </select> <br>
+    <section>
+      <input id="name" class="write" autocomplete="off" value="Boblin"/> 
+      <label for="level">Level</label>
+      <input id="lvl" class="write" autocomplete="off" name="level" value="1"/>
+      <table style="display:inline-table">
+        <tr>
+          <th></th>
+          <th>current</th>
+          <th></th>
+          <th>max</th>
+        </tr>
+        <tr>
+          <th>HP</th>
+          <th><input id="hp" class="write" autocomplete="off" name="HP" value="0" size="1"/></th>
+          <th>out of</th>
+          <th id="hpmaxtxt">1</th>
+          <th><input id="hpchange" class="write" autocomplete="off" name="HPchange" value="" size="1"/></th>
+        </tr>
+        <tr>
+          <th>mana</th>
+          <th><input id="mp" class="write" autocomplete="off" name="mana" value="0" size="1"/></th>
+          <th>out of</th>
+          <th id="mpmaxtxt">1</th>
+          <th><input id="mpchange" class="write" autocomplete="off" name="MPchange" value="" size="1"/></th>
+        </tr>
+      </table>
+      <br>
+      <label for="races" class="tooltip line2">race:<span class="tooltiptext"><table>
+        <tr>
+          <th>Name</th>
+          <th>Body</th>
+          <th>Senses</th>
+          <th>Mind</th>
+          <th>fortune</th>
+        </tr>
+        <tr>
+          <th>Human</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Elf</th>
+          <th>0</th>
+          <th>2</th>
+          <th>1</th>
+          <th>0</th>
+        </tr>
+        <tr>
+          <th>Halfling</th>
+          <th>0</th>
+          <th>1</th>
+          <th>0</th>
+          <th>2</th>
+        </tr>
+        <tr>
+          <th>Orc</th>
+          <th>2</th>
+          <th>1</th>
+          <th>0</th>
+          <th>0</th>
+        </tr>
+        <tr>
+          <th>Dwarf</th>
+          <th>2</th>
+          <th>0</th>
+          <th>0</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Gnome</th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>0</th>
+        </tr>
+        <tr>
+          <th>Nethertouched</th>
+          <th>1</th>
+          <th>0</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Goblin</th>
+          <th>0</th>
+          <th>2</th>
+          <th>0</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Bird-folk</th>
+          <th>0</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Reptilian</th>
+          <th>1</th>
+          <th>2</th>
+          <th>0</th>
+          <th>0</th>
+        </tr>
+        <tr>
+          <th>Elemental</th>
+          <th>1</th>
+          <th>0</th>
+          <th>0</th>
+          <th>2</th>
+        </tr>
+        <tr>
+          <th>Fae</th>
+          <th>0</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Half-Giant</th>
+          <th>2</th>
+          <th>0</th>
+          <th>1</th>
+          <th>0</th>
+        </tr>
+        <tr>
+          <th>Forged</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>0</th>
+        </tr>
+        <tr>
+          <th>Triac</th>
+          <th>0</th>
+          <th>0</th>
+          <th>2</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Half-Dragon</th>
+          <th>2</th>
+          <th>0</th>
+          <th>0</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Minotaur</th>
+          <th>2</th>
+          <th>0</th>
+          <th>0</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Custom</th>
+          <th>0</th>
+          <th>0</th>
+          <th>0</th>
+          <th>0</th>
+        </tr>
 
-    <label for="classes">Class:</label>
-    <select value="" name="classes" id="classs">
-      <option value="warrior">warrior</option>
-      <option value="mage">mage</option>
-      <option value="scoundrel">scoundrel</option>
-      <option value="ecc">eccentric</option>
-      <option value="psion">psion</option>
-      <option value="verdant">verdant</option>
-      <option value="harm">harmonarch</option>
-      <option value="pug">pugilist</option>
-    </select>
+      </table></span> </label>
+      <select name="races" id="race" class="line2">
+        <option value="human">Human</option>
+        <option value="elf">Elf</option>
+        <option value="halfling">Halfling</option>
+        <option value="orc">Orc</option>
+        <option value="dwarf">Dwarf</option>
+        <option value="gnome">Gnome</option>
+        <option value="nethertouched">Nethertouched</option>
+        <option value="goblin">Goblin</option>
+        <option value="bird-folk">Bird-folk</option>
+        <option value="reptilian">Reptilian</option>
+        <option value="elemental">Elemental</option>
+        <option value="fae">Fae</option>
+        <option value="half-Giant">Half-Giant</option>
+        <option value="forged">Forged</option>
+        <option value="triac">Triac</option>
+        <option value="half-Dragon">Half-Dragon</option>
+        <option value="minotaur">Minotaur</option>
+        <option value="custom">Custom</option>
+      </select> 
+      <label for="classes" class="tooltip line2">Class: <span class="tooltiptext"><table>
+        <tr>
+          <th>Name</th>
+          <th>Body</th>
+          <th>Senses</th>
+          <th>Mind</th>
+          <th>fortune</th>
+        </tr>
+        <tr>
+          <th>Warrior</th>
+          <th>4</th>
+          <th>2</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Mage</th>
+          <th>1</th>
+          <th>1</th>
+          <th>4</th>
+          <th>2</th>
+        </tr>
+        <tr>
+          <th>Scoundrel</th>
+          <th>1</th>
+          <th>3</th>
+          <th>1</th>
+          <th>3</th>
+        </tr>
+        <tr>
+          <th>Eccentric</th>
+          <th>2</th>
+          <th>1</th>
+          <th>3</th>
+          <th>2</th>
+        </tr>
+        <tr>
+          <th>psion</th>
+          <th>1</th>
+          <th>2</th>
+          <th>4</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Verdant</th>
+          <th>3</th>
+          <th>2</th>
+          <th>2</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Harmonarch</th>
+          <th>1</th>
+          <th>2</th>
+          <th>2</th>
+          <th>3</th>
+        </tr>
+        <tr>
+          <th>Pugilist</th>
+          <th>3</th>
+          <th>3</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+      </table></span> </label>
+      <select value="" name="classes" id="classs" class="line2">
+        <option value="warrior">warrior</option>
+        <option value="mage">mage</option>
+        <option value="scoundrel">scoundrel</option>
+        <option value="ecc">eccentric</option>
+        <option value="psion">psion</option>
+        <option value="verdant">verdant</option>
+        <option value="harm">harmonarch</option>
+        <option value="pug">pugilist</option>
+      </select>
 
-    <label id="wlabel" for="warriors">Subclass:</label>
-    <select name="warriors" id="warrior">
-      <option value="holy">Holy knight</option>
-      <option value="death">Death knight</option>
-      <option value="spellblade">spellblade</option>
-      <option value="artillerist">Artillerist</option>
-      <option value="gladiator">Gladiator</option>
-    </select>
+      <label id="wlabel" for="warriors" class="subclass">Subclass:</label>
+      <select name="warriors" class="subclasses" id="warrior">
+        <option value="holy">Holy knight</option>
+        <option value="death">Death knight</option>
+        <option value="spellblade">spellblade</option>
+        <option value="artillerist">Artillerist</option>
+        <option value="gladiator">Gladiator</option>
+      </select>
 
-    <label id="mlabel" for="mages">Subclass:</label>
-    <select name="mages" id="mage">
-      <option value="evoker">Evoker</option>
-      <option value="necro">Necromancer</option>
-      <option value="chrono">Chronomancer</option>
-      <option value="cryo">Cryomancer</option>
-      <option value="storm">Stormcaller</option>
-    </select>
+      <label id="mlabel" for="mages" class="subclass">Subclass:</label>
+      <select name="mages" class="subclasses" id="mage">
+        <option value="evoker">Evoker</option>
+        <option value="necro">Necromancer</option>
+        <option value="chrono">Chronomancer</option>
+        <option value="cryo">Cryomancer</option>
+        <option value="storm">Stormcaller</option>
+      </select>
 
-    <label id="elabel" for="eccs">Subclass:</label>
-    <select name="eccs" id="ecc">
-      <option value="occultist">Occultist</option>
-      <option value="nebulon">Nebulon</option>
-      <option value="pyromaniac">Pyromaniac</option>
-      <option value="plague">Plague doctor</option>
-      <option value="sanguine">Sanguine sorcerer</option>
-    </select>
+      <label id="elabel" for="eccs" class="subclass">Subclass:</label>
+      <select name="eccs" class="subclasses" id="ecc">
+        <option value="occultist">Occultist</option>
+        <option value="nebulon">Nebulon</option>
+        <option value="pyromaniac">Pyromaniac</option>
+        <option value="plague">Plague doctor</option>
+        <option value="sanguine">Sanguine sorcerer</option>
+      </select>
 
-    <label id="slabel" for="scoundrels">Subclass:</label>
-    <select name="scoundrels" id="scoundrel">
-      <option value="bounty">Bounty hunter</option>
-      <option value="pirate">Pirate</option>
-      <option value="shadowblade">Shadowblade</option>
-      <option value="duelist">Duelist</option>
-      <option value="dead">Dead-eye</option>
-    </select>
+      <label id="slabel" for="scoundrels" class="subclass">Subclass:</label>
+      <select name="scoundrels" class="subclasses" id="scoundrel">
+        <option value="bounty">Bounty hunter</option>
+        <option value="pirate">Pirate</option>
+        <option value="shadowblade">Shadowblade</option>
+        <option value="duelist">Duelist</option>
+        <option value="dead">Dead-eye</option>
+      </select>
 
-    <label id="vlabel" for="verdants">Subclass:</label>
-    <select name="verdants" id="verdant">
-      <option value="shapeshifter">Shapeshifter</option>
-      <option value="sylvan">Sylvan Warden</option>
-      <option value="beastmaster">Beastmaster</option>
-      <option value="elementalist">Elementalist</option>
-      <option value="infested">Infested</option>
-    </select>
+      <label id="vlabel" for="verdants" class="subclass">Subclass:</label>
+      <select name="verdants" class="subclasses" id="verdant">
+        <option value="shapeshifter">Shapeshifter</option>
+        <option value="sylvan">Sylvan Warden</option>
+        <option value="beastmaster">Beastmaster</option>
+        <option value="elementalist">Elementalist</option>
+        <option value="infested">Infested</option>
+      </select>
 
-    <label id="plabel" for="psions">Subclass:</label>
-    <select name="psions" id="psion">
-      <option value="kineticist">Kineticist</option>
-      <option value="dream">Dreamweaver</option>
-      <option value="diviner">Diviner</option>
-      <option value="mind">Mind-Bender</option>
-      <option value="mirror">Mirrorblade</option>
-    </select>
+      <label id="plabel" for="psions" class="subclass">Subclass:</label>
+      <select name="psions" class="subclasses" id="psion">
+        <option value="kineticist">Kineticist</option>
+        <option value="dream">Dreamweaver</option>
+        <option value="diviner">Diviner</option>
+        <option value="mind">Mind-Bender</option>
+        <option value="mirror">Mirrorblade</option>
+      </select>
 
-    <label id="hlabel" for="harms">Subclass:</label>
-    <select name="harms" id="harm">
-      <option value="bard">Bard</option>
-      <option value="siren">Siren</option>
-      <option value="jester">Jester</option>
-      <option value="metal">Metal head</option>
-      <option value="ghost">Ghost writer</option>
-    </select>
+      <label id="hlabel" for="harms" class="subclass">Subclass:</label>
+      <select name="harms" class="subclasses" id="harm">
+        <option value="bard">Bard</option>
+        <option value="siren">Siren</option>
+        <option value="jester">Jester</option>
+        <option value="metal">Metal head</option>
+        <option value="ghost">Ghost writer</option>
+      </select>
 
-    <label id="pulabel" for="pugs">Subclass:</label>
-    <select name="pugs" id="pug">
-      <option value="monk">Monk</option>
-      <option value="mystic">Mystic</option>
-      <option value="titan">Titan</option>
-      <option value="conduit">Conduit</option>
-      <option value="rager">Rager</option>
-    </select>
+      <label id="pulabel" for="pugs" class="subclass">Subclass:</label>
+      <select name="pugs" class="subclasses" id="pug">
+        <option value="monk">Monk</option>
+        <option value="mystic">Mystic</option>
+        <option value="titan">Titan</option>
+        <option value="conduit">Conduit</option>
+        <option value="rager">Rager</option>
+      </select>
+  </section>
     <table>
       <tr>
         <th>Mastery</th>
         <th>Stats</th>
-        <th>bonuses</th>
-        <th>bonuses</th>
+        <th>Bonuses</th>
+        <th>Bonuses</th>
+        <th>Bonuses</th>
       </tr>
       <tr>
-        <td></td>
+        <td><input type="checkbox" id="bodyMastery" name="bodyM" value="on" class="masteries"></td>
         <td>Body</td>
-        <td></td>
-        <td>bonuses</td>
+        <td id="body">0</td>
+        <td>Movement</td>
+        <td id="movtxt">6</td>
       </tr>
       <tr>
-        <td></td>
+        <td><input type="checkbox" id="sensesMastery" name="sensesM" value="on" class="masteries"></td>
         <td>Senses</td>
-        <td><data id="bodytxt" value="0">34</data></td>
-        <td>bonuses</td>
+        <td id="sense">0</td>
+        <td>Initiative</td>
+        <td id="inittxt">0</td>
       </tr>
        <tr>
-        <td></td>
+        <td><input type="checkbox" id="mindMastery" name="mindM" value="on" class="masteries"></td>
         <td>Mind</td>
-        <td></td>
-        <td>bonuses</td>
+        <td id="mind">0</td>
+        <td>Crit-chance</td>
+        <td id="critchancetxt">20</td>
       </tr>
        <tr>
-        <td></td>
+        <td><input type="checkbox" id="fortuneMastery" name="fortuneM" value="on" class="masteries"></td>
         <td>Fortune</td>
-        <td></td>
-        <td>bonuses</td>
+        <td id="fortune">0</td>
+        <td>Crit-damage</td>
+        <td id="critdamagetxt">2</td>
       </tr>
     </table>
-
+    <table width="300px">
+      <tr>
+        <th colspan="2">Race features</th>
+      </tr>
+      <tr>
+        <td id="racefeature1"></td>
+        <td id="racefeature2"></td>
+      </tr>
+      <tr>
+    </table>
+    <table width="300px">
+      <tr>
+        <th colspan="2" id="basicname">Basic name</th>
+      </tr>
+      <tr>
+        <td>To Hit</td>
+        <td>Damage</td>
+        <td>Range</td>
+      </tr>
+      <tr>
+        <td id="tohit"></td>
+        <td id="dmg"></td>
+        <td id="range"></td>
+      </tr>
+      <tr>
+        <td>Effect</td>
+        <td id="effect" colspan="2" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line">@Model.CommentText>hewo</span></td>
+      </tr>
+      <tr>
+    </table>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/classes/pug.js"></script>
     <script>
         const socket = io();
         
@@ -185,9 +489,39 @@
         const hlabel = document.getElementById('hlabel');
         const pug = document.getElementById('pug');
         const pulabel = document.getElementById('pulabel');
-        const bodytxt = document.getElementById('bodytxt');
-        var subclass = "";
-        var body = 0, senses = 0, mind = 0, fortune = 0;
+        const bodytxt = document.getElementById('body');
+        const sensetxt = document.getElementById('sense');
+        const mindtxt = document.getElementById('mind');
+        const fortunetxt = document.getElementById('fortune');
+        const bodyMastery = document.getElementById('bodyMastery');
+        const sensesMastery = document.getElementById('sensesMastery');
+        const mindMastery = document.getElementById('mindMastery');
+        const fortuneMastery = document.getElementById('fortuneMastery');
+        const masteries = document.getElementsByClassName('masteries');
+        const subclasses = document.getElementsByClassName('subclasses');
+        const write = document.getElementsByClassName('write');
+        const lvl = document.getElementById('lvl');
+        const hp = document.getElementById('hp');
+        const mp = document.getElementById('mp');
+        const hpmaxtxt = document.getElementById('hpmaxtxt');
+        const mpmaxtxt = document.getElementById('mpmaxtxt');
+        const movtxt = document.getElementById('movtxt');
+        const critchancetxt = document.getElementById('critchancetxt');
+        const critdamagetxt = document.getElementById('critdamagetxt');
+        const inittxt = document.getElementById('inittxt');
+        const hpchange = document.getElementById('hpchange');
+        const mpchange = document.getElementById('mpchange');
+        const racefeature1 = document.getElementById('racefeature1');
+        const racefeature2 = document.getElementById('racefeature2');
+        const basicname = document.getElementById('basicname');
+        const tohit = document.getElementById('tohit');
+        const dmg = document.getElementById('dmg');
+        const range = document.getElementById('range');
+        const effect = document.getElementById('effect');
+        const effectadv = document.getElementById('effectadv');
+        var subclass = "", masteryStat = "";
+        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0;
+        var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
         warrior.style.display = "none"
         wlabel.style.display = "none"
         mage.style.display = "none"
@@ -206,77 +540,430 @@
         pulabel.style.display = "none"
 
         socket.on('connection', (data) => {
-            name.value=data.chars[0].name
-            document.getElementsByTagName("TITLE")[0].text = data.chars[0].name
-            race.value = data.chars[0].race
-            classs.value = data.chars[0].classs
-            body = data.chars[0].body;
-            senses = data.chars[0].senses;
-            mind = data.chars[0].mind;
-            fortune = data.chars[0].fortune;
-            displaySubclasses(data.chars[0].classs, data);
+          update(data);
         })
-
         classs.addEventListener('change', (e) => {
             e.preventDefault();
+            updateStats()
+            hp.value = hpmax;
+            mp.value = mpmax;
+            sendData();
             displaySubclasses(classs.value);
-            bodytxt.textContent = "sd"
-            socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, body: body, senses: senses, mind: mind, fortune: fortune});
         });
+        
 
-        warrior.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = warrior.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:warrior.value});
-        });
-
-        mage.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = mage.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:mage.value});
-        });
-
-        scoundrel.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = scoundrel.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:scoundrel.value});
-        });
-
-        ecc.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = ecc.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:ecc.value});
-        });
-
-        psion.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = psion.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:psion.value});
-        });
-
-        harm.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = harm.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:harm.value});
-        });
-
-        pug.addEventListener('change', (e) => {
-          e.preventDefault();
-          subclass = pug.value;
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:pug.value});
-        });
+        for (let i = 0; i < subclasses.length; i++){
+          subclasses[i].addEventListener('change', (e) => {
+           e.preventDefault();
+            subclass = subclasses[i].value;
+            sendData()
+        });}
 
 
         race.addEventListener('change', (e) => {
-            e.preventDefault();
-            socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, body: body, senses: senses, mind: mind, fortune: fortune});
+          e.preventDefault();
+          updateStats()
+          hp.value = hpmax;
+          mp.value = mpmax;
+          sendData()
         });
 
-        name.addEventListener('change', (e) => {
+        for (let i = 0; i < write.length; i++){
+          write[i].addEventListener('change', (e) => {
             e.preventDefault();
+            document.getElementsByTagName("TITLE")[0].text = name.value;
+            if (write[i].id=="hpchange"){
+              hp.value-=parseInt(write[i].value);
+              write[i].value = "";
+            } else if (write[i].id=="mpchange"){
+              mp.value-=parseInt(write[i].value);
+              write[i].value = "";
+            }
+            sendData()
+        });}
+
+        /*name.addEventListener('change', (e) => {
+          e.preventDefault();
           document.getElementsByTagName("TITLE")[0].text = name.value;
-            socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:subclass});
-        });
+          sendData()
+        });*/
+        for (let i = 0; i < masteries.length; i++){
+          masteries[i].addEventListener('change', (e) => {
+           e.preventDefault();
+          updateStats();
+          sendData();
+        });}
+
+          socket.on('charupdate', (data) =>{
+            let chars = [data]
+            update({l:1, chars});
+        })
+        function sendData(){
+          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value})
+        }
+        function updateStats(){
+          body = 0;
+          senses = 0;
+          mind = 0;
+          fortune = 0;
+          switch(classs.value){
+              case("warrior"):
+                body += 4;
+                senses += 2;
+                mind += 1;
+                fortune += 1;
+              break;
+              case("mage"):
+                body += 1;
+                senses += 1;
+                mind += 4;
+                fortune += 2;
+              break;
+              case("scoundrel"):
+                body += 1;
+                senses += 3;
+                mind += 1;
+                fortune += 3;
+              break;
+              case("ecc"):
+                body += 2;
+                senses += 1;
+                mind += 3;
+                fortune += 2;
+              break;
+              case("psion"):
+                body += 1;
+                senses += 2;
+                mind += 4;
+                fortune += 1
+              break;
+              case("harm"):
+                body += 1;
+                senses += 2;
+                mind += 2;
+                fortune += 3;
+              break;
+              case("pug"):
+                body += 3;
+                senses += 3;
+                mind += 1;
+                fortune += 1
+              break;
+            }
+            switch(race.value){
+              case("human"):
+                body += 1;
+                senses += 1;
+                mind += 1;
+                fortune += 1;
+              break;
+              case("elf"):
+                body += 0;
+                senses += 2;
+                mind += 1;
+                fortune += 0;
+              break;
+              case("halfling"):
+                body += 0;
+                senses += 1;
+                mind += 0;
+                fortune += 2;
+              break;
+              case("orc"):
+                body += 2;
+                senses += 1;
+                mind += 0;
+                fortune += 0;
+              break;
+              case("dwarf"):
+                body += 2;
+                senses += 0;
+                mind += 0;
+                fortune += 1;
+              break;
+              case("gnome"):
+                body += 0;
+                senses += 1;
+                mind += 2;
+                fortune += 0;
+              break;
+              case("nethertouched"):
+                body += 1;
+                senses += 0;
+                mind += 1;
+                fortune += 1;
+              break;
+              case("goblin"):
+                body += 0;
+                senses += 2;
+                mind += 0;
+                fortune += 1;
+              break;
+              case("bird-folk"):
+                body += 0;
+                senses += 1;
+                mind += 1;
+                fortune += 1;
+              break;
+              case("reptilian"):
+                body += 1;
+                senses += 2;
+                mind += 0;
+                fortune += 0;
+              break;
+              case("elemental"):
+                body += 1;
+                senses += 0;
+                mind += 0;
+                fortune += 2;
+              break;
+              case("fae"):
+                body += 0;
+                senses += 1;
+                mind += 1;
+                fortune += 1;
+              break;
+              case("half-giant"):
+                body += 2;
+                senses += 0;
+                mind += 1;
+                fortune += 0;
+              break;
+              case("forged"):
+                body += 1;
+                senses += 1;
+                mind += 1;
+                fortune += 0;
+              break;
+              case("triac"):
+                body += 0;
+                senses += 0;
+                mind += 2;
+                fortune += 1;
+              break;
+              case("half-dragon"):
+                body += 2;
+                senses += 0;
+                mind += 0;
+                fortune += 1;
+              break;
+              case("minotaur"):
+                body += 2;
+                senses += 0;
+                mind += 0;
+                fortune += 1;
+              break;
+              case("custom"):
+                body += 0;
+                senses += 0;
+                mind += 0;
+                fortune += 0;
+              break;
+            }
+            if (bodyMastery.checked){
+              masteryStat = "body";
+              //body += mastery
+            } else if (sensesMastery.checked){
+              masteryStat = "senses";
+              //senses += mastery;
+            } else if (mindMastery.checked){
+              masteryStat = "mind";
+              //mind += mastery
+            } else if (fortuneMastery.checked){
+              masteryStat = "fortune";
+              //fortune += mastery
+            } else {
+              masteryStat = "";
+            }
+            switch(masteryStat){
+              case("body"):
+                bodyMastery.checked = true
+                sensesMastery.checked = false
+                mindMastery.checked = false
+                fortuneMastery.checked = false
+              break;
+              case("senses"):
+                bodyMastery.checked = false
+                sensesMastery.checked = true
+                mindMastery.checked = false
+                fortuneMastery.checked = false
+              break;
+              case("mind"):
+                bodyMastery.checked = false
+                sensesMastery.checked = false
+                mindMastery.checked = true
+                fortuneMastery.checked = false
+              break;
+              case("fortune"):
+                bodyMastery.checked = false
+                sensesMastery.checked = false
+                mindMastery.checked = false
+                fortuneMastery.checked = true
+              break;
+            }
+          bodytxt.textContent = body;
+          sensetxt.textContent = senses;
+          mindtxt.textContent = mind;
+          fortunetxt.textContent = fortune;
+          hp.val = hp;
+          let lvll = parseInt(lvl.value)
+          hpmax = body*lvll + lvll + hpbonus + 5;
+          mpmax = lvll + lvll*mind + body + 3 + mpbonus;
+          critchance = 20 - parseInt(fortune/3) - (fortuneMastery.checked?1:0)
+          critdamage = 0
+          if (fortune>=2){
+            critdamage+=2
+            if (fortune>=5){
+              critdamage+=1
+              if (fortune>=8){
+                critdamage+=1
+              }
+            }
+          } else {
+            critdamage += 1;
+          }
+          if (lvll>=5 && fortuneMastery.checked){
+            critdamage+=1;
+            if (lvll>=9){
+              critdamage+=1;
+            }
+          }
+          init = senses + (sensesMastery.checked?parseInt((lvll+1)/2):0)
+          inittxt.textContent = init;
+          critchancetxt.textContent = critchance;
+          critdamagetxt.textContent = critdamage;
+          hpmaxtxt.textContent = hpmax;
+          mpmaxtxt.textContent = mpmax;
+        }
+        function update(data){
+          name.value=data.chars[0].name
+          document.getElementsByTagName("TITLE")[0].text = data.chars[0].name
+          race.value = data.chars[0].race
+          racefeatures(race.value);
+          classs.value = data.chars[0].classs
+          lvl.value = data.chars[0].lvl
+          hp.value = data.chars[0].hp
+          mp.value = data.chars[0].mp
+          switch(data.chars[0].masteryStat){
+              case("body"):
+                bodyMastery.checked = true
+                sensesMastery.checked = false
+                mindMastery.checked = false
+                fortuneMastery.checked = false
+              break;
+              case("senses"):
+                bodyMastery.checked = false
+                sensesMastery.checked = true
+                mindMastery.checked = false
+                fortuneMastery.checked = false
+              break;
+              case("mind"):
+                bodyMastery.checked = false
+                sensesMastery.checked = false
+                mindMastery.checked = true
+                fortuneMastery.checked = false
+              break;
+              case("fortune"):
+                bodyMastery.checked = false
+                sensesMastery.checked = false
+                mindMastery.checked = false
+                fortuneMastery.checked = true
+              break;
+              case(""):
+                bodyMastery.checked = false
+                sensesMastery.checked = false
+                mindMastery.checked = false
+                fortuneMastery.checked = false
+              break;
+            }
+          
+          displaySubclasses(data.chars[0].classs, data);
+          updateStats()
+          subclassfeatures(subclass)
+        }
+        function subclassfeatures(subclass){
+          switch(subclass){
+            case("rager"):
+              rager();
+            break;
+          }
+        }
+        function racefeatures(race){
+          switch(race){
+            case("human"):
+              racefeature1.textContent="Once per rest, you can add your mastery to any roll that doesn't already include it. You must choose to do so before you roll. You regain this feature if the roll fails."
+              racefeature2.textContent="You can learn one additional skill at level 1."
+            break;
+            case("elf"):
+              racefeature1.textContent="You gain 5 extra Mana."
+              racefeature2.textContent="you are proficient in all light and balanced weapons. You can use eleven chain; medium armor that is made to protect only elves."
+            break;
+            case("halfling"):
+              racefeature1.textContent="If you roll a 1 on a d20, you may reroll, and you must use the new roll."
+              racefeature2.textContent="You can move through the space of any creature that is larger than you. If they are friendly, you gain +2 evasion while in their space and you can hide when obscured by the creature."
+            break;
+            case("orc"):
+              racefeature1.textContent="You gain 2 extra armor."
+              racefeature2.textContent="If you miss an attack, you may reroll the attack. You may do this a number of times equal to your mastery per rest."
+            break;
+            case("dwarf"):
+              racefeature1.textContent="You are resistant to poison damage. You can consume stone in place of regular food to satiate your hunger. Once per day, you may use 1 AP to eat a rock and regain 1d10 + your level hit points."
+              racefeature2.textContent="you are proficient in all armor. You gain +1 armor slot."
+            break;
+            case("gnome"):
+              racefeature1.textContent="During your turn, you may gain mana equal to your mana regeneration. You may do this a number of times equal to your mastery per rest."
+              racefeature2.textContent="When you are attacked, you may add your mastery to your evasion and/or saving throw. You must do so before they roll. You may do this a number of times equal to your mastery per rest."
+            break;
+            case("nethertouched"):
+              racefeature1.textContent="You gain resistance to fire damage and burning DOT."
+              racefeature2.textContent="Once per rest when you succeed in intimidating, persuading, deceiving or hit someone with an attack or skill, you can make them frightened of you until the end of their next turn."
+            break;
+            case("goblin"):
+              racefeature1.textContent="You make treasure rolls with advantage."
+              racefeature2.textContent="At the start of your turn, you get +1 movement for each enemy next to you."
+            break;
+            case("bird-folk"):
+              racefeature1.textContent="You have wings. While not wearing medium or heavy armor, you can fly. While flying, you have +2 movement."
+              racefeature2.textContent="You have a bonus to rolls made to perceive equal to your mastery. You may add your Senses to any ranged attack roll once per combat."
+            break;
+            case("reptilian"):
+              racefeature1.textContent="At the end of combat, you regain Hit Points equal to your level."
+              racefeature2.textContent="While not wearing armor, you gain +2 armor and +1 armor slot."
+            break;
+            case("elemental"):
+              racefeature1.textContent="Choose an element."
+              racefeature2.textContent="Effect based on elemental essence."
+            break;
+            case("fae"):
+              racefeature1.textContent="When a creature is about to attack you, you may give them disadvantage to the attack. If they then miss, they are charmed until the start of their next turn. You may do this once per rest."
+              racefeature2.textContent="Once per rest, you can teleport to a location within a distance up to your movement. This does not cost any movement."
+            break;
+            case("half-Giant"):
+              racefeature1.textContent="You have extra Hit Points equal to twice your level."
+              racefeature2.textContent="You may grapple with 1 hand instead of 2. On your turn, you may toss a grappled target a number of squares equal to your Body, taking 1d4 + Body bludgeoning damage when they land."
+            break;
+            case("forged"):
+              racefeature1.textContent="Once per combat on your turn, you may switch an equipped skill with an unequipped skill you have. The skills are swapped back at the end of combat."
+              racefeature2.textContent="you are proficient in all armor, but you have to attach any armor onto your metal self during a rest (no rest action required). You have +1 armor."
+            break;
+            case("triac"):
+              racefeature1.textContent="Once per rest, your next d20 roll becomes a 20. Until you roll a 1 on a d20 roll, the GM may choose any roll you make to become a 1."
+              racefeature2.textContent="When you get a critical hit on an attack, get +1 crit damage. This extra damage dice inflicts Poison DOT instead of damage, with no damage modifier."
+            break;
+            case("half-Dragon"):
+              racefeature1.textContent="DC 8 Senses saving throw in a 3 square cone. 1d12 damage on a failed save, or half as much on a success."
+              racefeature2.textContent="Choose a damage type. You gain resistance to that damage type, and your dragon's breath becomes that damage type."
+            break;
+            case("minotaur"):
+              racefeature1.textContent="If you move 4+ squares in a line, you may CHARGE: Gain 2/3/5 extra movement in that direction, and your next melee attack has +2 to hit."
+              racefeature2.textContent="After taking damage from an attack, you may reroll a number of damage dice up to your Mastery during your next attack that hits."
+            break;
+            case("custom"):
+              racefeature1.textContent=""
+              racefeature2.textContent=""
+            break;
+          }
+        }
         function displaySubclasses(classs, data){
             if (classs == "warrior"){
               warrior.style.display = "inline";
@@ -295,8 +982,7 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              console.log(data.subclass);
-              if (data.chars[0].sheet>-1){
+              if (data.chars[0].subclass != null){
                 warrior.value = data.chars[0].subclass;
               }
             } else if (classs == "mage"){
@@ -383,6 +1069,9 @@
               if (data.chars[0].sheet>-1){
                 psion.value = data.chars[0].subclass;
                 subclass = data.chars[0].subclass
+              } else if (data.sheet>-1){
+                psion.value = data.subclass;
+                subclass = data.subclass
               }
 
             } else if (classs == "harm"){

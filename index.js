@@ -27,13 +27,12 @@ io.on('connection', (socket) => {
 
   socket.on('new sheet', () => {
     l = characters.length + 1;
-    characters.push({name: "Boblin"});
+    characters.push({name: "Boblin", lvl:1});
     console.log(characters);
     io.emit('new boblin', l)
   })
 
   socket.on('change', (data) => {
-    console.log(data);
     io.emit("charupdate", data);
     characters[data.sheet] = data;
   })
