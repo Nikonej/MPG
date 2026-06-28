@@ -28,6 +28,11 @@
       cursor: pointer;
     }
 
+    td.tooltip {
+      display: table-cell;
+      border-bottom: none;
+    }
+
     .line2 {
       position: relative;
       display: inline-block;
@@ -401,10 +406,7 @@
     <table>
       <tr>
         <th>Mastery</th>
-        <th>Stats</th>
-        <th>Bonuses</th>
-        <th>Bonuses</th>
-        <th>Bonuses</th>
+        <th colspan="4" >Stats</th>
       </tr>
       <tr>
         <td><input type="checkbox" id="bodyMastery" name="bodyM" value="on" class="masteries"></td>
@@ -447,7 +449,7 @@
     </table>
     <table width="300px">
       <tr>
-        <th colspan="2" id="basicname">Basic name</th>
+        <th colspan="3" id="basicname">Basic name</th>
       </tr>
       <tr>
         <td>To Hit</td>
@@ -461,9 +463,22 @@
       </tr>
       <tr>
         <td>Effect</td>
-        <td id="effect" colspan="2" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line">@Model.CommentText>hewo</span></td>
+        <td colspan="2" id="effect" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line">@Model.CommentText>hewo</span></td>
       </tr>
       <tr>
+    </table>
+    <table width="300px">
+      <tr>
+        <th colspan="3" id="skill1">Skill 1</th>
+      </tr>
+      <tr>
+        <td colspan="3" id="skill1desc">="You unleash three attacks with +"&'calc and stats'!$H$126+Sheet!$O$11&" to hit. On a hit, each attack deals 1d4 + "&Sheet!$C$14+'calc and stats'!AU4+'calc and stats'!$D$99&" damage"</td>
+      </tr>
+      <tr>
+        <td id="skill1mana" >3</td>
+        <td id="skill1uses"></td>
+        <td id="skill1ap">2</td>
+      </tr>
     </table>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/classes/pug.js"></script>
