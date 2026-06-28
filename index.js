@@ -39,4 +39,5 @@ io.on('connection', (socket) => {
 });
 server.listen(3000)
 //server.listen(3000, '192.168.86.31')
-console.log("http://192.168.86.31:3000")
+console.log("http://localhost:3000/0")
+//console.log("http://192.168.86.31:3000")
