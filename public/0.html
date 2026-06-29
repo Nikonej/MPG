@@ -248,7 +248,7 @@
         <option value="reptilian">Reptilian</option>
         <option value="elemental">Elemental</option>
         <option value="fae">Fae</option>
-        <option value="half-Giant">Half-Giant</option>
+        <option value="half-giant">Half-Giant</option>
         <option value="forged">Forged</option>
         <option value="triac">Triac</option>
         <option value="half-Dragon">Half-Dragon</option>
@@ -450,6 +450,33 @@
     <br>
     <table width="300px">
       <tr>
+        <th colspan="3" id="classfeaturename">Class Features</th>
+      </tr>
+      <tr>
+        <td id="classfeature11"></td>
+        <td id="classfeature12"></td>
+        <td id="classfeature13"></td>
+      </tr>
+      <tr>
+        <td id="classfeature21"></td>
+        <td id="classfeature22"></td>
+        <td id="classfeature23"></td>
+      </tr>
+      <tr>
+        <td id="classfeature31"></td>
+        <td id="classfeature32"></td>
+        <td id="classfeature33"></td>
+      </tr>
+      <tr>
+        <td id="classfeature41"></td>
+        <td id="classfeature42"></td>
+        <td id="classfeature43"></td>
+      </tr>
+      <tr>
+    </table>
+    <br>
+    <table width="300px">
+      <tr>
         <th colspan="3" id="basicname">Basic name</th>
       </tr>
       <tr>
@@ -502,6 +529,7 @@
     </table>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/classes/pug.js"></script>
+    <script src="/classes/general.js"></script>
     <script>
         const socket = io();
         
@@ -558,7 +586,7 @@
         const skill1sel = document.getElementById('skill1sel'); const skill1desc = document.getElementById('skill1desc'); const skill1mana = document.getElementById('skill1mana'); const skill1uses = document.getElementById('skill1uses'); const skill1ap = document.getElementById('skill1ap');
         const skill2sel = document.getElementById('skill2sel'); const skill2desc = document.getElementById('skill2desc'); const skill2mana = document.getElementById('skill2mana'); const skill2uses = document.getElementById('skill2uses'); const skill2ap = document.getElementById('skill2ap');
         var subclass = "", masteryStat = "";
-        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0;
+        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, sheet=0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
         warrior.style.display = "none"
         wlabel.style.display = "none"
@@ -635,11 +663,14 @@
         
 
           socket.on('charupdate', (data) =>{
-            let chars = [data]
-            update({l:1, chars});
+            if (data.sheet==sheet){
+              let chars = [data]
+              update({l:1, chars});
+            }
         })
         function sendData(){
-          socket.emit('change', {name: name.value, sheet: 0, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value});
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value}
+          socket.emit('change', data);
         }
         function updateStats(){
           body = 0;
@@ -876,15 +907,19 @@
           mpmaxtxt.textContent = mpmax;
         }
         function update(data){
-          name.value=data.chars[0].name
-          document.getElementsByTagName("TITLE")[0].text = data.chars[0].name
-          race.value = data.chars[0].race
+          charnumber = 0;
+          if (data.l!=1){
+            charnumber=0;
+          } 
+          name.value=data.chars[charnumber].name
+          document.getElementsByTagName("TITLE")[0].text = data.chars[charnumber].name
+          race.value = data.chars[charnumber].race
           racefeatures(race.value);
-          classs.value = data.chars[0].classs
-          lvl.value = data.chars[0].lvl
-          hp.value = data.chars[0].hp
-          mp.value = data.chars[0].mp
-          switch(data.chars[0].masteryStat){
+          classs.value = data.chars[charnumber].classs
+          lvl.value = data.chars[charnumber].lvl
+          hp.value = data.chars[charnumber].hp
+          mp.value = data.chars[charnumber].mp
+          switch(data.chars[charnumber].masteryStat){
               case("body"):
                 bodyMastery.checked = true
                 sensesMastery.checked = false
@@ -917,18 +952,50 @@
               break;
             }
           
-          displaySubclasses(data.chars[0].classs, data);
+          displaySubclasses(data.chars[charnumber].classs, data);
           updateStats()
+          classfeatures();
           subclassfeatures(subclass)
-          skill1sel.value = data.chars[0].skill1sel
+          skill1sel.value = data.chars[charnumber].skill1sel
           skilldesc(skill1sel, skill1desc, skill1mana, skill1uses, skill1ap)
-          skill2sel.value = data.chars[0].skill2sel
+          skill2sel.value = data.chars[charnumber].skill2sel
           skilldesc(skill2sel, skill2desc, skill2mana, skill2uses, skill2ap)
+          showskills();
+        }
+        function classfeatures(){
+          let datad = {classfeaturename: classfeaturename, classfeature11: classfeature11, classfeature12: classfeature12, classfeature13: classfeature13, classfeature21: classfeature21, classfeature22: classfeature22, classfeature23: classfeature23, classfeature31: classfeature31, classfeature32: classfeature32, classfeature33: classfeature33, classfeature41: classfeature41, classfeature42: classfeature42, classfeature43: classfeature43}
+          switch(classs.value){
+            case("warrior"):
+              warriorfeatures(datad);
+            break;
+            case("mage"):
+              magefeatures(datad);
+            break;
+            case("scoundrel"):
+              scoundrelfeatures(datad );
+            break;
+            case("ecc"):
+              eccfeatures(datad);
+            break;
+            case("psion"):
+              psionfeatures(datad);
+            break;
+            case("verdant"):
+              verdantfeatures(datad);
+            break;
+            case("harm"):
+              harmfeatures(datad);
+            break;
+            case("pug"):
+              pugfeatures(datad);
+            break;
+          }
         }
         function subclassfeatures(subclass){
+          let datad = {basicname: basicname, tohit: tohit, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap}
           switch(subclass){
             case("rager"):
-              rager();
+              rager(datad);
             break;
           }
         }
@@ -982,7 +1049,7 @@
               racefeature1.textContent="When a creature is about to attack you, you may give them disadvantage to the attack. If they then miss, they are charmed until the start of their next turn. You may do this once per rest."
               racefeature2.textContent="Once per rest, you can teleport to a location within a distance up to your movement. This does not cost any movement."
             break;
-            case("half-Giant"):
+            case("half-giant"):
               racefeature1.textContent="You have extra Hit Points equal to twice your level."
               racefeature2.textContent="You may grapple with 1 hand instead of 2. On your turn, you may toss a grappled target a number of squares equal to your Body, taking 1d4 + Body bludgeoning damage when they land."
             break;
@@ -1026,8 +1093,8 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].subclass != null){
-                warrior.value = data.chars[0].subclass;
+              if (data.chars[charnumber].subclass != null){
+                warrior.value = data.chars[charnumber].subclass;
               }
             } else if (classs == "mage"){
               warrior.style.display = "none";
@@ -1046,9 +1113,9 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].sheet>-1){
-                mage.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass;
+              if (data.chars[charnumber].sheet>-1){
+                mage.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass;
               }
             } else if (classs == "scoundrel"){
               warrior.style.display = "none";
@@ -1067,9 +1134,9 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].sheet>-1){
-                scoundrel.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass;
+              if (data.chars[charnumber].sheet>-1){
+                scoundrel.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass;
               }
             } else if (classs == "ecc"){
               warrior.style.display = "none";
@@ -1088,9 +1155,9 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].sheet>-1){
-                ecc.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass
+              if (data.chars[charnumber].sheet>-1){
+                ecc.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass
               }
 
             } else if (classs == "psion"){
@@ -1110,9 +1177,9 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].sheet>-1){
-                psion.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass
+              if (data.chars[charnumber].sheet>-1){
+                psion.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass
               } else if (data.sheet>-1){
                 psion.value = data.subclass;
                 subclass = data.subclass
@@ -1135,9 +1202,9 @@
               hlabel.style.display = "inline"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].sheet>-1){
-                harm.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass
+              if (data.chars[charnumber].sheet>-1){
+                harm.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass
               }
 
             } else if (classs == "pug"){
@@ -1157,9 +1224,9 @@
               hlabel.style.display = "none"
               pug.style.display = "inline"
               pulabel.style.display = "inline"
-              if (data.chars[0].sheet>-1){
-                pug.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass
+              if (data.chars[charnumber].sheet>-1){
+                pug.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass
               }
             } else if (classs == "verdant"){
               warrior.style.display = "none";
@@ -1178,9 +1245,9 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[0].sheet>-1){
-                verdant.value = data.chars[0].subclass;
-                subclass = data.chars[0].subclass
+              if (data.chars[charnumber].sheet>-1){
+                verdant.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass
               }
             } 
             return;

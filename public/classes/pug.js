@@ -1,40 +1,29 @@
-function rager(){
-    basicname.textContent = "Retaliation"
-    tohit.textContent = "+" + tohitf(masteryStat, true)
-    dmg.textContent = "1d4+" + tohitf(masteryStat, false)
-    range.textContent = "1 square"
+function pugfeatures(data){
+    data.classfeaturename.textContent = "Focus"
+    data.classfeature11.textContent = "+1 focus on a hit with an attack or skill"
+    data.classfeature11.style = "colspan: 3"
+    data.classfeature21.textContent = "0"
+    data.classfeature21.style = "colspan: 3"
+    data.classfeature31.textContent = "Reset upon taking damage"
+    data.classfeature31.style = "colspan: 3"
+    data.classfeature41.textContent = "Bonus to hit:"
+    data.classfeature41.style = "colspan: 2"
+    data.classfeature42.textContent = "0"
+    data.classfeature42.style = "colspan: 1"
+}
+
+function rager(data){
+    data.basicname.textContent = "Retaliation"
+    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
+    data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage.";
-    effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
-    pugskills(skill1sel, 1)
-    ragerskills(skill1sel, 1)
-    pugskills(skill2sel, 2)
-    ragerskills(skill2sel, 2)
-    for (let i = 0; i < skillsel.length; i++){
-          skillsel[i].addEventListener('change', (e) => {
-           e.preventDefault();
-           switch(skillsel[i].id){
-            case("skill1sel"):
-                skilldesc(skill1sel, skill1desc, skill1mana, skill1uses, skill1ap)
-            break;
-            case("skill2sel"):
-                skilldesc(skill2sel, skill2desc, skill2mana, skill2uses, skill2ap)
-            break;
-              case("skill3sel"):
-                skilldesc(skill3sel, skill3desc, skill3mana, skill3uses, skill3ap)
-            break;
-            case("skill4sel"):
-                skilldesc(skill4sel, skill4desc, skill4mana, skill4uses, skill4ap)
-            break;
-            case("skill5sel"):
-                skilldesc(skill5sel, skill5desc, skill5mana, skill5uses, skill5ap)
-            break;
-            case("skill6sel"):
-                skilldesc(skill6sel, skill6desc, skill6mana, skill6uses, skill6ap)
-            break;
-            }
-          sendData();
-        });}
+    data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage.";
+    data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
+    pugskills(data.skill1sel, 1)
+    ragerskills(data.skill1sel, 1)
+    pugskills(data.skill2sel, 2)
+    ragerskills(data.skill2sel, 2)
 }
 
 function pugskills(skillid, tier){
@@ -106,41 +95,4 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
             skillap.textContent = "1 AP";
         break;
         }
-}
-function tohitf(ms, atk, ms2){
-    let hit=0;
-    switch(ms){
-        case("body"):
-            hit = body
-            if (bodyMastery.checked && atk){
-                hit += parseInt((parseInt(lvl.value)+1)/2)
-            }
-        break;
-        case("senses"):
-            hit = senses
-            if (sensesMastery.checked && atk){
-                hit += parseInt((parseInt(lvl.value)+1)/2)
-            }
-        break;
-        case("mind"):
-            hit = mind
-            if (mindMastery.checked && atk){
-                hit += parseInt((parseInt(lvl.value)+1)/2)
-            }
-        break;
-        case("fortune"):
-            hit = fortune
-            if (fortuneMastery.checked && atk){
-                hit += parseInt((parseInt(lvl.value)+1)/2)
-            }
-        break;
-        case(""):
-            hit = 0
-        break;
-    }
-    if (ms2 != undefined){
-        hit2 = tohitf(ms2, atk)
-        hit = parseInt((hit + hit2 + 1)/2)
-    }
-    return(hit)
 }
