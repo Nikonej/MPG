@@ -55,9 +55,9 @@
     }
     .subclass {
       display:block; 
-      position:absolute; 
-      left:0px;
-      top:75px
+      position:relative; 
+      left:-270px;
+      top:-18px
     }
 
     .subclasses {
@@ -75,8 +75,8 @@
     <section>
       <input id="name" class="write" autocomplete="off" value="Boblin"/> 
       <label for="level">Level</label>
-      <input id="lvl" class="write" autocomplete="off" name="level" value="1"/>
-      <table style="display:inline-table">
+      <input id="lvl" class="write" autocomplete="off" type="number" name="level" style="width: 60px;" value="1"/>
+      <table style="display:inline-table"> <!-- hp and mp -->
         <tr>
           <th></th>
           <th>current</th>
@@ -85,21 +85,37 @@
         </tr>
         <tr>
           <th>HP</th>
-          <th><input id="hp" class="write" autocomplete="off" name="HP" value="0" size="1"/></th>
+          <th><input id="hp" type="number" class="write" autocomplete="off" name="HP" value="0" style="width: 40px;"/></th>
           <th>out of</th>
           <th id="hpmaxtxt">1</th>
-          <th><input id="hpchange" class="write" autocomplete="off" name="HPchange" value="" size="1"/></th>
+          <th><input id="hpchange" type="number" class="write" autocomplete="off" name="HPchange" value="" style="width: 40px;"/></th>
         </tr>
         <tr>
           <th>mana</th>
-          <th><input id="mp" class="write" autocomplete="off" name="mana" value="0" size="1"/></th>
+          <th><input id="mp" type="number" class="write" autocomplete="off" name="mana" value="0" style="width: 40px;"/></th>
           <th>out of</th>
           <th id="mpmaxtxt">1</th>
-          <th><input id="mpchange" class="write" autocomplete="off" name="MPchange" value="" size="1"/></th>
+          <th><input id="mpchange" type="number" class="write" autocomplete="off" name="MPchange" value="" style="width: 40px;"/></th>
         </tr>
+        <tr>
+          <th colspan="5">ap:</th>
+        </tr>
+        <tr>
+          <th colspan="2"><input type="checkbox" id="ap1" class="write" autocomplete="off" name="ap1" style="width: 40px;"/></th>
+          <th colspan="1"><input type="checkbox" id="ap2" class="write" autocomplete="off" name="ap2" style="width: 40px;"/></th>
+          <th colspan="2"><input type="checkbox" id="ap3" class="write" autocomplete="off" name="ap3" style="width: 40px;"/></th>
+        </tr>
+         <tr>
+          <th colspan="2">mana regen</th>
+          <th colspan="3">End turn</th>
+        </tr>
+         <tr>
+          <th colspan="2" id="mpregen">0</th>
+          <th colspan="3"><input type="button" id="endturn" class="write"  name="endturn" style="width: 90px;" value="End Turn" onclick="endTurn()"/></th>
+        </tr>       
       </table>
       <br>
-      <label for="races" class="tooltip line2">race:<span class="tooltiptext"><table>
+      <label for="races" class="tooltip line2">race:<span class="tooltiptext"><table> <!-- race tooltip -->
         <tr>
           <th>Name</th>
           <th>Body</th>
@@ -235,7 +251,7 @@
         </tr>
 
       </table></span> </label>
-      <select name="races" id="race" class="line2">
+      <select name="races" id="race" class="line2"> <!-- races -->
         <option value="human">Human</option>
         <option value="elf">Elf</option>
         <option value="halfling">Halfling</option>
@@ -320,7 +336,7 @@
           <th>1</th>
         </tr>
       </table></span> </label>
-      <select value="" name="classes" id="classs" class="line2">
+      <select value="" name="classes" id="classs" class="line2"> <!-- classS -->
         <option value="warrior">warrior</option>
         <option value="mage">mage</option>
         <option value="scoundrel">scoundrel</option>
@@ -332,7 +348,7 @@
       </select>
 
       <label id="wlabel" for="warriors" class="subclass">Subclass:</label>
-      <select name="warriors" class="subclasses" id="warrior">
+      <select name="warriors" class="subclasses" id="warrior"> <!-- warrior subclass -->
         <option value="holy">Holy knight</option>
         <option value="death">Death knight</option>
         <option value="spellblade">spellblade</option>
@@ -341,7 +357,7 @@
       </select>
 
       <label id="mlabel" for="mages" class="subclass">Subclass:</label>
-      <select name="mages" class="subclasses" id="mage">
+      <select name="mages" class="subclasses" id="mage"> <!-- mage subclass -->
         <option value="evoker">Evoker</option>
         <option value="necro">Necromancer</option>
         <option value="chrono">Chronomancer</option>
@@ -350,7 +366,7 @@
       </select>
 
       <label id="elabel" for="eccs" class="subclass">Subclass:</label>
-      <select name="eccs" class="subclasses" id="ecc">
+      <select name="eccs" class="subclasses" id="ecc"> <!-- ecc subclass -->
         <option value="occultist">Occultist</option>
         <option value="nebulon">Nebulon</option>
         <option value="pyromaniac">Pyromaniac</option>
@@ -359,7 +375,7 @@
       </select>
 
       <label id="slabel" for="scoundrels" class="subclass">Subclass:</label>
-      <select name="scoundrels" class="subclasses" id="scoundrel">
+      <select name="scoundrels" class="subclasses" id="scoundrel"> <!-- scoundrel subclass -->
         <option value="bounty">Bounty hunter</option>
         <option value="pirate">Pirate</option>
         <option value="shadowblade">Shadowblade</option>
@@ -368,7 +384,7 @@
       </select>
 
       <label id="vlabel" for="verdants" class="subclass">Subclass:</label>
-      <select name="verdants" class="subclasses" id="verdant">
+      <select name="verdants" class="subclasses" id="verdant"> <!-- verdant subclass -->
         <option value="shapeshifter">Shapeshifter</option>
         <option value="sylvan">Sylvan Warden</option>
         <option value="beastmaster">Beastmaster</option>
@@ -377,7 +393,7 @@
       </select>
 
       <label id="plabel" for="psions" class="subclass">Subclass:</label>
-      <select name="psions" class="subclasses" id="psion">
+      <select name="psions" class="subclasses" id="psion"> <!-- psion subclass -->
         <option value="kineticist">Kineticist</option>
         <option value="dream">Dreamweaver</option>
         <option value="diviner">Diviner</option>
@@ -386,7 +402,7 @@
       </select>
 
       <label id="hlabel" for="harms" class="subclass">Subclass:</label>
-      <select name="harms" class="subclasses" id="harm">
+      <select name="harms" class="subclasses" id="harm"> <!-- harm subclass -->
         <option value="bard">Bard</option>
         <option value="siren">Siren</option>
         <option value="jester">Jester</option>
@@ -395,7 +411,7 @@
       </select>
 
       <label id="pulabel" for="pugs" class="subclass">Subclass:</label>
-      <select name="pugs" class="subclasses" id="pug">
+      <select name="pugs" class="subclasses" id="pug"> <!-- pug subclass -->
         <option value="monk">Monk</option>
         <option value="mystic">Mystic</option>
         <option value="titan">Titan</option>
@@ -403,7 +419,7 @@
         <option value="rager">Rager</option>
       </select>
   </section>
-    <table>
+    <table> <!-- Mastery -->
       <tr>
         <th>Mastery</th>
         <th colspan="4" >Stats</th>
@@ -437,7 +453,7 @@
         <td id="critdamagetxt">2</td>
       </tr>
     </table>
-    <table width="300px">
+    <table width="300px"> <!-- race features -->
       <tr>
         <th colspan="2">Race features</th>
       </tr>
@@ -448,34 +464,28 @@
       <tr>
     </table>
     <br>
-    <table width="300px">
+    <!-- class features -->
+    <table width="300px" id="focusTable" style="display: none;"> <!-- Focus -->
       <tr>
-        <th colspan="3" id="classfeaturename">Class Features</th>
+        <th colspan="3">Focus</th>
       </tr>
       <tr>
-        <td id="classfeature11"></td>
-        <td id="classfeature12"></td>
-        <td id="classfeature13"></td>
+        <td colspan="3"> +1 focus on a hit with an attack or skill</td>
       </tr>
       <tr>
-        <td id="classfeature21"></td>
-        <td id="classfeature22"></td>
-        <td id="classfeature23"></td>
+        <td align="center" colspan="3"><input type="number" id="focusval" class="write" autocomplete="off" name="focusval" value="0" style="width: 50px;"/></td>
       </tr>
       <tr>
-        <td id="classfeature31"></td>
-        <td id="classfeature32"></td>
-        <td id="classfeature33"></td>
+        <td  colspan="3">Reset upon taking damage</td>
       </tr>
       <tr>
-        <td id="classfeature41"></td>
-        <td id="classfeature42"></td>
-        <td id="classfeature43"></td>
+        <td  colspan="2">Bonus to hit:	</td>
+        <td id="focusbonus">0</td>
       </tr>
       <tr>
     </table>
     <br>
-    <table width="300px">
+    <table width="300px"> <!-- basic attack -->
       <tr>
         <th colspan="3" id="basicname">Basic name</th>
       </tr>
@@ -494,9 +504,12 @@
         <td colspan="2" id="effect" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line">@Model.CommentText>hewo</span></td>
       </tr>
       <tr>
+        <td id="basicbutton" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(0, 1)"></td>
+      </tr>
+      <tr>
     </table>
     <br>
-    <table width="300px">
+    <table width="300px"> <!-- skill 1 -->
       <tr>
         <th colspan="3" id="skill1"><select id="skill1sel" class="skillsel"> 
           <option value="">Select skill 1</option>
@@ -510,11 +523,14 @@
         <td id="skill1uses"></td>
         <td id="skill1ap" style="color: green"></td>
       </tr>
+      <tr>
+        <td id="skill1button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill1mana.textContent, skill1ap.textContent)"></td>
+      </tr>
     </table>
     <br>
-    <table width="300px">
+    <table width="300px">  <!-- skill 2 -->
       <tr>
-        <th colspan="3" id="skill2"><select id="skill2sel" class="skillsel"> 
+        <th colspan="3" id="skill2"><select id="skill2sel" class="skillsel">  
           <option value="">Select skill 2</option>
         </select></th>
       </tr>
@@ -525,6 +541,9 @@
         <td id="skill2mana" style="color: blue"></td>
         <td id="skill2uses"></td>
         <td id="skill2ap" style="color: green"></td>
+      </tr>
+      <tr>
+        <td id="skill2button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill2mana.textContent, skill2ap.textContent)"></td>
       </tr>
     </table>
     <script src="/socket.io/socket.io.js"></script>
@@ -583,6 +602,11 @@
         const range = document.getElementById('range');
         const effect = document.getElementById('effect');
         const effectadv = document.getElementById('effectadv');
+        const focus = document.getElementById('focusval');
+        const ap1 = document.getElementById('ap1');
+        const ap2 = document.getElementById('ap2');
+        const ap3 = document.getElementById('ap3');
+        const mpregen = document.getElementById('mpregen');
         const skill1sel = document.getElementById('skill1sel'); const skill1desc = document.getElementById('skill1desc'); const skill1mana = document.getElementById('skill1mana'); const skill1uses = document.getElementById('skill1uses'); const skill1ap = document.getElementById('skill1ap');
         const skill2sel = document.getElementById('skill2sel'); const skill2desc = document.getElementById('skill2desc'); const skill2mana = document.getElementById('skill2mana'); const skill2uses = document.getElementById('skill2uses'); const skill2ap = document.getElementById('skill2ap');
         var subclass = "", masteryStat = "";
@@ -640,6 +664,11 @@
             document.getElementsByTagName("TITLE")[0].text = name.value;
             if (write[i].id=="hpchange"){
               hp.value-=parseInt(write[i].value);
+              if (subclass == "rager"){
+                focus.value -= parseInt(write[i].value)>0?focus.value>0?focus.value:1:0
+              } else if (classs.value == "pug"){
+                focus.value -= parseInt(write[i].value)>0?focus.value:0;
+              }
               write[i].value = "";
             } else if (write[i].id=="mpchange"){
               mp.value-=parseInt(write[i].value);
@@ -669,7 +698,7 @@
             }
         })
         function sendData(){
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value}
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked}
           socket.emit('change', data);
         }
         function updateStats(){
@@ -905,6 +934,7 @@
           critdamagetxt.textContent = critdamage;
           hpmaxtxt.textContent = hpmax;
           mpmaxtxt.textContent = mpmax;
+          mpregen.textContent = parseInt((mpmax+9)/10)+parseInt(lvll/2)+ (mindMastery.checked?parseInt((lvll+1)/2):0);
         }
         function update(data){
           charnumber = 0;
@@ -919,6 +949,10 @@
           lvl.value = data.chars[charnumber].lvl
           hp.value = data.chars[charnumber].hp
           mp.value = data.chars[charnumber].mp
+          focus.value = data.chars[charnumber].focus
+          ap1.checked = data.chars[charnumber].ap1
+          ap2.checked = data.chars[charnumber].ap2
+          ap3.checked = data.chars[charnumber].ap3
           switch(data.chars[charnumber].masteryStat){
               case("body"):
                 bodyMastery.checked = true
@@ -963,7 +997,7 @@
           showskills();
         }
         function classfeatures(){
-          let datad = {classfeaturename: classfeaturename, classfeature11: classfeature11, classfeature12: classfeature12, classfeature13: classfeature13, classfeature21: classfeature21, classfeature22: classfeature22, classfeature23: classfeature23, classfeature31: classfeature31, classfeature32: classfeature32, classfeature33: classfeature33, classfeature41: classfeature41, classfeature42: classfeature42, classfeature43: classfeature43}
+          let datad = {}//{classfeaturename: classfeaturename, classfeature11: classfeature11, classfeature12: classfeature12, classfeature13: classfeature13, classfeature21: classfeature21, classfeature22: classfeature22, classfeature23: classfeature23, classfeature31: classfeature31, classfeature32: classfeature32, classfeature33: classfeature33, classfeature41: classfeature41, classfeature42: classfeature42, classfeature43: classfeature43}
           switch(classs.value){
             case("warrior"):
               warriorfeatures(datad);
@@ -972,7 +1006,7 @@
               magefeatures(datad);
             break;
             case("scoundrel"):
-              scoundrelfeatures(datad );
+              //scoundrelfeatures(datad );
             break;
             case("ecc"):
               eccfeatures(datad);
@@ -992,7 +1026,7 @@
           }
         }
         function subclassfeatures(subclass){
-          let datad = {basicname: basicname, tohit: tohit, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap}
+          let datad = {basicname: basicname, tohit: tohit, masteryStat: masteryStat, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap}
           switch(subclass){
             case("rager"):
               rager(datad);

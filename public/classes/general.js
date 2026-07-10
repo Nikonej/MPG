@@ -26,6 +26,41 @@ for (let i = 0; i < skillsel.length; i++){
 });}
 }
 
+function useSkill(skillmana, skillap){
+    if (mp.value >= parseInt(skillmana)){
+        let freeap = 0;
+        if (ap1.checked == false){
+            freeap +=1;
+        }
+        if (ap2.checked == false){
+            freeap +=1;
+        }
+        if (ap3.checked == false){
+            freeap +=1;
+        }
+        if (freeap >= parseInt(skillap)){
+            mp.value -= parseInt(skillmana)
+            let apused = parseInt(skillap)
+            if (ap1.checked == false && apused > 0){
+                ap1.checked = true;
+                apused--;
+            }
+            if (ap2.checked == false && apused > 0){
+                ap2.checked = true;
+                apused--;
+            }
+            if (ap3.checked == false && apused > 0){
+                ap3.checked = true;
+                apused--;
+            }
+        } else {
+            alert("Not enough AP to use this skill")
+        }
+    } else {
+        alert("Not enough MP to use this skill")
+    }
+    sendData()
+}
 function tohitf(ms, atk, ms2){
     let hit=0;
     switch(ms){
@@ -61,5 +96,19 @@ function tohitf(ms, atk, ms2){
         hit2 = tohitf(ms2, atk)
         hit = parseInt((hit + hit2 + 1)/2)
     }
+    if (classs.value == "pug" && atk){
+        hit += parseInt(focusbonus.textContent)
+    }
+    if (subclass == "rager" && !atk){
+        hit -= parseInt(focus.value<0?focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value:0)
+    }
     return(hit)
+}
+
+function endTurn(){
+    ap1.checked = false;
+    ap2.checked = false;
+    ap3.checked = false;
+    mp.value = parseInt(mp.value) + parseInt(mpregen.textContent);
+    sendData();
 }

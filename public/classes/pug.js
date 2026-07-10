@@ -1,24 +1,23 @@
 function pugfeatures(data){
-    data.classfeaturename.textContent = "Focus"
-    data.classfeature11.textContent = "+1 focus on a hit with an attack or skill"
-    data.classfeature11.style = "colspan: 3"
-    data.classfeature21.textContent = "0"
-    data.classfeature21.style = "colspan: 3"
-    data.classfeature31.textContent = "Reset upon taking damage"
-    data.classfeature31.style = "colspan: 3"
-    data.classfeature41.textContent = "Bonus to hit:"
-    data.classfeature41.style = "colspan: 2"
-    data.classfeature42.textContent = "0"
-    data.classfeature42.style = "colspan: 1"
+    document.getElementById("focusTable").style.display = "table"
+    //husk at fjerne alle andre subclass features
+    let focus = document.getElementById("focusval")
+    let lvl = document.getElementById("lvl")
+    if (focus.value>0){
+        document.getElementById("focusbonus").textContent = focus.value>parseInt((parseInt(lvl.value)+1)/2)?parseInt((parseInt(lvl.value)+1)/2):focus.value
+    } else{
+        document.getElementById("focusbonus").textContent = "0"
+    }
 }
 
 function rager(data){
+    let ragebonus = parseInt(focus.value<0?focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value:0)
     data.basicname.textContent = "Retaliation"
     data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
     data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage.";
+    data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently +" + -ragebonus + " damage.";
     data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
     pugskills(data.skill1sel, 1)
     ragerskills(data.skill1sel, 1)
