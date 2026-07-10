@@ -21,8 +21,10 @@ function rager(data){
     data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
     pugskills(data.skill1sel, 1)
     ragerskills(data.skill1sel, 1)
-    pugskills(data.skill2sel, 2)
-    ragerskills(data.skill2sel, 2)
+    pugskills(data.skill2sel, 1)
+    ragerskills(data.skill2sel, 1)
+    pugskills(data.skill3sel, 2)
+    ragerskills(data.skill3sel, 2)
 }
 
 function pugskills(skillid, tier){

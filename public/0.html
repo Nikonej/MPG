@@ -509,7 +509,7 @@
       <tr>
     </table>
     <br>
-    <table width="300px"> <!-- skill 1 -->
+    <table width="300px" class="skilltable" style="display: none;"> <!-- skill 1 -->
       <tr>
         <th colspan="3" id="skill1"><select id="skill1sel" class="skillsel"> 
           <option value="">Select skill 1</option>
@@ -528,7 +528,8 @@
       </tr>
     </table>
     <br>
-    <table width="300px">  <!-- skill 2 -->
+
+    <table width="300px" class="skilltable" style="display: none;">  <!-- skill 2 -->
       <tr>
         <th colspan="3" id="skill2"><select id="skill2sel" class="skillsel">  
           <option value="">Select skill 2</option>
@@ -546,6 +547,26 @@
         <td id="skill2button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill2mana.textContent, skill2ap.textContent)"></td>
       </tr>
     </table>
+
+    <table width="300px" class="skilltable" style="display: none;">  <!-- skill 3 -->
+      <tr>
+        <th colspan="3" id="skill3"><select id="skill3sel" class="skillsel">  
+          <option value="">Select skill 3</option>
+        </select></th>
+      </tr>
+      <tr>
+        <td colspan="3" id="skill3desc" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+      </tr>
+      <tr>
+        <td id="skill3mana" style="color: blue"></td>
+        <td id="skill3uses"></td>
+        <td id="skill3ap" style="color: green"></td>
+      </tr>
+      <tr>
+        <td id="skill3button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill3mana.textContent, skill3ap.textContent)"></td>
+      </tr>
+    </table>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/classes/pug.js"></script>
     <script src="/classes/general.js"></script>
@@ -583,6 +604,7 @@
         const subclasses = document.getElementsByClassName('subclasses');
         const write = document.getElementsByClassName('write');
         const skillsel = document.getElementsByClassName('skillsel');
+        const skilltable = document.getElementsByClassName('skilltable');
         const lvl = document.getElementById('lvl');
         const hp = document.getElementById('hp');
         const mp = document.getElementById('mp');
@@ -609,6 +631,7 @@
         const mpregen = document.getElementById('mpregen');
         const skill1sel = document.getElementById('skill1sel'); const skill1desc = document.getElementById('skill1desc'); const skill1mana = document.getElementById('skill1mana'); const skill1uses = document.getElementById('skill1uses'); const skill1ap = document.getElementById('skill1ap');
         const skill2sel = document.getElementById('skill2sel'); const skill2desc = document.getElementById('skill2desc'); const skill2mana = document.getElementById('skill2mana'); const skill2uses = document.getElementById('skill2uses'); const skill2ap = document.getElementById('skill2ap');
+        const skill3sel = document.getElementById('skill3sel'); const skill3desc = document.getElementById('skill3desc'); const skill3mana = document.getElementById('skill3mana'); const skill3uses = document.getElementById('skill3uses'); const skill3ap = document.getElementById('skill3ap');        
         var subclass = "", masteryStat = "";
         var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, sheet=0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
@@ -698,7 +721,7 @@
             }
         })
         function sendData(){
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked}
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked}
           socket.emit('change', data);
         }
         function updateStats(){
@@ -947,6 +970,7 @@
           racefeatures(race.value);
           classs.value = data.chars[charnumber].classs
           lvl.value = data.chars[charnumber].lvl
+          updateskilltables(lvl.value);
           hp.value = data.chars[charnumber].hp
           mp.value = data.chars[charnumber].mp
           focus.value = data.chars[charnumber].focus
@@ -994,6 +1018,8 @@
           skilldesc(skill1sel, skill1desc, skill1mana, skill1uses, skill1ap)
           skill2sel.value = data.chars[charnumber].skill2sel
           skilldesc(skill2sel, skill2desc, skill2mana, skill2uses, skill2ap)
+          skill3sel.value = data.chars[charnumber].skill3sel
+          skilldesc(skill3sel, skill3desc, skill3mana, skill3uses, skill3ap)
           showskills();
         }
         function classfeatures(){
@@ -1026,7 +1052,7 @@
           }
         }
         function subclassfeatures(subclass){
-          let datad = {basicname: basicname, tohit: tohit, masteryStat: masteryStat, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap}
+          let datad = {basicname: basicname, tohit: tohit, masteryStat: masteryStat, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap, skill3sel:skill3sel, skill3desc:skill3desc, skill3mana:skill3mana, skill3uses:skill3uses, skill3ap:skill3ap}
           switch(subclass){
             case("rager"):
               rager(datad);

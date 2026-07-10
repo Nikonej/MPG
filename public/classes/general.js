@@ -61,6 +61,7 @@ function useSkill(skillmana, skillap){
     }
     sendData()
 }
+
 function tohitf(ms, atk, ms2){
     let hit=0;
     switch(ms){
@@ -111,4 +112,17 @@ function endTurn(){
     ap3.checked = false;
     mp.value = parseInt(mp.value) + parseInt(mpregen.textContent);
     sendData();
+}
+
+function updateskilltables(lvl){
+    for (let i = 0; i < skilltable.length;i++){
+       // skilltable[i].style.display="none";
+    }
+    if (lvl>0){
+        skilltable[0].style.display="block";
+        skilltable[1].style.display="block";
+    }
+    if (lvl>=3){
+        skilltable[2].style.display="block";
+    }
 }
