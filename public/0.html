@@ -512,8 +512,8 @@
     <table width="300px" class="skilltable" style="display: none;"> <!-- skill 1 -->
       <tr>
         <th colspan="3" id="skill1"><select id="skill1sel" class="skillsel"> 
-          <option value="">Select skill 1</option>
-        </select></th>
+          <option value="">Select skill 1</option> 
+        </select>   <input type="button" value="hey" onclick="upgradeskill(skill1sel.value)"> </input></th>
       </tr>
       <tr>
         <td colspan="3" id="skill1desc" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line"></span></td>
@@ -564,6 +564,60 @@
       </tr>
       <tr>
         <td id="skill3button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill3mana.textContent, skill3ap.textContent)"></td>
+      </tr>
+    </table>
+    <table width="300px" class="skilltable" style="display: none;">  <!-- skill 4 -->
+      <tr>
+        <th colspan="3" id="skill4"><select id="skill4sel" class="skillsel">  
+          <option value="">Select skill 4</option>
+        </select></th>
+      </tr>
+      <tr>
+        <td colspan="3" id="skill4desc" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+      </tr>
+      <tr>
+        <td id="skill4mana" style="color: blue"></td>
+        <td id="skill4uses"></td>
+        <td id="skill4ap" style="color: green"></td>
+      </tr>
+      <tr>
+        <td id="skill4button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill4mana.textContent, skill4ap.textContent)"></td>
+      </tr>
+    </table>
+    <table width="300px" class="skilltable" style="display: none;">  <!-- skill 5 -->
+      <tr>
+        <th colspan="3" id="skill5"><select id="skill5sel" class="skillsel">  
+          <option value="">Select skill 5</option>
+        </select></th>
+      </tr>
+      <tr>
+        <td colspan="5" id="skill5desc" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+      </tr>
+      <tr>
+        <td id="skill5mana" style="color: blue"></td>
+        <td id="skill5uses"></td>
+        <td id="skill5ap" style="color: green"></td>
+      </tr>
+      <tr>
+        <td id="skill5button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill5mana.textContent, skill5ap.textContent)"></td>
+      </tr>
+    </table>
+    <table width="300px" class="skilltable" style="display: none;">  <!-- skill 6 -->
+      <tr>
+        <th colspan="3" id="skill5"><select id="skill6sel" class="skillsel">  
+          <option value="">Select skill 6</option>
+        </select></th>
+      </tr>
+      <tr>
+        <td colspan="6" id="skill6desc" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+      </tr>
+      <tr>
+        <td id="skill6mana" style="color: blue"></td>
+        <td id="skill6uses"></td>
+        <td id="skill6ap" style="color: green"></td>
+      </tr>
+      <tr>
+        <td id="skill6button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill6mana.textContent, skill6ap.textContent)"></td>
       </tr>
     </table>
 
@@ -632,7 +686,10 @@
         const skill1sel = document.getElementById('skill1sel'); const skill1desc = document.getElementById('skill1desc'); const skill1mana = document.getElementById('skill1mana'); const skill1uses = document.getElementById('skill1uses'); const skill1ap = document.getElementById('skill1ap');
         const skill2sel = document.getElementById('skill2sel'); const skill2desc = document.getElementById('skill2desc'); const skill2mana = document.getElementById('skill2mana'); const skill2uses = document.getElementById('skill2uses'); const skill2ap = document.getElementById('skill2ap');
         const skill3sel = document.getElementById('skill3sel'); const skill3desc = document.getElementById('skill3desc'); const skill3mana = document.getElementById('skill3mana'); const skill3uses = document.getElementById('skill3uses'); const skill3ap = document.getElementById('skill3ap');        
-        var subclass = "", masteryStat = "";
+        const skill4sel = document.getElementById('skill4sel'); const skill4desc = document.getElementById('skill4desc'); const skill4mana = document.getElementById('skill4mana'); const skill4uses = document.getElementById('skill4uses'); const skill4ap = document.getElementById('skill4ap');        
+        const skill5sel = document.getElementById('skill5sel'); const skill5desc = document.getElementById('skill5desc'); const skill5mana = document.getElementById('skill5mana'); const skill5uses = document.getElementById('skill5uses'); const skill5ap = document.getElementById('skill5ap');        
+        const skill6sel = document.getElementById('skill6sel'); const skill6desc = document.getElementById('skill6desc'); const skill6mana = document.getElementById('skill6mana'); const skill6uses = document.getElementById('skill6uses'); const skill6ap = document.getElementById('skill6ap');        
+        var subclass = "", masteryStat = "", skillupgrades = 0;
         var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, sheet=0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
         warrior.style.display = "none"

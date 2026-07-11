@@ -111,12 +111,23 @@ function endTurn(){
     ap2.checked = false;
     ap3.checked = false;
     mp.value = parseInt(mp.value) + parseInt(mpregen.textContent);
+    if (mp.value > parseInt(mpmaxtxt.textContent)){
+        mp.value = parseInt(mpmaxtxt.textContent)
+    }
     sendData();
+}
+
+function upgradeskill(skill){
+    switch(skill){
+        case("flurry"):
+
+        break;
+    }
 }
 
 function updateskilltables(lvl){
     for (let i = 0; i < skilltable.length;i++){
-       // skilltable[i].style.display="none";
+       skilltable[i].style.display="none";
     }
     if (lvl>0){
         skilltable[0].style.display="block";
@@ -124,5 +135,14 @@ function updateskilltables(lvl){
     }
     if (lvl>=3){
         skilltable[2].style.display="block";
+    }
+    if (lvl>=5){
+        skilltable[3].style.display="block";
+    }
+    if (lvl>=7){
+        skilltable[4].style.display="block";
+    }
+    if (lvl>=9){
+        skilltable[5].style.display="block";
     }
 }
