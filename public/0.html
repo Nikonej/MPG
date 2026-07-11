@@ -513,7 +513,7 @@
       <tr>
         <th colspan="3" id="skill1"><select id="skill1sel" class="skillsel"> 
           <option value="">Select skill 1</option> 
-        </select>   <input type="button" value="hey" onclick="upgradeskill(skill1sel.value)"> </input></th>
+        </select>   <input type="button" value="upgrade" onclick="upgradeskill(skill1sel)"> </input></th>
       </tr>
       <tr>
         <td colspan="3" id="skill1desc" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line"></span></td>
@@ -1071,12 +1071,12 @@
           updateStats()
           classfeatures();
           subclassfeatures(subclass)
+          skilldesc(data.chars[charnumber].skill1sel, skill1desc, skill1mana, skill1uses, skill1ap, skill1sel)
           skill1sel.value = data.chars[charnumber].skill1sel
-          skilldesc(skill1sel, skill1desc, skill1mana, skill1uses, skill1ap)
+          skilldesc(data.chars[charnumber].skill2sel, skill2desc, skill2mana, skill2uses, skill2ap, skill2sel)
           skill2sel.value = data.chars[charnumber].skill2sel
-          skilldesc(skill2sel, skill2desc, skill2mana, skill2uses, skill2ap)
+          skilldesc(data.chars[charnumber].skill3sel, skill3desc, skill3mana, skill3uses, skill3ap, skill3sel)
           skill3sel.value = data.chars[charnumber].skill3sel
-          skilldesc(skill3sel, skill3desc, skill3mana, skill3uses, skill3ap)
           showskills();
         }
         function classfeatures(){

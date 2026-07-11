@@ -19,8 +19,8 @@ function rager(data){
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
     data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently +" + -ragebonus + " damage.";
     data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
-    pugskills(data.skill1sel, 1)
-    ragerskills(data.skill1sel, 1)
+    pugskills(data.skill1sel, 2)
+    ragerskills(data.skill1sel, 2)
     pugskills(data.skill2sel, 1)
     ragerskills(data.skill2sel, 1)
     pugskills(data.skill3sel, 1)
@@ -30,7 +30,7 @@ function rager(data){
 }
 
 function pugskills(skillid, tier){
-    skillid.options.length = 0;
+    skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
     skillid.options[skillid.options.length] = new Option('Flurry of Blows (I)', 'flurry');
     skillid.options[skillid.options.length] = new Option('Crushing Palm (I)', 'crush');
@@ -48,9 +48,9 @@ function ragerskills(skillid, tier){
         skillid.options[skillid.options.length] = new Option('dfs (II)', 'dfs');
     }
 }
-function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
-    
-    switch(skillid.value){
+function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
+    //console.log(skillid.value)
+    switch(skillid){
         case(""):
             skilldesc.childNodes[0].textContent="";
             skilldesc.querySelector(".tooltiptext").textContent = "";
@@ -64,7 +64,16 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
             skillmana.textContent = "3 Mana";
             skillap.textContent = "2 AP";
             skilluses.textContent = "";
-            break;
+        break;
+        case("flurryrager+"):
+            skillsel.options[skillsel.options.length] = new Option('Flurry of Blows+ (I)', 'flurryrager+')
+            //skillid.value="flurryuprager"
+            skilldesc.childNodes[0].textContent = "Three attacks with +3 to hit. On a hit, each attack deals 1d6 + " + tohitf("senses", false) + " damage. Hits generate no Focus";
+            skilldesc.querySelector(".tooltiptext").textContent = "Flurry of Blows+ \n Cost: 9 Mana, 2 AP \n Range: 1 Square \n \n You unleash a flurry of rapid strikes, making three attacks against a single target. On a hit, each attack deals 1d6 + Senses damage. Hits generate no Focus";
+            skillmana.textContent = "9 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
         case("crush"):
             skilldesc.childNodes[0].textContent = "+" + tohitf("senses", true, "body") + " to hit. On hit, they take 2d12 + " + tohitf("senses", false, "body") + " damage. If they, Weak or Dazed, also Cripple.";
             skilldesc.querySelector(".tooltiptext").textContent = "Crushing palm \n Cost: 4 Mana, 2 AP \n Range: 1 square \n A devastating palm strike aimed to break defenceless foes. The target takes 2d10 + Body/Senses damage. If they are Frail, Weak or Dazed, they become Crippled until the end of their next turn.";
@@ -72,12 +81,28 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
             skillap.textContent = "2 AP";
             skilluses.textContent = "";
         break;
+        case("crush+"):
+            skillsel.options[skillsel.options.length] = new Option('Crushing palm+ (I)', 'crush+')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("senses", true, "body") + " to hit. On hit, they take 3d12 + " + tohitf("senses", false, "body") + " damage. If they are debuffed, stun, otherwise, cripple.";
+            skilldesc.querySelector(".tooltiptext").textContent = "Crushing Blow+ \n Cost: 15 Mana, 2 AP \n Range: 1 square \n \n A devastating palm strike aimed to break defenceless foes. The target takes 3d10 + Body/Senses damage. If they have a negative condition (DOTs not included), they become stunned until the end of their next turn, otherwise they become crippled for the same amount of time.";
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
         case("secondwind"):
-            skilldesc.childNodes[0].textContent = "Cleanse 1 debuff and restore "+ body +" hit points, or "+ body*2 +" if you are below half hit points ("+ (parseInt(hp.value)+1)/2 +")";
+            skilldesc.childNodes[0].textContent = "Cleanse 1 debuff and restore "+ (parseInt(focus.value)>0?parseInt(body+parseInt(focus.value)):body) +" hit points, or "+ (parseInt(focus.value)>0?parseInt((body+parseInt(focus.value))*2):parseInt(body*2)) +" if you are below half hit points ("+ (parseInt(hpmaxtxt.textContent)+1)/2 +")";
             skilldesc.querySelector(".tooltiptext").textContent = "Second Wind \n Cost: 2 Mana, 1 AP \n Range: Self \n Choose 1 debuff on you, and remove all stacks of it \n Restore Body + Focus hit points. If you have half your maximum hit points or less, you restore twice that amount.";
             skillmana.textContent = "2 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "2 uses"
+        break;
+        case("secondwind+"):
+            skillsel.options[skillsel.options.length] = new Option('Second Wind+ (I)', 'secondwind+')
+            skilldesc.childNodes[0].textContent = "Cleanse 3 debuffs and restore "+ (parseInt(focus.value)>0?parseInt(body+2*parseInt(focus.value)):body) +" hit points, or "+ (parseInt(focus.value)>0?parseInt((body+2*parseInt(focus.value))*2):parseInt(body*2)) +" if you are below half hit points ("+ (parseInt(hpmaxtxt.textContent)+1)/2 +")";
+            skilldesc.querySelector(".tooltiptext").textContent = "Second Wind \n Cost: 2 Mana, 1 AP \n Range: Self \n Choose up to 3 debuffs on you, and remove all stacks of each \n Restore Body + 2x Focus hit points. If you have half your maximum hit points or less, you restore twice that amount.";
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "4 uses"
         break;
         case("bulletpunch"):
             skilldesc.childNodes[0].textContent = "+" + tohitf("senses", true, "fortune") + " to hit. On a hit, deal 1d4 per square moved + " + tohitf("senses", false, "fortune") + " damage. Use focus for extra move, may daze 1d4";
@@ -86,14 +111,37 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
+        case("bulletpunch+"):
+            skillsel.options[skillsel.options.length] = new Option('Bullets Punch+ (II)', 'bulletpunch+')
+            skilldesc.childNodes[0].textContent = "3 attacks, +" + tohitf("senses", true, "fortune") + " to hit. On a hit, deal 1d6 per move + " + tohitf("senses", false, "fortune") + " damage. Use focus for extra move, may daze 1d4";
+            skilldesc.querySelector(".tooltiptext").textContent = "Bullet Punch+ \n Cost: 15 Mana, 1 AP \n Range: 1 Square \n \n Use your movement to move in a straight line, then immediately attack enemies within range \n \n You may expend any amount of focus to increase the distance you move with this skill. You keep the to hit bonus of focus until after this skill is used. \n \n up to 3 times during this skill, you may stop and attack an enemy within range. On hit, deal 1d6 damage for each square moved during this skill, plus Senses/Fortune damage. \n \n If you have more movement, you may continue moving. Each time you attack an enemy, you may change your direction before continuing to move \n \n Additionally, any attack inflicts 1d4 dazed on hit \n \n You cannot target the same enemy more than once with this skill";
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
         case("counter"):
-            skilldesc.childNodes[0].textContent = "You have +"+ tohitf("body", false) +" Evasion during the next attack that targets you. Next time youre attacked, attack back";
-            skilldesc.querySelector(".tooltiptext").textContent = "Counter Strike \n Cost: 8 Mana, 2 AP \n Range: Self \n During the next attack that targets you, you gain a bonus to Evasion equal to your Body. Next time youre attacked, you may target the attacker with one free use of your basic attack";
+            skilldesc.childNodes[0].textContent = "You have +"+ body +" Evasion during the next attack that targets you. Next time youre attacked, attack back";
+            skilldesc.querySelector(".tooltiptext").textContent = "Counter Strike \n Cost: 8 Mana, 1 AP \n Range: Self \n During the next attack that targets you, you gain a bonus to Evasion equal to your Body. Next time youre attacked, you may target the attacker with one free use of your basic attack";
             skillmana.textContent = "8 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("counter+"):
+            skillsel.options[skillsel.options.length] = new Option('Counter+ (II)', 'counter+')
+            skilldesc.childNodes[0].textContent = "You have +"+ body +" Evasion during the next 3 attacks that target you. Attack back x3";
+            skilldesc.querySelector(".tooltiptext").textContent = "Counter Strike \n Cost: 20 Mana, 2 AP \n \n During the next 3 attacks that target you, you gain a bonus to Evasion equal to your Body. Next 3 times youre attacked, you may target the attacker with one free use of your basic attack";
+            skillmana.textContent = "20 Mana";
             skillap.textContent = "2 AP";
             skilluses.textContent = "";
         break;
         case("frenzy"):
+            skilldesc.childNodes[0].textContent = "Gain +3 extra movement this turn. Your next skill has +"+ 0 +" to hit and reduces Focus on hit";
+            skilldesc.querySelector(".tooltiptext").textContent = "Frenzy Rush \n Cost: 8 Mana, 1 AP \n Range: Self \n Gain +3 extra movement this turn. \n Your next skill this turn has a bonus to hit equal to your negative Focus damage bonus on all attacks, and it reduces your focus by 1 instead of increasing focus on hit";
+            skillmana.textContent = "8 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("frenzy+"):
             skilldesc.childNodes[0].textContent = "Gain +3 extra movement this turn. Your next skill has +"+ 0 +" to hit and reduces Focus on hit";
             skilldesc.querySelector(".tooltiptext").textContent = "Frenzy Rush \n Cost: 8 Mana, 1 AP \n Range: Self \n Gain +3 extra movement this turn. \n Your next skill this turn has a bonus to hit equal to your negative Focus damage bonus on all attacks, and it reduces your focus by 1 instead of increasing focus on hit";
             skillmana.textContent = "8 Mana";
@@ -107,6 +155,13 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
+        case("rage+"):
+            skilldesc.childNodes[0].textContent = "Reduce Focus to zero, gain resistance to martial damage. Is active as long as you take damage.";
+            skilldesc.querySelector(".tooltiptext").textContent = "Rage \n Cost: 4 Mana, 1 AP \n Range: Self \n You enter a deep rage. You gain resistance to slashing, piercing and bludgeoning damage. If your Focus is above 0 when you use this skill, its reduced to 0 \n At the start of your next turn, you may use 1 AP to keep this effect, if you choose not to, the rage ends. If you took any damage between turns, the cost is reduced to 0 AP. When extending the rage in this way, you don't reduce your Focus";
+            skillmana.textContent = "4 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
         case("unleash"):
             skilldesc.childNodes[0].textContent = 1 + " attack(s) with +" + tohitf("body", true, "senses") + " to hit. On hit, deal 1d6+" + tohitf("body", false, "senses") + " damage. Make more attacks with less Focus	";
             skilldesc.querySelector(".tooltiptext").textContent = "Unleash Anger \n Cost: 5 Mana, 1 AP \n Range: 1 Square \n You unleash a brutal series of attacks against a target, fueled by your anger. \n You can make a number of attacks equal to your negative Focus damage bonus + 1. You can choose a new target within range for each attack.\n On hit, the target takes 1d6 + Body/Senses damage.";
@@ -114,5 +169,50 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap){
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
+        case("unleash+"):
+            skilldesc.childNodes[0].textContent = 1 + " attack(s) with +" + tohitf("body", true, "senses") + " to hit. On hit, deal 1d6+" + tohitf("body", false, "senses") + " damage. Make more attacks with less Focus	";
+            skilldesc.querySelector(".tooltiptext").textContent = "Unleash Anger \n Cost: 5 Mana, 1 AP \n Range: 1 Square \n You unleash a brutal series of attacks against a target, fueled by your anger. \n You can make a number of attacks equal to your negative Focus damage bonus + 1. You can choose a new target within range for each attack.\n On hit, the target takes 1d6 + Body/Senses damage.";
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
         }
+}
+
+function upgradeskill(skill){
+    switch(skill.value){
+        case("flurry"):
+            skill.options[skill.options.length] = new Option('Flurry of Blows+ (I)', 'flurryrager+')
+            skill.value="flurryrager+"
+        break;
+        case("crush"):
+            skill.options[skill.options.length] = new Option('Crushing palm+ (I)', 'crush+')
+            skill.value="crush+"
+        break;
+        case("secondwind"):
+            skill.options[skill.options.length] = new Option('Second Wind+ (I)', 'secondwind+')
+            skill.value="secondwind+"
+        break;
+        case("bulletpunch"):
+            skill.options[skill.options.length] = new Option('Bullets Punch+ (II)', 'bulletpunch+')
+            skill.value="bulletpunch+"
+        break;
+        case("counter"):
+            skill.options[skill.options.length] = new Option('Counter+ (II)', 'counter+')
+            skill.value="counter+"
+        break;
+        case("frenzy"):
+            skill.options[skill.options.length] = new Option('Frenzy rush+ (II)', 'frenzy+')
+            skill.value="frenzy+"
+        break;
+        case("rage"):
+            skill.options[skill.options.length] = new Option('Rage+ (I)', 'rage+')
+            skill.value="rage+"
+        break;
+        case("unleash"):
+            skill.options[skill.options.length] = new Option('Unleash Anger+ (I)', 'unleash+')
+            skill.value="unleash+"
+        break;
+    }
+    sendData();
 }

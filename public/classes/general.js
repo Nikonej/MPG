@@ -93,15 +93,16 @@ function tohitf(ms, atk, ms2){
             hit = 0
         break;
     }
-    if (ms2 != undefined){
-        hit2 = tohitf(ms2, atk)
+    if (ms2 != undefined && ms2 != "stat"){
+        hit2 = tohitf(ms2, atk, "stat")
         hit = parseInt((hit + hit2 + 1)/2)
     }
-    if (classs.value == "pug" && atk){
+    if (classs.value == "pug" && atk && ms2!="stat"){
         hit += parseInt(focusbonus.textContent)
     }
-    if (subclass == "rager" && !atk){
-        hit -= parseInt(focus.value<0?focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value:0)
+    if (subclass == "rager" && !atk && ms2!="stat"){
+        hit -= parseInt(focus.value<0?(focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value):0)
+        console.log(-1*parseInt((parseInt(lvl.value)+1)/2))
     }
     return(hit)
 }
@@ -115,14 +116,6 @@ function endTurn(){
         mp.value = parseInt(mpmaxtxt.textContent)
     }
     sendData();
-}
-
-function upgradeskill(skill){
-    switch(skill){
-        case("flurry"):
-
-        break;
-    }
 }
 
 function updateskilltables(lvl){
