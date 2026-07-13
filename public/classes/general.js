@@ -102,7 +102,6 @@ function tohitf(ms, atk, ms2){
     }
     if (subclass == "rager" && !atk && ms2!="stat"){
         hit -= parseInt(focus.value<0?(focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value):0)
-        console.log(-1*parseInt((parseInt(lvl.value)+1)/2))
     }
     return(hit)
 }
@@ -122,20 +121,90 @@ function updateskilltables(lvl){
     for (let i = 0; i < skilltable.length;i++){
        skilltable[i].style.display="none";
     }
+    skillsels=[skill1sel, skill2sel, skill3sel, skill4sel, skill5sel, skill6sel]
+    freeupgrades = (lvl - 1);
+    /*for (let i = 0; i < skill2sel.value.length; i++){
+        if (skill2sel.value[i]=="+"){
+            freeupgrades--;
+        }
+    }
+    for (let i = 0; i < skill3sel.value.length; i++){
+        if (skill3sel.value[i]=="+"){
+            freeupgrades--;
+        }
+    }
+    for (let i = 0; i < skill4sel.value.length; i++){
+        if (skill4sel.value[i]=="+"){
+            freeupgrades--;
+        }
+    }
+    for (let i = 0; i < skill4sel.value.length; i++){
+        if (skill4sel.value[i]=="+"){
+            freeupgrades--;
+        }
+    }
+    for (let i = 0; i < skill4sel.value.length; i++){
+        if (skill4sel.value[i]=="+"){
+            freeupgrades--;
+        }
+    }*/
     if (lvl>0){
         skilltable[0].style.display="block";
         skilltable[1].style.display="block";
     }
-    if (lvl>=3){
+    if (lvl>=3 && freeupgrades > 0){
         skilltable[2].style.display="block";
     }
-    if (lvl>=5){
+    if (lvl>=5 && freeupgrades > 0){
         skilltable[3].style.display="block";
     }
-    if (lvl>=7){
+    if (lvl>=7 && freeupgrades > 0){
         skilltable[4].style.display="block";
     }
-    if (lvl>=9){
+    if (lvl>=9 && freeupgrades > 0){
         skilltable[5].style.display="block";
+    }
+    for (let i = 0; i < skillsels.length; i++){
+        if (skilltable[i].style.display!="none"){
+            for (let j = 0; j < skillsels[i].value.length; j++){
+                if (skillsels[i].value[j]=="+"  ){
+                    freeupgrades--;
+                }
+            }
+        }
+    }
+    if (skill3sel.value!="" && skilltable[2].style.display!="none"){
+        freeupgrades--; 
+    }
+    if (skill4sel.value!="" && skilltable[3].style.display!="none"){
+        freeupgrades--;
+    }
+    if (skill5sel.value!="" && skilltable[4].style.display!="none"){
+        freeupgrades--;
+    }
+    if (skill6sel.value!="" && skilltable[5].style.display!="none"){
+        freeupgrades--;
+    }
+    if(freeupgrades>0){
+        for (let i = 0; i < upgradebutton.length; i++){
+            let notupgraded = true
+            for (let j = 0; j < skillsels[i].value.length; j++){
+                if (skillsels[i].value[j]=="+"){
+                    notupgraded = false;
+                }
+            }
+            if (skillsels[i].value!="" && notupgraded){
+                upgradebutton[i].style.display ="inline"
+            } else {
+                upgradebutton[i].style.display ="none"
+            }
+        }
+    } else {
+        for (let i = 0; i < upgradebutton.length; i++){
+            upgradebutton[i].style.display ="none";
+            if (skillsels[i].value==""){
+                skilltable[i].style.display="none";
+            }
+        }
     }
 }

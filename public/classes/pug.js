@@ -25,8 +25,12 @@ function rager(data){
     ragerskills(data.skill2sel, 1)
     pugskills(data.skill3sel, 1)
     ragerskills(data.skill3sel, 1)
-    pugskills(data.skill3sel, 2)
-    ragerskills(data.skill3sel, 2)
+    pugskills(data.skill4sel, 2)
+    ragerskills(data.skill4sel, 2)
+    pugskills(data.skill5sel, 2)
+    ragerskills(data.skill5sel, 2)
+    pugskills(data.skill6sel, 2)
+    ragerskills(data.skill6sel, 2)
 }
 
 function pugskills(skillid, tier){
@@ -49,7 +53,6 @@ function ragerskills(skillid, tier){
     }
 }
 function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
-    //console.log(skillid.value)
     switch(skillid){
         case(""):
             skilldesc.childNodes[0].textContent="";
@@ -135,16 +138,17 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";
         break;
         case("frenzy"):
-            skilldesc.childNodes[0].textContent = "Gain +3 extra movement this turn. Your next skill has +"+ 0 +" to hit and reduces Focus on hit";
+            skilldesc.childNodes[0].textContent = "Gain +3 extra movement this turn. Your next skill has +"+ tohitf(0,false) +" to hit and reduces Focus on hit";
             skilldesc.querySelector(".tooltiptext").textContent = "Frenzy Rush \n Cost: 8 Mana, 1 AP \n Range: Self \n Gain +3 extra movement this turn. \n Your next skill this turn has a bonus to hit equal to your negative Focus damage bonus on all attacks, and it reduces your focus by 1 instead of increasing focus on hit";
             skillmana.textContent = "8 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
         case("frenzy+"):
-            skilldesc.childNodes[0].textContent = "Gain +3 extra movement this turn. Your next skill has +"+ 0 +" to hit and reduces Focus on hit";
-            skilldesc.querySelector(".tooltiptext").textContent = "Frenzy Rush \n Cost: 8 Mana, 1 AP \n Range: Self \n Gain +3 extra movement this turn. \n Your next skill this turn has a bonus to hit equal to your negative Focus damage bonus on all attacks, and it reduces your focus by 1 instead of increasing focus on hit";
-            skillmana.textContent = "8 Mana";
+            skillsel.options[skillsel.options.length] = new Option('Frenzy rush+ (II)', 'frenzy+')
+            skilldesc.childNodes[0].textContent = "Gain +5 extra movement this turn. Your next two skills have +"+ tohitf(0, false) +" to hit and reduces Focus on hit";
+            skilldesc.querySelector(".tooltiptext").textContent = "Adrenaline Rush+ \n Cost: 15 Mana, 1 AP \n Range: Self \n \n Gain +5 extra movement this turn. \n \n Your next two skills this turn have a bonus to hit equal to your negative Focus damage bonus on all attacks, and they reduce your focus by 1 instead of increasing focus on hit";
+            skillmana.textContent = "15 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
@@ -156,26 +160,28 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";
         break;
         case("rage+"):
-            skilldesc.childNodes[0].textContent = "Reduce Focus to zero, gain resistance to martial damage. Is active as long as you take damage.";
-            skilldesc.querySelector(".tooltiptext").textContent = "Rage \n Cost: 4 Mana, 1 AP \n Range: Self \n You enter a deep rage. You gain resistance to slashing, piercing and bludgeoning damage. If your Focus is above 0 when you use this skill, its reduced to 0 \n At the start of your next turn, you may use 1 AP to keep this effect, if you choose not to, the rage ends. If you took any damage between turns, the cost is reduced to 0 AP. When extending the rage in this way, you don't reduce your Focus";
-            skillmana.textContent = "4 Mana";
+            skillsel.options[skillsel.options.length] = new Option('Rage+ (I)', 'rage+')
+            skilldesc.childNodes[0].textContent = "Reduce Focus to zero, gain resistance to martial damage. For every focus lost heal "+ parseInt((parseInt(lvl.value)+1)/2) + " hp.";
+            skilldesc.querySelector(".tooltiptext").textContent = "Rage \n Cost: 12 Mana, 1 AP \n Range: Self \n You enter a deep rage. You enter a deep rage. You gain resistance to slashing, piercing and bludgeoning damage. If your Focus is above 0 when you use this skill, its reduced to 0 \n \n Whenever you lose Focus while this skill is active, restore Hit Points equal to your mastery for each point of Focus lost \n \n At the start of your next turn, you may use 1 AP to keep this effect, if you choose not to, the rage ends. If you took any damage between turns, the cost is reduced to 0 AP. When extending the rage in this way, you don't reduce your Focus";
+            skillmana.textContent = "12 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
         case("unleash"):
-            skilldesc.childNodes[0].textContent = 1 + " attack(s) with +" + tohitf("body", true, "senses") + " to hit. On hit, deal 1d6+" + tohitf("body", false, "senses") + " damage. Make more attacks with less Focus	";
+            skillsel.classList.remove("upgraded")
+            skilldesc.childNodes[0].textContent = parseInt(1+tohitf(0,false)) + " attack(s) with +" + tohitf("body", true, "senses") + " to hit. On hit, deal 1d6+" + tohitf("body", false, "senses") + " damage. Make more attacks with less Focus	";
             skilldesc.querySelector(".tooltiptext").textContent = "Unleash Anger \n Cost: 5 Mana, 1 AP \n Range: 1 Square \n You unleash a brutal series of attacks against a target, fueled by your anger. \n You can make a number of attacks equal to your negative Focus damage bonus + 1. You can choose a new target within range for each attack.\n On hit, the target takes 1d6 + Body/Senses damage.";
             skillmana.textContent = "5 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
         case("unleash+"):
-            skilldesc.childNodes[0].textContent = 1 + " attack(s) with +" + tohitf("body", true, "senses") + " to hit. On hit, deal 1d6+" + tohitf("body", false, "senses") + " damage. Make more attacks with less Focus	";
-            skilldesc.querySelector(".tooltiptext").textContent = "Unleash Anger \n Cost: 5 Mana, 1 AP \n Range: 1 Square \n You unleash a brutal series of attacks against a target, fueled by your anger. \n You can make a number of attacks equal to your negative Focus damage bonus + 1. You can choose a new target within range for each attack.\n On hit, the target takes 1d6 + Body/Senses damage.";
-            skillmana.textContent = "5 Mana";
+            skillsel.options[skillsel.options.length] = new Option('Unleash anger+ (I)', 'unleash+')
+            skilldesc.childNodes[0].textContent = parseInt(2+tohitf(0, false))  + " attack(s) with +" + tohitf("body", true, "senses") + " to hit. On hit, deal 1d6+" + tohitf("body", false, "senses") + " damage. Cripple target if hit multiple times";
+            skilldesc.querySelector(".tooltiptext").textContent = "Unleash Anger \n Cost: 5 Mana, 1 AP \n Range: 1 Square \n You unleash a brutal series of attacks against a target, fueled by your anger. \n \n You can make a number of attacks equal to your negative Focus damage bonus + 2. You can choose a new target within range for each attack. \n \n On hit, the target takes 1d6 + Body/Senses damage. \n If a target is successfully hit 2 or more times by this skill, they become Crippled until the end of their next turn.";
+            skillmana.textContent = "14 Mana";
             skillap.textContent = "1 AP";
-            skilluses.textContent = "";
-        break;
+            skilluses.textContent = "";        break;
         }
 }
 
