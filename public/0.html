@@ -633,45 +633,64 @@
         <td id="restitem">rest item</td>
         <td id="restskill">swap skill</td>
         <td id="restsander">Sander :)</td>
-        <td id="statsel1t"><select id="statsel1" class="statsel">  
-          <option value="">Select stat</option>
-          <option value="Body">Body</option>
-          <option value="Mind">Mind</option>
-          <option value="Senses">Senses</option>
-          <option value="Fortune">Fortune</option></select>
-          <select id="statsel12" class="statsel">  
-          <option value="">Select stat</option>
-          <option value="Body">Body</option>
-          <option value="Mind">Mind</option>
-          <option value="Senses">Senses</option>
-          <option value="Fortune">Fortune</option></select></td>
-        <td id="statsel2t"><select id="statsel2" class="statsel">  
-          <option value="">Select stat</option>
-          <option value="Body">Body</option>
-          <option value="Mind">Mind</option>
-          <option value="Senses">Senses</option>
-          <option value="Fortune">Fortune</option></select>
-          <select id="statsel22" class="statsel">  
-          <option value="">Select stat</option>
-          <option value="Body">Body</option>
-          <option value="Mind">Mind</option>
-          <option value="Senses">Senses</option>
-          <option value="Fortune">Fortune</option></select></td>
-        <td id="statsel3t" style="display: none"><select id="statsel3" class="statsel">  
-          <option value="">Select stat</option>
-          <option value="Body">Body</option>
-          <option value="Mind">Mind</option>
-          <option value="Senses">Senses</option>
-          <option value="Fortune">Fortune</option></select>
-          <select id="statsel32" class="statsel">  
-          <option value="">Select stat</option>
-          <option value="Body">Body</option>
-          <option value="Mind">Mind</option>
-          <option value="Senses">Senses</option>
-          <option value="Fortune">Fortune</option></select></td>
+        <td id="statsel1t">
+          <label for="st1" class="statsel1l">Body:</label>   
+          <input type="checkbox" value="body" class="statsel1" id="st1"></input>
+          <label for="st2" class="statsel1l">Mind:</label>    
+          <input type="checkbox" value="mind" class="statsel1" id="st2"></input>
+          <label for="st3" class="statsel1l">Senses:</label>   
+          <input type="checkbox" value="senses" class="statsel1" id="st3"></input>
+          <label for="st4" class="statsel1l">Fortune:</label>   
+          <input type="checkbox" value="fortune" class="statsel1" id="st4"></input>
+          </td>
+        <td id="statsel2t">
+          <label for="st5" class="statsel2l">Body:</label>
+          <input type="checkbox" value="body" class="statsel2"></input>
+          <label for="st6" class="statsel2l">Mind:</label>  
+          <input type="checkbox" value="mind" class="statsel2"></input>
+          <label for="st7" class="statsel2l">Senses:</label>  
+          <input type="checkbox" value="senses" class="statsel2"></input>
+          <label for="st8" class="statsel2l">Fortune:</label>
+          <input type="checkbox" value="fortune" class="statsel2"></input>
+          </td>
+        <td id="statsel3t">
+          <label for="st9" class="statsel3l">Body:</label>  
+          <input type="checkbox" value="body" class="statsel3"></input>
+          <label for="st10" class="statsel3l">Mind:</label>  
+          <input type="checkbox" value="mind" class="statsel3"></input>
+          <label for="st11" class="statsel3l">Senses:</label>  
+          <input type="checkbox" value="senses" class="statsel3"></input>
+          <label for="st12" class="statsel3l">Fortune:</label> 
+          <input type="checkbox" value="fortune" class="statsel3"></input>
+          </td>
 
       </tr>
     </table>
+    <table width="300px" class="" >  <!-- Armor -->
+      <tr>
+        <th id="">Armor:</th>
+        <td id="armorscore">4</td>
+      </tr>
+      <tr>
+        <td class="armorslot"><input type="checkbox" id="armor1"></input></td>
+        <td class="armorslot"><input type="checkbox" id="armor2"></input></td>
+      </tr>
+      <tr>
+        <td class="armorslot"><input type="checkbox" id="armor3"></input></td>
+        <td class="armorslot"><input type="checkbox" id="armor4"></input></td>
+      </tr>
+      <tr>
+        <td class="armorslot"><input type="checkbox" id="armor5"></input></td>
+        <td class="armorslot"><input type="checkbox" id="armor6"></input></td>
+      </tr>
+      <tr>
+        <td class="armorslot"><input type="checkbox" id="armor7"></input></td>
+        <td class="armorslot"><input type="checkbox" id="armor8"></input></td>
+      </tr>
+      <tr>
+        <td class="armorslot"><input type="checkbox" id="armor9"></input></td>
+        <td class="armorslot"><input type="checkbox" id="armor10"></input></td>
+      </tr>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/classes/pug.js"></script>
     <script src="/classes/general.js"></script>
@@ -711,7 +730,12 @@
         const skillsel = document.getElementsByClassName('skillsel');
         const skilltable = document.getElementsByClassName('skilltable');
         const upgradebutton = document.getElementsByClassName('upgradebutton');
-        const statsel = document.getElementsByClassName('statsel')
+        const statsel1 = document.getElementsByClassName('statsel1')
+        const statsel2 = document.getElementsByClassName('statsel2')
+        const statsel3 = document.getElementsByClassName('statsel3')
+        const statsel1l = document.getElementsByClassName('statsel1l')
+        const statsel2l = document.getElementsByClassName('statsel2l')
+        const statsel3l = document.getElementsByClassName('statsel3l')
         const lvl = document.getElementById('lvl');
         const hp = document.getElementById('hp');
         const mp = document.getElementById('mp');
@@ -742,7 +766,7 @@
         const skill4sel = document.getElementById('skill4sel'); const skill4desc = document.getElementById('skill4desc'); const skill4mana = document.getElementById('skill4mana'); const skill4uses = document.getElementById('skill4uses'); const skill4ap = document.getElementById('skill4ap');        
         const skill5sel = document.getElementById('skill5sel'); const skill5desc = document.getElementById('skill5desc'); const skill5mana = document.getElementById('skill5mana'); const skill5uses = document.getElementById('skill5uses'); const skill5ap = document.getElementById('skill5ap');        
         const skill6sel = document.getElementById('skill6sel'); const skill6desc = document.getElementById('skill6desc'); const skill6mana = document.getElementById('skill6mana'); const skill6uses = document.getElementById('skill6uses'); const skill6ap = document.getElementById('skill6ap');        
-        var subclass = "", masteryStat = "", freeupgrades = 0;
+        var subclass = "", masteryStat = "", freeupgrades = 0, statincreases = ["","","","","",""];
         var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, sheet=0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
         warrior.style.display = "none"
@@ -810,11 +834,55 @@
             sendData()
         });}
 
-        /*name.addEventListener('change', (e) => {
-          e.preventDefault();
-          document.getElementsByTagName("TITLE")[0].text = name.value;
-          sendData()
-        });*/
+        for (let i = 0; i < statsel1.length; i++){
+          statsel1[i].addEventListener('click', (e) => {
+            //e.preventDefault();
+            //e.stopPropagation();
+            showstatincrease(statsel1, statsel1l, 3)
+            updateStats()
+            sendData()
+          })
+        }
+        for (let i = 0; i < statsel2.length; i++){
+          statsel2[i].addEventListener('click', (e) => {
+            //e.preventDefault();
+            showstatincrease(statsel2, statsel2l, 6)
+            updateStats()
+            sendData()
+          })
+        }
+        for (let i = 0; i < statsel3.length; i++){
+          statsel3[i].addEventListener('click', (e) => {
+            //e.preventDefault();
+            showstatincrease(statsel3, statsel3l, 9)
+            updateStats()
+            sendData()
+          })
+        }
+        function showstatincrease(stat,label, lvlcap){
+          if (lvl.value>=lvlcap){
+            let c = 0;
+            for (let j = 0; j < stat.length; j++){
+              if (stat[j].checked){
+                c++;
+              }
+            }
+            if (c>=2){
+              for (let j = 0; j < stat.length; j++){
+                if (!stat[j].checked){
+                  stat[j].style.display="none";
+                  label[j].style.display="none"
+                }
+              }
+            } else {
+              for (let j = 0; j < stat.length; j++){
+                  stat[j].style.display="inline";
+                  label[j].style.display="inline"
+              }
+            }
+            //
+          }
+        }
         for (let i = 0; i < masteries.length; i++){
           masteries[i].addEventListener('change', (e) => {
            e.preventDefault();
@@ -831,30 +899,72 @@
             }
         })
         function sendData(){
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked}
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases}
           socket.emit('change', data);
+        }
+        function getstatincrease(stat, increase1, increase2){
+          let c = 0
+            for (let j = 0; j < stat.length; j++){
+              if (stat[j].checked){
+                c++;
+                switch(stat[j].value){
+                  case("body"):
+                    body++;
+                    if ((statincreases[increase1]=="" || statincreases[increase1]=="body") && statincreases[increase1] != "bodu"){
+                      statincreases[increase1] = "body";
+                    } else {
+                      statincreases[increase2] = "body"
+                    }
+                  break;
+                  case("mind"):
+                    mind++;
+                    if ((statincreases[increase1]=="" || statincreases[increase1]=="mind") && statincreases[increase2] != "mind"){
+                      statincreases[increase1] = "mind";
+                    } else {
+                      statincreases[increase2] = "mind"
+                    }
+                  break;
+                  case("senses"):
+                    senses++;
+                    if ((statincreases[increase1]=="" || statincreases[increase1]=="senses") && statincreases[increase2] != "senses"){
+                      statincreases[increase1] = "senses";
+                    } else {
+                      statincreases[increase2] = "senses"
+                    }
+                  break;
+                  case("fortune"):
+                    fortune++;
+                    if ((statincreases[increase1]=="" || statincreases[increase1]=="fortune") && statincreases[increase2] != "fortune"){
+                      statincreases[increase1] = "fortune";
+                    } else {
+                      statincreases[increase2] = "fortune"
+                    }
+                  break;
+                }
+              } else if (stat[j].value == statincreases[increase1]){
+                statincreases[increase1] = "";
+              } else if (stat[j].value == statincreases[increase2]){
+                statincreases[increase2] = "";
+              }
+            }
         }
         function updateStats(){
           body = 0;
           senses = 0;
           mind = 0;
           fortune = 0;
-          for (let i = 0; i < statsel.length;i++){
-            switch(statsel[i].value){
-              case("Body"):
-                body++;
-              break;
-              case("Mind"):
-                mind++;
-              break;
-              case("Senses"):
-                senses++;
-              break;
-              case("Fortune"):
-                fortune++;
-              break;
-            }
+          if (lvl.value>=3){
+            getstatincrease(statsel1, 0, 1)
           }
+          if (lvl.value>=6){
+            getstatincrease(statsel2, 2, 3)
+          }
+          if (lvl.value>=9){
+            getstatincrease(statsel3, 4, 5)
+          }
+          showstatincrease(statsel1, statsel1l)
+          showstatincrease(statsel2, statsel2l)
+          showstatincrease(statsel3, statsel3l)
           switch(classs.value){
               case("warrior"):
                 body += 4;
@@ -1097,25 +1207,58 @@
           classs.value = data.chars[charnumber].classs
           lvl.value = data.chars[charnumber].lvl
           if (lvl.value>=3){
-            statsel[0].style.display="block";
-            statsel[1].style.display="block";
-          } else {
-            statsel[0].style.display="none";
-            statsel[1].style.display="none";
+            for (let i = 0; i < statsel1.length; i++){
+              statsel1[i].style.display="inline";
+              statsel1l[i].style.display="inline";
+              if (statsel1[i].value == data.chars[charnumber].statincreases[0] || statsel1[i].value == data.chars[charnumber].statincreases[1]){
+                statsel1[i].checked = true;
+              }
+            }
+            //showstatincrease(statsel1,statsel1l)
+            //showstatincrease(statsel2,statsel2l)
+            //showstatincrease(statsel3,statsel3l)
+          } 
+          else {
+            for (let i = 0; i < statsel1.length; i++){
+              statsel1[i].style.display="none";
+              statsel1l[i].style.display="none";
+            }
           }
           if (lvl.value>=6){
-            statsel[2].style.display="block";
-            statsel[3].style.display="block";
-          } else {
-            statsel[2].style.display="none";
-            statsel[3].style.display="none";
+            for (let i = 0; i < statsel2.length; i++){
+              statsel2[i].style.display="inline";
+              statsel2l[i].style.display="inline";
+              if (statsel2[i].value == data.chars[charnumber].statincreases[2] || statsel2[i].value == data.chars[charnumber].statincreases[3]){
+                statsel2[i].checked = true;
+              }
+            }
+            //showstatincrease(statsel1,statsel1l)
+            //showstatincrease(statsel2,statsel2l)
+            //showstatincrease(statsel3,statsel3l)
+          } 
+          else {
+            for (let i = 0; i < statsel2.length; i++){
+              statsel2[i].style.display="none";
+              statsel2l[i].style.display="none";
+            }
           }
           if (lvl.value>=9){
-            statsel[4].style.display="block";
-            statsel[5].style.display="block";
-          } else {
-            statsel[4].style.display="none";
-            statsel[5].style.display="none";
+            for (let i = 0; i < statsel3.length; i++){
+              statsel3[i].style.display="inline";
+              statsel3l[i].style.display="inline";
+              if (statsel3[i].value == data.chars[charnumber].statincreases[4] || statsel3[i].value == data.chars[charnumber].statincreases[5]){
+                statsel3[i].checked = true;
+              }
+            }
+            //showstatincrease(statsel1,statsel1l)
+            //showstatincrease(statsel2,statsel2l)
+            //showstatincrease(statsel3,statsel3l)
+          } 
+          else {
+            for (let i = 0; i < statsel3.length; i++){
+              statsel3[i].style.display="none";
+              statsel3l[i].style.display="none";
+            }
           }
           hp.value = data.chars[charnumber].hp
           mp.value = data.chars[charnumber].mp
