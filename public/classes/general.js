@@ -201,10 +201,12 @@ function updateskilltables(lvl){
         }
     } else {
         for (let i = 0; i < upgradebutton.length; i++){
-            upgradebutton[i].style.display ="none";
-            if (skillsels[i].value==""){
+            upgradebutton[i].style.display ="none"; 
+            if (skillsels[i].value=="" && i > 1){
                 skilltable[i].style.display="none";
             }
         }
     }
+    //skilltable[0].style.display="block";
+    //skilltable[1].style.display="block";
 }

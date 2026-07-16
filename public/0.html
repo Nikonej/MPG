@@ -620,7 +620,58 @@
         <td id="skill6button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill6mana.textContent, skill6ap.textContent)"></td>
       </tr>
     </table>
+     <table width="300px" class="" >  <!-- Extra -->
+      <tr>
+        <th id="">Rest actions:</th>
+        <td id="restheal">heal</td>
+        <td id="restarmor">armor</td>
+        <td id="statincrease1">lvl 3 statincrease</td>
+        <td id="statincrease2">lvl 6 statincrease</td>
+        <td id="statincrease3">lvl 9 statincrease</td>
+      </tr>
+      <tr>
+        <td id="restitem">rest item</td>
+        <td id="restskill">swap skill</td>
+        <td id="restsander">Sander :)</td>
+        <td id="statsel1t"><select id="statsel1" class="statsel">  
+          <option value="">Select stat</option>
+          <option value="Body">Body</option>
+          <option value="Mind">Mind</option>
+          <option value="Senses">Senses</option>
+          <option value="Fortune">Fortune</option></select>
+          <select id="statsel12" class="statsel">  
+          <option value="">Select stat</option>
+          <option value="Body">Body</option>
+          <option value="Mind">Mind</option>
+          <option value="Senses">Senses</option>
+          <option value="Fortune">Fortune</option></select></td>
+        <td id="statsel2t"><select id="statsel2" class="statsel">  
+          <option value="">Select stat</option>
+          <option value="Body">Body</option>
+          <option value="Mind">Mind</option>
+          <option value="Senses">Senses</option>
+          <option value="Fortune">Fortune</option></select>
+          <select id="statsel22" class="statsel">  
+          <option value="">Select stat</option>
+          <option value="Body">Body</option>
+          <option value="Mind">Mind</option>
+          <option value="Senses">Senses</option>
+          <option value="Fortune">Fortune</option></select></td>
+        <td id="statsel3t" style="display: none"><select id="statsel3" class="statsel">  
+          <option value="">Select stat</option>
+          <option value="Body">Body</option>
+          <option value="Mind">Mind</option>
+          <option value="Senses">Senses</option>
+          <option value="Fortune">Fortune</option></select>
+          <select id="statsel32" class="statsel">  
+          <option value="">Select stat</option>
+          <option value="Body">Body</option>
+          <option value="Mind">Mind</option>
+          <option value="Senses">Senses</option>
+          <option value="Fortune">Fortune</option></select></td>
 
+      </tr>
+    </table>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/classes/pug.js"></script>
     <script src="/classes/general.js"></script>
@@ -660,6 +711,7 @@
         const skillsel = document.getElementsByClassName('skillsel');
         const skilltable = document.getElementsByClassName('skilltable');
         const upgradebutton = document.getElementsByClassName('upgradebutton');
+        const statsel = document.getElementsByClassName('statsel')
         const lvl = document.getElementById('lvl');
         const hp = document.getElementById('hp');
         const mp = document.getElementById('mp');
@@ -787,6 +839,22 @@
           senses = 0;
           mind = 0;
           fortune = 0;
+          for (let i = 0; i < statsel.length;i++){
+            switch(statsel[i].value){
+              case("Body"):
+                body++;
+              break;
+              case("Mind"):
+                mind++;
+              break;
+              case("Senses"):
+                senses++;
+              break;
+              case("Fortune"):
+                fortune++;
+              break;
+            }
+          }
           switch(classs.value){
               case("warrior"):
                 body += 4;
@@ -1028,7 +1096,27 @@
           racefeatures(race.value);
           classs.value = data.chars[charnumber].classs
           lvl.value = data.chars[charnumber].lvl
-          updateskilltables(lvl.value);
+          if (lvl.value>=3){
+            statsel[0].style.display="block";
+            statsel[1].style.display="block";
+          } else {
+            statsel[0].style.display="none";
+            statsel[1].style.display="none";
+          }
+          if (lvl.value>=6){
+            statsel[2].style.display="block";
+            statsel[3].style.display="block";
+          } else {
+            statsel[2].style.display="none";
+            statsel[3].style.display="none";
+          }
+          if (lvl.value>=9){
+            statsel[4].style.display="block";
+            statsel[5].style.display="block";
+          } else {
+            statsel[4].style.display="none";
+            statsel[5].style.display="none";
+          }
           hp.value = data.chars[charnumber].hp
           mp.value = data.chars[charnumber].mp
           focus.value = data.chars[charnumber].focus
@@ -1085,6 +1173,7 @@
           skilldesc(data.chars[charnumber].skill6sel, skill6desc, skill6mana, skill6uses, skill6ap, skill6sel)
           skill6sel.value = data.chars[charnumber].skill6sel
           showskills();
+          updateskilltables(lvl.value);
         }
         function classfeatures(){
           let datad = {}//{classfeaturename: classfeaturename, classfeature11: classfeature11, classfeature12: classfeature12, classfeature13: classfeature13, classfeature21: classfeature21, classfeature22: classfeature22, classfeature23: classfeature23, classfeature31: classfeature31, classfeature32: classfeature32, classfeature33: classfeature33, classfeature41: classfeature41, classfeature42: classfeature42, classfeature43: classfeature43}
