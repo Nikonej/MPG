@@ -66,6 +66,7 @@
       bottom: 19px;
       right:220px;
     }
+
     </style>
   </head>
   <nav>
@@ -672,25 +673,39 @@
         <td id="armorscore">4</td>
       </tr>
       <tr>
-        <td class="armorslot"><input type="checkbox" id="armor1"></input></td>
-        <td class="armorslot"><input type="checkbox" id="armor2"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor1"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor2"></input></td>
       </tr>
       <tr>
-        <td class="armorslot"><input type="checkbox" id="armor3"></input></td>
-        <td class="armorslot"><input type="checkbox" id="armor4"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor3"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor4"></input></td>
       </tr>
       <tr>
-        <td class="armorslot"><input type="checkbox" id="armor5"></input></td>
-        <td class="armorslot"><input type="checkbox" id="armor6"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor5"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor6"></input></td>
       </tr>
       <tr>
-        <td class="armorslot"><input type="checkbox" id="armor7"></input></td>
-        <td class="armorslot"><input type="checkbox" id="armor8"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor7"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor8"></input></td>
       </tr>
       <tr>
-        <td class="armorslot"><input type="checkbox" id="armor9"></input></td>
-        <td class="armorslot"><input type="checkbox" id="armor10"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor9" style="display: none"></input></td>
+        <td><input class="armorslot" type="checkbox" id="armor10" style="display: none"></input></td>
       </tr>
+    </table>
+    <table> <td>
+      Equipment
+      <input type="button" width="20px" value="add" onclick="itemmenu()"></input>
+      <ul id="equipment">
+      </ul>
+    </td></table>
+    <table id="items"> <td>
+      Items
+      <ul>
+        <li><input type="button" width="20px" value="+" id="whip" onclick="additem('Whip')"></input> <label for="whip">Whip</label></li>
+        <li><input type="button" width="20px" value="+" id="wand" onclick="additem('Wand')"></input> <label for="wand">Wand</label></li>
+      </ul>
+    </td></table>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/classes/pug.js"></script>
     <script src="/classes/general.js"></script>
@@ -736,6 +751,10 @@
         const statsel1l = document.getElementsByClassName('statsel1l')
         const statsel2l = document.getElementsByClassName('statsel2l')
         const statsel3l = document.getElementsByClassName('statsel3l')
+        const armorslot = document.getElementsByClassName('armorslot')
+        const armorscore = document.getElementById('armorscore')
+        const equipment = document.getElementById('equipment')
+        const items = document.getElementById('items');
         const lvl = document.getElementById('lvl');
         const hp = document.getElementById('hp');
         const mp = document.getElementById('mp');
@@ -766,7 +785,7 @@
         const skill4sel = document.getElementById('skill4sel'); const skill4desc = document.getElementById('skill4desc'); const skill4mana = document.getElementById('skill4mana'); const skill4uses = document.getElementById('skill4uses'); const skill4ap = document.getElementById('skill4ap');        
         const skill5sel = document.getElementById('skill5sel'); const skill5desc = document.getElementById('skill5desc'); const skill5mana = document.getElementById('skill5mana'); const skill5uses = document.getElementById('skill5uses'); const skill5ap = document.getElementById('skill5ap');        
         const skill6sel = document.getElementById('skill6sel'); const skill6desc = document.getElementById('skill6desc'); const skill6mana = document.getElementById('skill6mana'); const skill6uses = document.getElementById('skill6uses'); const skill6ap = document.getElementById('skill6ap');        
-        var subclass = "", masteryStat = "", freeupgrades = 0, statincreases = ["","","","","",""];
+        var subclass = "", masteryStat = "", freeupgrades = 0, statincreases = ["","","","","",""], armorcount = 1, armorslots = [false, false, false, false, false, false, false, false, false, false], ownequipment = [];
         var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, sheet=0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
         warrior.style.display = "none"
@@ -831,8 +850,15 @@
               mp.value-=parseInt(write[i].value);
               write[i].value = "";
             }
-            sendData()
+            sendData();
         });}
+
+        for (let i = 0; i < armorslot.length;i++){
+          armorslot[i].addEventListener('change', (e) => {
+            armorslots[i] = armorslot[i].checked;
+            sendData()
+          })
+        }
 
         for (let i = 0; i < statsel1.length; i++){
           statsel1[i].addEventListener('click', (e) => {
@@ -898,8 +924,33 @@
               update({l:1, chars});
             }
         })
+        function removeitem(number){
+          equipment.children[number].remove()
+          
+        }
+        function additem(item){
+          ownequipment.push(item)
+          let entry = document.createElement('li');
+          let check = document.createElement("input");
+          check.type = "checkbox";
+          check.setAttribute("id",item+";"+equipment.children.length)
+          entry.appendChild(check)
+          let label = document.createElement("label");
+          label.innerHTML = item;
+          label.setAttribute("for",item + ":"+equipment.children.length)
+          entry.appendChild(label);
+          let button = document.createElement("button");
+          button.innerHTML = "-";
+          button.setAttribute("id",item + ":"+equipment.children.length)
+          button.setAttribute("onclick","removeitem("+equipment.children.length+ ")")
+          entry.appendChild(button);
+          equipment.appendChild(entry);
+        }
+        function itemmenu(){
+
+        }
         function sendData(){
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases}
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots}
           socket.emit('change', data);
         }
         function getstatincrease(stat, increase1, increase2){
@@ -1206,6 +1257,7 @@
           racefeatures(race.value);
           classs.value = data.chars[charnumber].classs
           lvl.value = data.chars[charnumber].lvl
+          console.log(data.chars[charnumber])
           if (lvl.value>=3){
             for (let i = 0; i < statsel1.length; i++){
               statsel1[i].style.display="inline";
@@ -1214,9 +1266,6 @@
                 statsel1[i].checked = true;
               }
             }
-            //showstatincrease(statsel1,statsel1l)
-            //showstatincrease(statsel2,statsel2l)
-            //showstatincrease(statsel3,statsel3l)
           } 
           else {
             for (let i = 0; i < statsel1.length; i++){
@@ -1232,9 +1281,6 @@
                 statsel2[i].checked = true;
               }
             }
-            //showstatincrease(statsel1,statsel1l)
-            //showstatincrease(statsel2,statsel2l)
-            //showstatincrease(statsel3,statsel3l)
           } 
           else {
             for (let i = 0; i < statsel2.length; i++){
@@ -1250,9 +1296,6 @@
                 statsel3[i].checked = true;
               }
             }
-            //showstatincrease(statsel1,statsel1l)
-            //showstatincrease(statsel2,statsel2l)
-            //showstatincrease(statsel3,statsel3l)
           } 
           else {
             for (let i = 0; i < statsel3.length; i++){
@@ -1298,7 +1341,20 @@
                 fortuneMastery.checked = false
               break;
             }
-          
+          armorscore.textContent=parseInt(parseInt(bodytxt.textContent)/2) + parseInt(parseInt(lvl.value)/2) 
+            if (bodyMastery.checked){
+            armorcount=2;
+          } else {
+            armorcount=1;
+          }
+          for (let i = 0; i < 10; i++){
+            armorslot[i].style.display = "inline"
+            armorslot[i].checked = data.chars[charnumber].armorslots[i];
+            armorslots[i] = data.chars[charnumber].armorslots[i];
+          }
+          for (let i = 9; i > armorcount - 1;i--){
+            armorslot[i].style.display = "none"
+          }
           displaySubclasses(data.chars[charnumber].classs, data);
           updateStats()
           classfeatures();
