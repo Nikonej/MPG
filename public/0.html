@@ -937,7 +937,7 @@
           entry.appendChild(check)
           let label = document.createElement("label");
           label.innerHTML = item;
-          label.setAttribute("for",item + ":"+equipment.children.length)
+          label.setAttribute("for",item + ";"+equipment.children.length)
           entry.appendChild(label);
           let button = document.createElement("button");
           button.innerHTML = "-";
@@ -950,7 +950,12 @@
 
         }
         function sendData(){
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots}
+          let equips = []
+          for (let i = 0; i < equipment.children.length; i++){
+            equips.push(equipment.children[i])
+            console.log(equipment.children[i])
+          }
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots, equipment: equips}
           socket.emit('change', data);
         }
         function getstatincrease(stat, increase1, increase2){
@@ -1257,7 +1262,11 @@
           racefeatures(race.value);
           classs.value = data.chars[charnumber].classs
           lvl.value = data.chars[charnumber].lvl
-          console.log(data.chars[charnumber])
+          console.log()
+          for (let i = 0; i < data.chars[charnumber].equipment.length; i++){
+            //console.log(data.chars[charnumber].equipment)
+            //equipment.appendChild(data.chars[charnumber].equipment[i])
+          }
           if (lvl.value>=3){
             for (let i = 0; i < statsel1.length; i++){
               statsel1[i].style.display="inline";
