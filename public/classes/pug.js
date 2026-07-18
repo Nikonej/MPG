@@ -181,8 +181,106 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilldesc.querySelector(".tooltiptext").textContent = "Unleash Anger \n Cost: 5 Mana, 1 AP \n Range: 1 Square \n You unleash a brutal series of attacks against a target, fueled by your anger. \n \n You can make a number of attacks equal to your negative Focus damage bonus + 2. You can choose a new target within range for each attack. \n \n On hit, the target takes 1d6 + Body/Senses damage. \n If a target is successfully hit 2 or more times by this skill, they become Crippled until the end of their next turn.";
             skillmana.textContent = "14 Mana";
             skillap.textContent = "1 AP";
-            skilluses.textContent = "";        break;
-        }
+            skilluses.textContent = "";        
+        break;
+        case("backstab"):
+            skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("senses",true) + " to hit. On a hit, deal 4d4 +" + tohitf("senses",true) + " damage. If you have advantage, deal 1d12 additional damage"		
+            skilldesc.querySelector(".tooltiptext").textContent = "Backstab \n Cost: 3 Mana, 2 AP \n Range: 1 square \n \n You strike your opponent when they are at their weakest. On a hit, you deal 4d4 + Senses damage. If you have advantage on the attack against the target, you deal an additional 1d12 damage";
+            skillmana.textContent = "3 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("backstab+"):
+            skillsel.options[skillsel.options.length] = new Option('Backstab+ (I)', 'backstab+')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("senses",true) + " to hit. On a hit, deal 6d4 +" + tohitf("senses",true) + " damage. If advantage, deal 1d12 additional damage and 1d12 weak"		
+            skilldesc.querySelector(".tooltiptext").textContent = "Backstab \n Cost: 3 Mana, 2 AP \n Range: 1 square \n \n You strike your opponent when they are at their weakest. On a hit, you deal 4d4 + Senses damage. If you have advantage on the attack against the target, you deal an additional 1d12 damage and apply 1d12 Weak";
+            skillmana.textContent = "9 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("bladeflurry"):
+            skillsel.options[skillsel.options.length] = new Option('Blade Flurry (I)', 'bladeflurry')
+            skilldesc.childNodes[0].textContent = "Two attacks with +" + tohitf("senses", true, "fortune") +" to hit. On hit, deal 2d6 +" + tohitf("senses", false, "fortune") +" damage. On a crit, use a weapon property for free"
+            skilldesc.querySelector(".tooltiptext").textContent = "Blade Flurry \n Cost: 5 Mana, 2 AP \n \n Attack twice with your weapon, dealing 2d6 + Fortune/Senses damage on each hit. If one of the attacks crit, use one of your weapon properties for free"
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("bladeflurry+"):
+            skillsel.options[skillsel.options.length] = new Option('Blade Flurry+ (I)', 'bladeflurry+')
+            skilldesc.childNodes[0].textContent = "Three attacks with +" + tohitf("senses", true, "fortune") +" to hit. On hit, deal 2d8 +" + tohitf("senses", false, "fortune") +" damage. On a crit, use a weapon property for free"
+            skilldesc.querySelector(".tooltiptext").textContent = "Blade Flurry \n Cost: 5 Mana, 2 AP \n \n Attack three times with your weapon, dealing 2d8 + Fortune/Senses damage on each hit. For each of the attacks that crit, use one of your weapon properties for free"
+            skillmana.textContent = "12 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("preparation"):
+            skillsel.options[skillsel.options.length] = new Option('Preparation (I)', 'preparation')
+            skilldesc.childNodes[0].textContent = "Advantage your first attack next turn and 2d4+" + mind +" Mana. This Mana can exceed your maximum"
+            skilldesc.querySelector(".tooltiptext").textContent = "Preparation \n Cost: 4 Mana, 1 AP \n \n You prepare to go all out. At the start of your next turn, gain 2d4 + Mind additional mana right after your mana regen. This mana can exceed your maximum mana. \n \n At the end of your turn, all mana above your maximum is removed. Additionally, your first attack next turn has advantage"
+            skillmana.textContent = "4 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";        
+        break;
+        case("preparation+"):
+            skillsel.options[skillsel.options.length] = new Option('Preparation+ (I)', 'preparation+')
+            skilldesc.childNodes[0].textContent = "Advantage your first attack next turn, gain +1 AP and 2d8+" + mind +" Mana. You cant use this skill next turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Preparation+ \n Cost: 15 Mana, 1 AP \n \n You prepare to go all out. At the start of your next turn, gain 2d8 + Mind additional mana right after your mana regen. This mana can exceed your maximum mana. \n \n At the end of your turn, all mana above your maximum is removed. Additionally, your first attack next turn has advantage and you gain +1 AP"
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";        
+        break;
+        case("feintingstrike"):
+            skillsel.options[skillsel.options.length] = new Option('Feinting Strike (II)', 'feintingstrike')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("senses",true) +" to hit with advantage. On a hit, deal 3d10 + " + tohitf("senses",false) + " damage. Target has disadv on their next roll"
+            skilldesc.querySelector(".tooltiptext").textContent = "Feinting strike \n Cost: 7 Mana, 1 AP \n \n You mislead your opponent before striking. With advantage, you make an attack with your weapon. On a hit, you deal 3d10 + Senses damage. Regardless of if you hit or miss, the enemy has disadvantage on their next roll"
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";        
+        break;
+        case("feintingstrike+"):
+            skillsel.options[skillsel.options.length] = new Option('Feinting Strike+ (II)', 'feintingstrike+')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("senses",true) +" to hit with 2x advantage. On a hit, deal 4d10 + " + tohitf("senses",false) + " damage. Target has disadv on their next roll"
+            skilldesc.querySelector(".tooltiptext").textContent = "Feinting strike \n Cost: 16 Mana, 1 AP \n \n You mislead your opponent before striking. With double advantage, you make an attack with your weapon. On a hit, you deal 3d10 + Senses damage. Regardless of if you hit or miss, the enemy has disadvantage on their next roll"
+            skillmana.textContent = "16 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";        
+        break;
+        case("envenom"):
+            skillsel.options[skillsel.options.length] = new Option('Envenom (II)', 'envenom')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("senses",true,"mind") +" to hit. On hit, deal 3d8 + "+tohitf("senses",false,"mind")+" damage, inflict 1d6 poison, then advance targets poison 1 turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Envenom \n Cost: 9 Mana, 2 AP \n Range: 1 square \n \n Attack with a deadly poisoned blade, dealing 3d8 + Mind/Senses damage on hit, inflict 1d6 poison, and then advance the targets poison by 1 turn"
+            skillmana.textContent = "9 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("envenom+"):
+            skillsel.options[skillsel.options.length] = new Option('Envenom+ (II)', 'envenom+')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("senses",true,"mind") +" to hit. On hit, deal 5d8 + "+tohitf("senses",false,"mind")+" damage, double poison, then advance targets poison 1 turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Envenom \n Cost: 20 Mana, 2 AP \n Range: 1 square \n \n Attack with a deadly poisoned blade, dealing 5d8 + Mind/Senses damage on hit, doubling the targets current poison, and then advance the targets poison by 1 turn"
+            skillmana.textContent = "20 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("treachery"):
+            skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("fortune",true,"mind") +" to hit. On hit, deal 3d12 + "+ tohitf("fortune",false,"mind") +" damage and steal buffs until the start of your next turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Envenom \n Cost: 9 Mana, 2 AP \n Range: 1 square \n \n With a swift strike, you attempt to steal the targets advantages in combat for yourself \n \n On a hit, deal 3d12 + Fortune/Mind and remove all magical shield, advantage or other temporary boons the target has. Until the start of your next turn, you gain all boons removed from the enemy. \n \n You may choose one resistance the enemy has to steal. You gain the resistance until the start of your next turn, when the enemy regains the resistance."
+            skillmana.textContent = "10 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";        
+        break;
+        case("treachery+"):
+            skillsel.options[skillsel.options.length] = new Option('Treachery+ (II)', 'treachery+')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("fortune",true,"mind") +" to hit. On hit, deal 4d12 + "+ tohitf("fortune",false,"mind") +" damage and steal buffs until the end of combat"
+            skilldesc.querySelector(".tooltiptext").textContent = "Envenom \n Cost: 9 Mana, 2 AP \n Range: 1 square \n \n With a swift strike, you attempt to steal the targets advantages in combat for yourself \n \n On a hit, deal 4d12 + Fortune/Mind and remove all magical shield, advantage or other temporary boons the target has. You gain all boons removed from the enemy until the end of combat, where the benefits are removed. If the boon would be removed after using it, it is removed when you use it. \n \n You may choose one resistance the enemy has to steal. You gain the resistance until the start of your next turn, when the enemy regains the resistance."
+            skillmana.textContent = "19 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";        
+        break;
+        
+    }
 }
 
 function upgradeskill(skill){
@@ -218,6 +316,30 @@ function upgradeskill(skill){
         case("unleash"):
             skill.options[skill.options.length] = new Option('Unleash Anger+ (I)', 'unleash+')
             skill.value="unleash+"
+        break;
+        case("backstab"):
+            skill.options[skill.options.length] = new Option('Backstab+ (I)', 'backstab+')
+            skill.value="backstab+"
+        break;
+        case("bladeflurry"):
+            skill.options[skill.options.length] = new Option('Blade Flurry+ (I)', 'bladeflurry+')
+            skill.value="bladeflurry+"
+        break;
+        case("preparation"):
+            skill.options[skill.options.length] = new Option('Preparation+ (I)', 'preparation+')
+            skill.value="preparation+"
+        break;
+        case("feintingstrike"):
+            skill.options[skill.options.length] = new Option('Feinting Strike+ (I)', 'feintingstrike+')
+            skill.value="feintingstrike+"
+        break;
+        case("envenom"):
+            skill.options[skill.options.length] = new Option('Envenom+ (I)', 'envenom+')
+            skill.value="envenom+"
+        break;
+        case("treachery"):
+            skill.options[skill.options.length] = new Option('Treachery+ (I)', 'treachery+')
+            skill.value="treachery+"
         break;
     }
     sendData();
