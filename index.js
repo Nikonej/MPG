@@ -21,6 +21,10 @@ app.get('/1', (req, res) => {
   res.sendFile(__dirname + '/public/1.html');
 });
 
+app.get('/2', (req, res) => {
+  res.sendFile(__dirname + '/public/2.html');
+});
+
 
 io.on('connection', (socket) => {
     io.emit('connection', {l: l, chars: characters});
