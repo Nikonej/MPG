@@ -641,6 +641,19 @@
         <td id="skill6button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill6mana.textContent, skill6ap.textContent)"></td>
       </tr>
     </table>
+    <br>
+
+    <table width="300px" class="skilltable" style="display: none;">  <!-- passive 1 -->
+      <tr>
+        <td colspan="1" id="passive1"><select id="passive1sel" class="skillsel">  
+          <option value="">Select passive 1</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td colspan="1" id="passive1desc" class="tooltip"><span>sadasddsadsadasdasdas</span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+      </tr>
+    </table>
+    <br>
      <table width="300px" class="" >  <!-- Extra -->
       <tr>
         <th id="">Rest actions:</th>
@@ -1278,7 +1291,7 @@
           console.log(data.chars)
           charnumber = 0;
           if (data.l!=1){
-            charnumber=1; //change for new sheet
+            charnumber=sheet; //change for new sheet
           } 
           name.value=data.chars[charnumber].name
           document.getElementsByTagName("TITLE")[0].text = data.chars[charnumber].name

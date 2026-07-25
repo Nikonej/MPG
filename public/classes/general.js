@@ -122,6 +122,7 @@ function updateskilltables(lvl){
        skilltable[i].style.display="none";
     }
     skillsels=[skill1sel, skill2sel, skill3sel, skill4sel, skill5sel, skill6sel]
+   // passivesels=[passive1sel]
     freeupgrades = (lvl - 1);
     /*for (let i = 0; i < skill2sel.value.length; i++){
         if (skill2sel.value[i]=="+"){
@@ -163,6 +164,9 @@ function updateskilltables(lvl){
     }
     if (lvl>=9 && freeupgrades > 0){
         skilltable[5].style.display="block";
+    }
+    if (lvl>=2){
+        skilltable[6].style.display="block";
     }
     for (let i = 0; i < skillsels.length; i++){
         if (skilltable[i].style.display!="none"){

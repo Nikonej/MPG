@@ -625,7 +625,7 @@
     </table>
     <table width="300px" class="skilltable" style="display: none;">  <!-- skill 6 -->
       <tr>
-        <th colspan="3" id="skill5"><select id="skill6sel" class="skillsel">  
+        <th colspan="3" id="skill6"><select id="skill6sel" class="skillsel">  
           <option value="">Select skill 6</option>
         </select>   <input type="button" style="display: none" class="upgradebutton" id="upgrade6" value="upgrade" onclick="upgradeskill(skill6sel)"> </input></th>
       </tr>
@@ -641,6 +641,19 @@
         <td id="skill6button" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(skill6mana.textContent, skill6ap.textContent)"></td>
       </tr>
     </table>
+    <br>
+
+    <table width="300px" class="skilltable" style="display: none;">  <!-- passive 1 -->
+      <tr>
+        <td colspan="1" id="passive1"><select id="passive1sel" class="skillsel">  
+          <option value="">Select passive 1</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td colspan="1" id="passive1desc" class="tooltip"><span>sadasddsadsadasdasdas</span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+      </tr>
+    </table>
+    <br>
      <table width="300px" class="" >  <!-- Extra -->
       <tr>
         <th id="">Rest actions:</th>
@@ -807,9 +820,11 @@
         const skill4sel = document.getElementById('skill4sel'); const skill4desc = document.getElementById('skill4desc'); const skill4mana = document.getElementById('skill4mana'); const skill4uses = document.getElementById('skill4uses'); const skill4ap = document.getElementById('skill4ap');        
         const skill5sel = document.getElementById('skill5sel'); const skill5desc = document.getElementById('skill5desc'); const skill5mana = document.getElementById('skill5mana'); const skill5uses = document.getElementById('skill5uses'); const skill5ap = document.getElementById('skill5ap');        
         const skill6sel = document.getElementById('skill6sel'); const skill6desc = document.getElementById('skill6desc'); const skill6mana = document.getElementById('skill6mana'); const skill6uses = document.getElementById('skill6uses'); const skill6ap = document.getElementById('skill6ap');        
+        const passive1sel = document.getElementById('passive1sel'), passive1desc = document.getElementById('passive1desc');
         var subclass = "", masteryStat = "", freeupgrades = 0, statincreases = ["","","","","",""], armorcount = 1, armorslots = [false, false, false, false, false, false, false, false, false, false], ownequipment = [];
-        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, sheet=0;
+        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
+        var sheet=0 // change for new sheet
         warrior.style.display = "none"
         wlabel.style.display = "none"
         mage.style.display = "none"
@@ -1276,7 +1291,7 @@
         function update(data){
           charnumber = 0;
           if (data.l!=1){
-            charnumber=0;
+            charnumber=sheet;
           } 
           name.value=data.chars[charnumber].name
           document.getElementsByTagName("TITLE")[0].text = data.chars[charnumber].name
@@ -1434,7 +1449,7 @@
           }
         }
         function subclassfeatures(subclass){
-          let datad = {basicname: basicname, tohit: tohit, masteryStat: masteryStat, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap, skill3sel:skill3sel, skill3desc:skill3desc, skill3mana:skill3mana, skill3uses:skill3uses, skill3ap:skill3ap, skill4sel:skill4sel, skill4desc:skill4desc, skill4mana:skill4mana, skill4uses:skill4uses, skill4ap:skill4ap, skill5sel:skill5sel, skill5desc:skill5desc, skill5mana:skill5mana, skill5uses:skill5uses, skill5ap:skill5ap, skill6sel:skill6sel, skill6desc:skill6desc, skill6mana:skill6mana, skill6uses:skill6uses, skill6ap:skill6ap}
+          let datad = {basicname: basicname, tohit: tohit, masteryStat: masteryStat, dmg:dmg, range:range, effect:effect, skill1sel:skill1sel, skill1desc:skill1desc, skill1mana:skill1mana, skill1uses:skill1uses, skill1ap:skill1ap, skill2sel:skill2sel, skill2desc:skill2desc, skill2mana:skill2mana, skill2uses:skill2uses, skill2ap:skill2ap, skill3sel:skill3sel, skill3desc:skill3desc, skill3mana:skill3mana, skill3uses:skill3uses, skill3ap:skill3ap, skill4sel:skill4sel, skill4desc:skill4desc, skill4mana:skill4mana, skill4uses:skill4uses, skill4ap:skill4ap, skill5sel:skill5sel, skill5desc:skill5desc, skill5mana:skill5mana, skill5uses:skill5uses, skill5ap:skill5ap, skill6sel:skill6sel, skill6desc:skill6desc, skill6mana:skill6mana, skill6uses:skill6uses, skill6ap:skill6ap, passive1sel: passive1sel, passive1desc:passive1desc}
           switch(subclass){
             case("rager"):
               rager(datad);

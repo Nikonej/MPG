@@ -19,8 +19,8 @@ function rager(data){
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
     data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently +" + -ragebonus + " damage.";
     data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
-    pugskills(data.skill1sel, 2)
-    ragerskills(data.skill1sel, 2)
+    pugskills(skill1sel, 2)
+    ragerskills(skill1sel, 2)
     pugskills(data.skill2sel, 1)
     ragerskills(data.skill2sel, 1)
     pugskills(data.skill3sel, 1)
@@ -184,7 +184,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";        
         break;
         case("backstab"):
-            skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
             skilldesc.childNodes[0].textContent = "+" + tohitf("senses",true) + " to hit. On a hit, deal 4d4 +" + tohitf("senses",true) + " damage. If you have advantage, deal 1d12 additional damage"		
             skilldesc.querySelector(".tooltiptext").textContent = "Backstab \n Cost: 3 Mana, 2 AP \n Range: 1 square \n \n You strike your opponent when they are at their weakest. On a hit, you deal 4d4 + Senses damage. If you have advantage on the attack against the target, you deal an additional 1d12 damage";
             skillmana.textContent = "3 Mana";
@@ -200,7 +200,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";        
         break;
         case("bladeflurry"):
-            skillsel.options[skillsel.options.length] = new Option('Blade Flurry (I)', 'bladeflurry')
+            //skillsel.options[skillsel.options.length] = new Option('Blade Flurry (I)', 'bladeflurry')
             skilldesc.childNodes[0].textContent = "Two attacks with +" + tohitf("senses", true, "fortune") +" to hit. On hit, deal 2d6 +" + tohitf("senses", false, "fortune") +" damage. On a crit, use a weapon property for free"
             skilldesc.querySelector(".tooltiptext").textContent = "Blade Flurry \n Cost: 5 Mana, 2 AP \n \n Attack twice with your weapon, dealing 2d6 + Fortune/Senses damage on each hit. If one of the attacks crit, use one of your weapon properties for free"
             skillmana.textContent = "5 Mana";
@@ -216,7 +216,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";        
         break;
         case("preparation"):
-            skillsel.options[skillsel.options.length] = new Option('Preparation (I)', 'preparation')
+            //skillsel.options[skillsel.options.length] = new Option('Preparation (I)', 'preparation')
             skilldesc.childNodes[0].textContent = "Advantage your first attack next turn and 2d4+" + mind +" Mana. This Mana can exceed your maximum"
             skilldesc.querySelector(".tooltiptext").textContent = "Preparation \n Cost: 4 Mana, 1 AP \n \n You prepare to go all out. At the start of your next turn, gain 2d4 + Mind additional mana right after your mana regen. This mana can exceed your maximum mana. \n \n At the end of your turn, all mana above your maximum is removed. Additionally, your first attack next turn has advantage"
             skillmana.textContent = "4 Mana";
@@ -232,7 +232,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";        
         break;
         case("feintingstrike"):
-            skillsel.options[skillsel.options.length] = new Option('Feinting Strike (II)', 'feintingstrike')
+            //skillsel.options[skillsel.options.length] = new Option('Feinting Strike (II)', 'feintingstrike')
             skilldesc.childNodes[0].textContent = "+"+ tohitf("senses",true) +" to hit with advantage. On a hit, deal 3d10 + " + tohitf("senses",false) + " damage. Target has disadv on their next roll"
             skilldesc.querySelector(".tooltiptext").textContent = "Feinting strike \n Cost: 7 Mana, 1 AP \n \n You mislead your opponent before striking. With advantage, you make an attack with your weapon. On a hit, you deal 3d10 + Senses damage. Regardless of if you hit or miss, the enemy has disadvantage on their next roll"
             skillmana.textContent = "7 Mana";
@@ -248,7 +248,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";        
         break;
         case("envenom"):
-            skillsel.options[skillsel.options.length] = new Option('Envenom (II)', 'envenom')
+            //skillsel.options[skillsel.options.length] = new Option('Envenom (II)', 'envenom')
             skilldesc.childNodes[0].textContent = "+"+ tohitf("senses",true,"mind") +" to hit. On hit, deal 3d8 + "+tohitf("senses",false,"mind")+" damage, inflict 1d6 poison, then advance targets poison 1 turn"
             skilldesc.querySelector(".tooltiptext").textContent = "Envenom \n Cost: 9 Mana, 2 AP \n Range: 1 square \n \n Attack with a deadly poisoned blade, dealing 3d8 + Mind/Senses damage on hit, inflict 1d6 poison, and then advance the targets poison by 1 turn"
             skillmana.textContent = "9 Mana";
@@ -264,7 +264,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";        
         break;
         case("treachery"):
-            skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
             skilldesc.childNodes[0].textContent = "+"+ tohitf("fortune",true,"mind") +" to hit. On hit, deal 3d12 + "+ tohitf("fortune",false,"mind") +" damage and steal buffs until the start of your next turn"
             skilldesc.querySelector(".tooltiptext").textContent = "Envenom \n Cost: 9 Mana, 2 AP \n Range: 1 square \n \n With a swift strike, you attempt to steal the targets advantages in combat for yourself \n \n On a hit, deal 3d12 + Fortune/Mind and remove all magical shield, advantage or other temporary boons the target has. Until the start of your next turn, you gain all boons removed from the enemy. \n \n You may choose one resistance the enemy has to steal. You gain the resistance until the start of your next turn, when the enemy regains the resistance."
             skillmana.textContent = "10 Mana";
@@ -278,6 +278,9 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skillmana.textContent = "19 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";        
+        break;
+        case('poisonblades'):
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("fortune",true,"mind") +" to hit. On hit, deal 4d12 + "+ tohitf("fortune",false,"mind") +" damage and steal buffs until the end of combat"
         break;
         
     }
