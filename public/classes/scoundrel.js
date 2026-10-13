@@ -1,17 +1,21 @@
 function scoundrelfeatures(data){
     document.getElementById("cunningtable").style.display = "table"
     document.getElementById("fortitudetable").style.display = "none"
+    document.getElementById("focusTable").style.display = "none"
+    document.getElementById("weavetable").style.display = "none"
+
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
     
 }
 
-function spendfortune(amount){
-    if (cunning.value - parseInt(amount) >= 0){
-        cunning.value -= parseInt(amount)
+function spendres(amount, res){
+    if (res.value - parseInt(amount) >= 0){
+        res.value -= parseInt(amount)
     } else {
-        alert("not enough cunning")
+        alert("not enough")
     }
+    sendData()
     
 }
 

@@ -1,0 +1,20 @@
+<table width="300px" id="weavetable" style="display: table;"> <!-- Weave  -->
+      <tr>
+        <th colspan="3">Weave</th>
+      </tr>
+      <tr>
+        <td colspan="2"> Current Weave:</td>
+        <td colspan="1"><input type="number" id="weave" value="0" class="write"></input></td>
+      </tr>
+      <tr>
+        <td>Costs 3</td>
+        <td>Costs 6</td>
+        <td>Costs 9</td>
+      </tr>
+      <tr>
+        <td align="center"><input type="button" id="weave3" value="spend 3" onclick="spendres(3, weave)"></input></td>
+        <td align="center"><input type="button" id="weave6" value="spend 6" onclick="spendres(6, weave)"></input></td>
+        <td align="center"><input type="button" id="weave9" value="spend 9" onclick="spendres(9, weave)"></input></td>
+      </tr>
+      <tr>
+    </table>

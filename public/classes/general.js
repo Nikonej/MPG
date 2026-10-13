@@ -106,6 +106,7 @@ function tohitf(ms, atk, ms2){
     return(hit)
 }
 
+
 function endTurn(){
     ap1.checked = false;
     ap2.checked = false;

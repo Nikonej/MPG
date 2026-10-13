@@ -494,17 +494,37 @@
         <td colspan="1"><input type="number" id="cunning" value="0" class="write"></input></td>
       </tr>
       <tr>
-        <td>Costs 3</td>
-        <td>Costs 6</td>
-        <td>Costs 9</td>
+        <td class="tooltip"><span>Costs 3:</span><span class="tooltiptext" style="white-space: pre-line">Choose one: <br><br>Gain advantage on your next roll<br><br>Make an enemy reroll their attack roll on a hit<br> <br>Check if one room is trapped, has enemies in it or has unlooted treasure (if possible) You may also check rooms you have not yet entered, as long as you have access to the entrance.</span></td>
+        <td class="tooltip"><span>Costs 6:</span><span class="tooltiptext" style="white-space: pre-line">Choose one:<br><br>When you inflict a debuff or DOT, double it<br><br>At the start of combat, you may start anywhere on the battlefield. Additionally you and your allies automatically start first in combat<br><br>On your turn, become invisible until you attack another creature</span></td>
+        <td class="tooltip"><span>Costs 9:</span><span class="tooltiptext" style="white-space: pre-line">Choose one:<br><br>On a crit, double your crit damage <br><br>Refresh your used AP, up to 3. This turn, you may use the same skills multiple times <br><br> Roll treasure table an additional time</span></td>
       </tr>
       <tr>
-        <td align="center"><input type="button" id="cunning3" value="spend 3" onclick="spendfortune(3)"></input></td>
-        <td align="center"><input type="button" id="cunning6" value="spend 6" onclick="spendfortune(6)"></input></td>
-        <td align="center"><input type="button" id="cunning9" value="spend 9" onclick="spendfortune(9)"></input></td>
+        <td align="center"><input type="button" id="cunning3" value="spend 3" onclick="spendres(3, cunning)"></input></td>
+        <td align="center"><input type="button" id="cunning6" value="spend 6" onclick="spendres(6, cunning)"></input></td>
+        <td align="center"><input type="button" id="cunning9" value="spend 9" onclick="spendres(9, cunning)"></input></td>
       </tr>
       <tr>
     </table>
+    </table>
+    <table width="300px" id="weavetable" style="display: table;"> <!-- Weave  -->
+      <tr>
+        <th colspan="3">Weave</th>
+      </tr>
+      <tr>
+        <td colspan="2"> Current Weave:</td>
+        <td colspan="1"><input type="number" id="weave" value="0" class="write"></input></td>
+      </tr>
+      <tr>
+        <td class="tooltip"><span>Low:</span><span class="tooltiptext" style="white-space: pre-line">Range Extension: <br> Increase the skill’s range by 3 squares. <br> <br> Mild Intensity Boost: <br> Reroll 1 die of damage. May be used after the skill has been used and damage has been rolled, but before damage is applied <br> <br> Efficient Casting: <br> Reduce the mana cost of the skill up to twice your level, but not below 0.</span></td>
+         <td class="tooltip"><span>Medium:</span><span class="tooltiptext" style="white-space: pre-line">Area Expansion: <br> Increase the radius of the skill by 1 square. <br> <br>Rapid Casting: <br> Reduce the cost of the skill by 1 AP, but not less than 1.<br><br>Moderate Intensity Boost: <br>Reroll up to 2 dice of damage. May be used after the skill has been used and damage has been rolled, but before damage is applied <br><br>Spell Splitting: A single-target skill may target an additional creature within range.</span></td>
+        <td class="tooltip"><span>High:</span><span class="tooltiptext" style="white-space: pre-line">Massive Intensity Boost: <br>Reroll up to 3 dice of damage. May be used after the skill has been used and damage has been rolled, but before damage is applied<br><br>Area Domination: <br>Increase the radius of effect of the skill by 2 squares.<br><br>Echo Casting:<br> You can use the skill one additional time this turn for no cost.</span></td>
+      </tr>
+      <tr>
+        <td align="center"><input type="button" id="weave3" value="spend 3" onclick="spendres(3, weave)"></input></td>
+        <td align="center"><input type="button" id="weave6" value="spend 5" onclick="spendres(6, weave)"></input></td>
+        <td align="center"><input type="button" id="weave9" value="spend 7" onclick="spendres(9, weave)"></input></td>
+      </tr>
+      <tr>
     </table>
     <table width="300px" id="fortitudetable" style="display: none;"> <!-- Fortitude  -->
       <tr>
@@ -765,7 +785,12 @@
     <script src="/classes/pug.js"></script>
     <script src="/classes/scoundrel.js"></script>
     <script src="/classes/warrior.js"></script>
-    <script src="/classes/general.js"></script>
+    <script src="/classes/verdant.js"></script>
+    <script src="/classes/psion.js"></script>
+    <script src="/classes/mage.js"></script>
+    <script src="/classes/warrior.js"></script>
+    <script src="/classes/harmonarch.js"></script>
+    <script src="/classes/eccentric.js"></script>
     <script>
         const socket = io();
         
@@ -883,6 +908,7 @@
           subclasses[i].addEventListener('change', (e) => {
            e.preventDefault();
             subclass = subclasses[i].value;
+            //console.log(subclass)
             sendData()
         });}
 
@@ -1375,7 +1401,7 @@
           hp.value = data.chars[charnumber].hp
           mp.value = data.chars[charnumber].mp
           focus.value = data.chars[charnumber].focus
-          console.log(data.chars[charnumber].cunning)
+          //console.log(data.chars[charnumber].cunning)
           cunning.value = data.chars[charnumber].cunning
           fortitude.value = data.chars[charnumber].fortitude
           ap1.checked = data.chars[charnumber].ap1
@@ -1430,6 +1456,7 @@
           displaySubclasses(data.chars[charnumber].classs, data);
           updateStats()
           classfeatures();
+          //console.log(subclass)
           subclassfeatures(subclass)
           skilldesc(data.chars[charnumber].skill1sel, skill1desc, skill1mana, skill1uses, skill1ap, skill1sel)
           skill1sel.value = data.chars[charnumber].skill1sel
@@ -1445,7 +1472,7 @@
           skill6sel.value = data.chars[charnumber].skill6sel
           showskills();
           updateskilltables(lvl.value);
-          console.log(skill1sel.value)
+          //console.log(skill1sel.value)
         }
         function classfeatures(){
           let datad = {}//{classfeaturename: classfeaturename, classfeature11: classfeature11, classfeature12: classfeature12, classfeature13: classfeature13, classfeature21: classfeature21, classfeature22: classfeature22, classfeature23: classfeature23, classfeature31: classfeature31, classfeature32: classfeature32, classfeature33: classfeature33, classfeature41: classfeature41, classfeature42: classfeature42, classfeature43: classfeature43}
@@ -1468,7 +1495,7 @@
             case("verdant"):
               verdantfeatures(datad);
             break;
-            case("harm"):
+            // case("harm"):
               harmfeatures(datad);
             break;
             case("pug"):
@@ -1583,8 +1610,9 @@
               hlabel.style.display = "none"
               pug.style.display = "none"
               pulabel.style.display = "none"
-              if (data.chars[charnumber].subclass != null){
+              if (data.chars[charnumber].sheet>-1){
                 warrior.value = data.chars[charnumber].subclass;
+                subclass = data.chars[charnumber].subclass;
               }
             } else if (classs == "mage"){
               warrior.style.display = "none";

@@ -28,6 +28,7 @@ app.get('/2', (req, res) => {
 
 io.on('connection', (socket) => {
     io.emit('connection', {l: l, chars: characters});
+    console.log(characters)
   socket.on('chat message', (msg) => {
     io.emit('chat message', msg);
     console.log(msg)
@@ -48,6 +49,3 @@ io.on('connection', (socket) => {
 server.listen(3000)
 console.log("http://localhost:3000")
 
-//mathias' ip
-//server.listen(3000, '192.168.0.14')
-//console.log("http://192.168.86.31:3000")
