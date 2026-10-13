@@ -1,5 +1,6 @@
 function scoundrelfeatures(data){
     document.getElementById("cunningtable").style.display = "table"
+    document.getElementById("fortitudetable").style.display = "none"
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
     

@@ -1,5 +1,7 @@
 function pugfeatures(data){
     document.getElementById("focusTable").style.display = "table"
+    document.getElementById("cunningtable").style.display = "none"
+    document.getElementById("fortitudetable").style.display = "none"
     //husk at fjerne alle andre subclass features
     let focus = document.getElementById("focusval")
     let lvl = document.getElementById("lvl")
@@ -282,6 +284,54 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
         case('poisonblades'):
             skilldesc.childNodes[0].textContent = "+"+ tohitf("fortune",true,"mind") +" to hit. On hit, deal 4d12 + "+ tohitf("fortune",false,"mind") +" damage and steal buffs until the end of combat"
         break;
+        case("whirlwindslash"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "Strike all foes surrounding you with +"+ tohitf("body",true) +" to hit. On a hit, deal 2d6 + "+ tohitf("body",false) +" damage"
+            skilldesc.querySelector(".tooltiptext").textContent = "Whirlwind Slash \n Cost: 7 Mana, 1 AP \n Range: 8 squares surrounding you \n \n Strike all foes surrounding you with your weapon. On a hit, deal 2d6 + body damage. Damage type depends on your weapon"
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";      
+        break;
+        case("whirlwindslash+"):
+            skillsel.options[skillsel.options.length] = new Option('Whirlwind Slash+ (I)', 'whirlwindslash+')
+            skilldesc.childNodes[0].textContent = "Strike all foes surrounding you twice with +"+ tohitf("body",true) +" to hit. On a hit, deal 2d6 + "+ tohitf("body",false) +" damage"
+            skilldesc.querySelector(".tooltiptext").textContent = "Whirlwind Slash \n Cost: 12 Mana, 2 AP \n Range: 8 squares surrounding you \n \n Strike all foes surrounding you twice with your weapon. On each hit, deal 2d6 + body damage. Damage type depends on your weapon"
+            skillmana.textContent = "12 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("cripplingblow"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("body",true) +" to hit. On a hit, deal 3d6 + "+ tohitf("body",false) +" damage and inflict crippled until the start of your next turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Crippling Blow \n Cost: 5 Mana, 2 AP \n Range: 1 square \n \n Strike an enemy with your weapon, dealing 3d6 + body damage, damage type depending on your weapon. On a hit, inflict cripple on the target until the start of your next turn."
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("cripplingblow+"):
+            skillsel.options[skillsel.options.length] = new Option('Crippling Blow+ (I)', 'cripplingblow+')
+            skilldesc.childNodes[0].textContent = "+"+ tohitf("body",true) +" to hit. On a hit, deal 3d8 + "+ tohitf("body",false) +" damage, inflict crippled and exposed until the start of your next turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Crippling Blow \n Cost: 14 Mana, 2 AP \n Range: 1 square \n \n Strike an enemy with your weapon, dealing 3d8 + body damage, damage type depending on your weapon. On a hit, inflict cripple and exposed on the target until the start of your next turn."
+            skillmana.textContent = "14 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";        
+        break;
+        case("armorup"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "gain 2 fortitude and regain 1 armor slot"
+            skilldesc.querySelector(".tooltiptext").textContent = "Armor Up \nCost: 2 Mana, 1 AP \n Range: self \n \n gain fortitude equal to half your armor score, rounded up and regain 1 lost armor slot."
+            skillmana.textContent = "2 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "3";        
+        break;
+        case("armorup+"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "gain 2 fortitude and regain 1 armor slot"
+            skilldesc.querySelector(".tooltiptext").textContent = "Armor Up \nCost: 2 Mana, 1 AP \n Range: self \n \n gain fortitude equal to half your armor score, rounded up and regain 1 lost armor slot."
+            skillmana.textContent = "2 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "3";        
+        break;
         
     }
 }
@@ -343,6 +393,18 @@ function upgradeskill(skill){
         case("treachery"):
             skill.options[skill.options.length] = new Option('Treachery+ (I)', 'treachery+')
             skill.value="treachery+"
+        break;
+        case("whirlwindslash"):
+            skill.options[skill.options.length] = new Option('Whirlwind Slash+ (II)', 'whirlwindslash+')
+            skill.value="whirlwindslash+"
+        break;
+        case("cripplingblow"):
+            skill.options[skill.options.length] = new Option('Crippling Blow+ (I)', 'cripplingblow+')
+            skill.value="cripplingblow+"
+        break;
+        case("armorup"):
+            skill.options[skill.options.length] = new Option('Armor Up+ (I)', 'armorup+')
+            skill.value="armorup+"
         break;
     }
     sendData();
