@@ -1,7 +1,9 @@
 function pugfeatures(data){
     document.getElementById("focusTable").style.display = "table"
     document.getElementById("cunningtable").style.display = "none"
+    document.getElementById("weavetable").style.display = "none"
     document.getElementById("fortitudetable").style.display = "none"
+    document.getElementById("manifesttable").style.display = "none"
     //husk at fjerne alle andre subclass features
     let focus = document.getElementById("focusval")
     let lvl = document.getElementById("lvl")
@@ -15,8 +17,8 @@ function pugfeatures(data){
 function rager(data){
     let ragebonus = parseInt(focus.value<0?focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value:0)
     data.basicname.textContent = "Retaliation"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
-    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
+    data.tohit.textContent = "+" + tohitf(data.masteryStat, true,"",true)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,"",true)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
     data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently +" + -ragebonus + " damage.";
@@ -325,14 +327,142 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "3";        
         break;
         case("armorup+"):
-            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skillsel.options[skillsel.options.length] = new Option('Armor Up+ (I)', 'armorup+')
             skilldesc.childNodes[0].textContent = "gain 2 fortitude and regain 1 armor slot"
             skilldesc.querySelector(".tooltiptext").textContent = "Armor Up \nCost: 2 Mana, 1 AP \n Range: self \n \n gain fortitude equal to half your armor score, rounded up and regain 1 lost armor slot."
             skillmana.textContent = "2 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "3";        
         break;
-        
+        case("befuddlingblast"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("mind", true, "fortune") + " to hit. Deal 4d4 damage and they must make a DC " + 8 + tohitf("mind", true, "fortune") + " Mind saving throw or become confused."
+            skilldesc.querySelector(".tooltiptext").textContent = "Befuddling Blast \n Cost: 6 Mana, 1 AP \n Range: 10 squares \n \n You hurl a ball of chaotic energy towards an enemy, targeting their mind. On a hit, you deal 4d4 arcane damage and the target must succeed a Mind saving throw or become confused until the end of their next turn."
+            skillmana.textContent = "6 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("befuddlingblast+"):
+            skillsel.options[skillsel.options.length] = new Option('Befuddling blast+ (I)', 'befuddlingblast+')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("fortune", true, "mind") + " to hit. On a hit, deal 4d8 damage and confuse the target until the end of their next turn."
+            skilldesc.querySelector(".tooltiptext").textContent = "Befuddling Blast \n Cost: 12 Mana, 2 AP \n Range: 10 squares \n \n You hurl a ball of chaotic energy towards an enemy, targeting their mind. On a hit, you deal 4d8 arcane damage and they become confused until the end of their next turn."
+            skillmana.textContent = "12 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("cursefrailty"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("mind", true)) + " Mind saving throw or take 1d6 damage and 1 frail the first time an ally damages them."
+            skilldesc.querySelector(".tooltiptext").textContent = "Curse of Frailty \n Cost: 7 Mana, 3 AP \n Range: 6 squares \n \n You curse a target with weakness. They must succeed on a Mind saving throw or become cursed with frailty.\n \n While cursed, the target takes an extra 1d6 necrotic damage and gains 1 frail the first time you and each ally damages them each turn. "
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "3 AP";
+            skilluses.textContent = "";
+        break;
+        case("cursefrailty+"):
+            skillsel.options[skillsel.options.length] = new Option('Curse of frailty+ (I)', 'cursefrailty+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("mind", true)) + " Mind saving throw or take 1d8 damage and 1 frail the first time an ally damages them."
+            skilldesc.querySelector(".tooltiptext").textContent = "Curse of Frailty+ \n Cost: 16 Mana, 2 AP \n Range: 6 squares \n \n You curse a target with weakness. They must succeed on a Mind saving throw or become cursed with frailty.\n \n While cursed, the target takes an extra 1d8 necrotic damage and gains 1 frail the first time you and each ally damages them each turn. "
+            skillmana.textContent = "16 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("beguile"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("fortune", true)) + " Mind saving throw or charm. Use again to control the target, ending the charm"
+            skilldesc.querySelector(".tooltiptext").textContent = "Beguile \n Cost: 5 Mana, 1 AP \n Range: 4 squares \n \n You use dark chants that turn into whispers of lies in the ear of the target. The target must make a Mind saving throw or become charmed for 1 hour or until you use this skill again. \n \n Instead of charming a target when you use this skill, you may control a creature that is charmed by your or a willing ally. The charmed creature may move up to their movement or and make a basic attack, or another basic action. After you use this skill in this way, the charmed condition is removed from the target"
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("beguile+"):
+            skillsel.options[skillsel.options.length] = new Option('Beguile+ (I)', 'beguile+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("fortune", true)) +" Mind saving throw or charm. Use again to make the target attack with +" + tohitf("",true) + " to hit and damage"
+            skilldesc.querySelector(".tooltiptext").textContent = "Beguile+ \n Cost: 13 Mana, 1 AP \n Range: 10 squares \n \n You use dark chants that turn into whispers of lies in the ear of the target. The target must make a Mind saving throw or become charmed for 1 hour or until you use this skill again. \n \n Instead of charming a target when you use this skill, you may control a creature that is already charmed by you or a willing ally. The charmed creature may move up to their movement and make a basic attack with an extra bonus to hit and damage equal to your Fortune, or another basic action. After you use this skill in this way, the charmed condition is removed from the target"
+            skillmana.textContent = "13 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("hemokinesis"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("body", true, "mind")) + " Body saving throw. On fail, take 3d6 force damage and advance bleeding 1 turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Hemokinesis \n Cost: 6 Mana, 2 AP \n Range: 3 squares \n \n You manipulate the blood of a creature within range, wrenching it with invisible force. The target must make a Body saving throw, taking 3d6 force damage on a failure, or half on a success. \n \n On a failed save, also advance the targets bleeding one turn"
+            skillmana.textContent = "6 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("hemokinesis+"):
+            skillsel.options[skillsel.options.length] = new Option('Hemokinesis+ (I)', 'hemokineses+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("body", true, "mind")) + " Body saving throw. On fail, take 5d6 force damage and advance bleeding 1 turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Hemokinesis \n Cost: 12 Mana, 1 AP \n Range: 6 squares \n \n You manipulate the blood of a creature within range, wrenching it with invisible force. The target must make a Body saving throw, taking 5d6 force damage on a failure, or half on a success. \n \n On a failed save, also advance the targets bleeding one turn"
+            skillmana.textContent = "12 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("cursehemo"):
+            //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("mind", true)) + " Body saving throw or gain 1d6+1 bleed at the start of their turn, deal damage on success		"
+            skilldesc.querySelector(".tooltiptext").textContent = "Curse of Hemorrhaging \n Cost: 5 Mana, 2 AP \n Range: 6 squares \n \n You choose one target within range worsen their bleeding from within. \n \n The target must make a body saving throw or gain 1d6 + Mastery turns of bleed now and at the start of each of their turns. \n \n At the end of each of the target's turns, they can remake the saving throw, ending the effect on a success. When they succeed on the saving throw, they take necrotic damage equal to their turns of bleed remaining."
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("cursehemo+"):
+            skillsel.options[skillsel.options.length] = new Option('Curse of Hemorrhaging+ (I)', 'cursehemo+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8 + tohitf("mind", true)) + "Body saving throw or inflict crippled and 1d10+" + tohitf("", true) + " bleed, deal damage on success"
+            skilldesc.querySelector(".tooltiptext").textContent = "Curse of Hemorrhaging+ \n Cost: 15 Mana, 2 AP \n Range: 6 squares \n \n You choose one target within range worsen their bleeding from within. \n \n The target must make a body saving throw or become crippled and gain 1d10 + Mastery turns of bleed now and at the start of each of their turns. \n \n At the end of each of the target's turns, they can remake the saving throw, ending the effect on a success. When they succeed on the saving throw, they take necrotic damage equal to their turns of bleed remaining."
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("naturegrasp"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("senses",true, "body")) + " Body saving throw or target becomes restrained. Exposes in Autumn. Change to Winter"
+            skilldesc.querySelector(".tooltiptext").textContent = "Nature's Grasp \n Cost: 5 Mana, 1 AP \n Range: 4 squares \n \n Grasping roots grow underneath a creature within range. They must make a Body saving throw, becoming restrained until the end of their next turn on a failure. \n \n If your Perennial Might is in autumn, the target also becomes exposed until the end of their next turn on a failed save";
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("naturegrasp+"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC" + parseInt(8+tohitf("body",true, "senses")) + "Body save or restrain, 1d4 Volatile and Weak. Exposes in Autumn. Change to Winter"
+            skilldesc.querySelector(".tooltiptext").textContent = "Nature's Grasp+ \n Cost: 11 Mana, 1 AP \n Range: 8 squares \n \n Grasping roots grow underneath a creature within range. They must make a Body saving throw, becoming restrained until the end of their next turn on a failure and gain 1d4 times Mastery Volatile and Weak and move the target up to 6 squares. \n \n If your Perennial Might is in autumn, the target also becomes exposed until the end of their next turn on a failed save \n \n After this skill is used, change your Perennial Might to Winter";
+            skillmana.textContent = "11 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("bloom"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Target restores 2d8 + " + mind + " hit points. Spring heals 1d8 in a 1 square radius. Change to Summer"
+            skilldesc.querySelector(".tooltiptext").textContent = "Bloom \n Cost: 7 Mana, 2 AP \n Range: 8 squares \n \nNature blooms around a target within range, restoring 2d8 + Mind hit points. \n \nIf your Perennial Might is in Spring, creatures of your choice within 1 square of the target also restore 1d8 Hit Points \n \n After this skill is used, change your Perennial Might to Spring";
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "3";
+        break;
+        case("bloom+"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "3d8 + " + mind +" HP, overflowing into shield. Spring heals 2d8 in a 1 square radius. Change to Summer"
+            skilldesc.querySelector(".tooltiptext").textContent = "Bloom+ \nCost: 15 Mana, 2 AP \nRange: 8 squares \n \nNature blooms around a target within range, restoring 3d8 + Mind hit points. All healing from this skill above a targets maximum health becomes a magical shield that lasts until the end of combat \n \nIf your Perennial Might is in Spring, creatures of your choice within 1 square of the target also restore 1d12 Hit Points \n \n After this skill is used, change your Perennial Might to Spring";
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+            break;
+        case("wildgrowth"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Roll 1d4 to gain a random Perennial Might season, then activate a unique effect based on season"
+            skilldesc.querySelector(".tooltiptext").textContent = "Wild Growth \nCost: 5 Mana, 1 AP \nRange: 8 squares \n \nRoll 1d4 to determine a new Perennial Might season and change to that season. Based on the new season, activate a unique effect: \n \n1, Summer: Summon a small ball of solar light in an unoccupied space within range. Until the start of your next turn, creatures starting their turn inside or who move within a 1 square radius of the ball take 2d4 burning DOT and Frail.\n \n2, Autumn: All creatures within a 3x3 square in front of you are pushed back 3 squares. If they collide with something, they fall prone \n \n3, Winter: Grant yourself or an ally a 1d10 Magical shield that reflects damage back to the attacker (up to the max health of the shield) if the attack is within 1 square. The shield lasts until the end of combat \n \n 4, Spring: An ally within range gains 2d6 Potential: The next time this ally restores Hit Points, they restore additional Hit Points equal to their Potential, they then loose all stacks of Potential.";
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("wildgrowth+"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Roll 1d4 to gain a random Perennial Might season, then activate a unique effect based on season"
+            skilldesc.querySelector(".tooltiptext").textContent = "Wild Growth \nCost: 10 Mana, 1 AP \nRange: 8 squares \n \nRoll 1d4 to determine a new Perennial Might season and change to that season. Based on the new season, activate a unique effect: \n \n1, Summer: Summon a small ball of solar light in an unoccupied space within range. Until the start of your next turn, creatures starting their turn inside or who move within a 1 square radius of the ball take 2d6 burning DOT and Frail. \n \n2, Autumn: All creatures within a 3x3 square in front of you are pushed back 5 squares and fall prone. If they collide with something, they also gain 1 dazed \n \n3, Winter: Grant yourself or an ally a 2d8 Magical shield that reflects damage back to the attacker (up to the max health of the shield) if the attack is within 1 square. The shield lasts until the end of combat. Creatures of your choice within 3 squares of the target have half Movement until the end of their next turn \n \n4, Spring: Remove all stacks of one debuff on an ally, they then gain 3d6 Potential: The next time this ally restores Hit Points, they restore additional Hit Points equal to their Potential, they then loose all stacks of Potential.";
+            skillmana.textContent = "10 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+
     }
 }
 
@@ -405,6 +535,26 @@ function upgradeskill(skill){
         case("armorup"):
             skill.options[skill.options.length] = new Option('Armor Up+ (I)', 'armorup+')
             skill.value="armorup+"
+        break;
+        case("befuddlingblast"):
+            skill.options[skill.options.length] = new Option('Befudlling Blast+ (I)', 'befuddlingblast+')
+            skill.value="befuddlingblast+"
+            break;
+        case("cursefrailty"):
+            skill.options[skill.options.length] = new Option('Curse of frailty+ (I)', 'cursefrailty+')
+            skill.value="cursefrailty+"
+        break;
+        case("beguile"):
+            skill.options[skill.options.length] = new Option('beguile+ (I)', 'beguile+')
+            skill.value="beguile+"
+        break;
+        case("hemokinesis"):
+            skill.options[skill.options.length] = new Option('hemokinesis+ (I)', 'hemokinesis+')
+            skill.value="hemokinesis+"
+        break;
+        case("cursehemo"):
+            skill.options[skill.options.length] = new Option('Curse of Hemorrhaging+ (I)', 'cursehemo+')
+            skill.value="cursehemo+"
         break;
     }
     sendData();

@@ -506,7 +506,7 @@
       <tr>
     </table>
     </table>
-    <table width="300px" id="weavetable" style="display: table;"> <!-- Weave  -->
+    <table width="300px" id="weavetable" style="display: none;"> <!-- Weave  -->
       <tr>
         <th colspan="3">Weave</th>
       </tr>
@@ -521,8 +521,60 @@
       </tr>
       <tr>
         <td align="center"><input type="button" id="weave3" value="spend 3" onclick="spendres(3, weave)"></input></td>
-        <td align="center"><input type="button" id="weave6" value="spend 5" onclick="spendres(6, weave)"></input></td>
-        <td align="center"><input type="button" id="weave9" value="spend 7" onclick="spendres(9, weave)"></input></td>
+        <td align="center"><input type="button" id="weave6" value="spend 5" onclick="spendres(5, weave)"></input></td>
+        <td align="center"><input type="button" id="weave9" value="spend 7" onclick="spendres(7, weave)"></input></td>
+      </tr>
+      <tr>
+    </table>
+    <table width="300px" id="seasontable" style="display: none;"> <!-- Seasons  -->
+      <tr>
+        <th colspan="3">Perennial might</th>
+      </tr>
+      <tr>
+        <td class="tooltip" colspan="2"><span>Seasons</span><span class="tooltiptext" style="white-space: pre-line">1: Summer<br>2: Autumn<br>3: Winter<br>4: Spring</span></td>
+        <td colspan="1"><input type="number" id="season" value="1" class="write"></input></td>
+      </tr>
+      <tr>
+        <td></td>
+         <td class="tooltip" id="season1"><span>Summer</span><span class="tooltiptext" style="white-space: pre-line">On hit with a basic attack, inflict Frail equal to the damage modifier of your basic attack</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tooltip" id="season2"><span>Spring</span><span class="tooltiptext" style="white-space: pre-line">On hit with a basic attack, restore Hit Points to another Ally within your basic attack range equal to your damage modifier</span></td>
+         <td></td>
+        <td class="tooltip" id="season3"><span>Autumn</span><span class="tooltiptext" style="white-space: pre-line">On hit with a basic attack, restore Mana to you or an ally within your basic attack range equal to your damage modifier</span></td>
+      </tr>
+      <tr>
+        <td></td>
+         <td class="tooltip" id="season4"><span>Winter</span><span class="tooltiptext" style="white-space: pre-line">On hit with a basic attack, gain a Magical Shield equal to your basic attack damage modifier that lasts until end of combat</span></td>
+        <td></td>
+      </tr>
+      <tr>
+     <table width="300px" id="manifesttable" style="display: none;"> <!-- Manifestations  -->
+      <tr>
+        <th colspan="3">Otherworldly Manifestations</th>
+      </tr>
+      <tr>
+        <td class="tooltip" id="OM1"><span>every 2 DOTs consumed reduce damage by 1d4+1</span><span class="tooltiptext" style="white-space: pre-line">When you see a creature attacking you or an ally, you may consume 1 or more of that creatures DOTs. For every 2 DOTs consumed in this way, reduce the damage of their next attack by 1d4 + your Mastery.</span></td>
+         <td class="tooltip" id="OM2"><span>Consume 3 DOTs to reduce saving throw by 1</span><span class="tooltiptext" style="white-space: pre-line">When you or an ally forces an enemy to make a saving throw, you may consume 3 of their DOTs to subtract your Mastery from their saving throw</span></td>
+        <td class="tooltip" id="OM3"><span>Once a turn, consume up to 1 DOTs to move by that much</span><span class="tooltiptext" style="white-space: pre-line">Once during each of your turns, you may consume DOTs up to your mastery on an enemy to move them or yourself a number of squares equal to DOTs consumed</span></td>
+      </tr>
+      <tr>
+        <td class="tooltip" colspan="3"><span>When a creature with DOTs die, transfer them</span><span class="tooltiptext" style="white-space: pre-line">Once during each of your turns, you may consume DOTs up to your mastery on an enemy to move them or yourself a number of squares equal to DOTs consumed</span></td>
+      </tr>
+      <tr>
+    </table>
+    <table width="300px" id="claritytable" style="display: none;"> <!-- Clarity  -->
+      <tr>
+        <th colspan="3">Clarity</th>
+      </tr>
+      <tr>
+        <td class="tooltip" colspan="3">Gain +1 Clarity at the start of each turn, up to 3. Once per turn, you may use Clarity with a skill</td>
+      </tr>
+      <tr>
+        <td class="tooltip" id="cl1"><span> <input type="checkbox" class="clrcheck"> </span><span class="tooltiptext" style="white-space: pre-line">1 Clarity: Give the skill a bonus to hit or save DC equal to your Mastery.<br><br>1 Clarity: When you roll damage, you may reroll a number of the damage dice up to your Mastery, and you must use the new rolls.</span></td>
+         <td class="tooltip" id="cl2"><span><input type="checkbox" class="clrcheck"></span><span for="cl2" class="tooltiptext" style="white-space: pre-line">2 Clarity: After a target succeeds on a saving throw against your skill, make them reroll and use the new result.</span></td>
+        <td class="tooltip" id="cl3"><label><input type="checkbox" class="clrcheck"></label><label for="cl3" class="tooltiptext" style="white-space: pre-line">3 Clarity: Change the skills AP cost to 1, and Mana cost to be equal to your level</label></td>
       </tr>
       <tr>
     </table>
@@ -567,7 +619,7 @@
         <td colspan="2" id="effect" class="tooltip"><span></span><span class="tooltiptext" style="white-space: pre-line">@Model.CommentText>hewo</span></td>
       </tr>
       <tr>
-        <td id="basicbutton" colspan="3" align="center"><input type="button" value="Use Skill" onclick="useSkill(0, 1)"></td>
+        <td id="basicbutton" colspan="3" align="center"><input type="button" value="Use attack" onclick="useSkill(0, 1)"></td>
       </tr>
       <tr>
     </table>
@@ -782,6 +834,7 @@
       </ul>
     </td></table>
     <script src="/socket.io/socket.io.js"></script>
+      <script src="/classes/general.js"></script>
     <script src="/classes/pug.js"></script>
     <script src="/classes/scoundrel.js"></script>
     <script src="/classes/warrior.js"></script>
@@ -834,6 +887,7 @@
         const statsel2l = document.getElementsByClassName('statsel2l')
         const statsel3l = document.getElementsByClassName('statsel3l')
         const armorslot = document.getElementsByClassName('armorslot')
+        const clrcheck = document.getElementsByClassName('clrcheck')
         const armorscore = document.getElementById('armorscore')
         const equipment = document.getElementById('equipment')
         const items = document.getElementById('items');
@@ -861,6 +915,9 @@
         const ap1 = document.getElementById('ap1');
         const ap2 = document.getElementById('ap2');
         const ap3 = document.getElementById('ap3');
+        const weave = document.getElementById('weave');
+        const season = document.getElementById('season'); const season1 = document.getElementById('season1'); const season2 = document.getElementById('season2');
+        const season3 = document.getElementById('season3'); const season4 = document.getElementById('season4');
         const fortitude = document.getElementById('fortitude'); const maxfortitude = document.getElementById('maxfortitude'); const fortitude1 = document.getElementById('fortitude1'); const fortitude2 = document.getElementById('fortitude2'); const fortitude3 = document.getElementById('fortitude3');
         const mpregen = document.getElementById('mpregen');
         const skill1sel = document.getElementById('skill1sel'); const skill1desc = document.getElementById('skill1desc'); const skill1mana = document.getElementById('skill1mana'); const skill1uses = document.getElementById('skill1uses'); const skill1ap = document.getElementById('skill1ap');
@@ -871,7 +928,7 @@
         const skill6sel = document.getElementById('skill6sel'); const skill6desc = document.getElementById('skill6desc'); const skill6mana = document.getElementById('skill6mana'); const skill6uses = document.getElementById('skill6uses'); const skill6ap = document.getElementById('skill6ap');        
         const passive1sel = document.getElementById('passive1sel'), passive1desc = document.getElementById('passive1desc');
         var subclass = "", masteryStat = "", freeupgrades = 0, statincreases = ["","","","","",""], armorcount = 1, armorslots = [false, false, false, false, false, false, false, false, false, false], ownequipment = [];
-        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0;
+        var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, clarity = 0;
         var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
         var sheet=0 // change for new sheet
         warrior.style.display = "none"
@@ -903,6 +960,12 @@
             displaySubclasses(classs.value);
         });
         
+        for (let i = 0; i < clrcheck.length; i++){
+          clarity = 0
+          if (clrcheck[i].checked){
+            clarity++
+          }
+        }
 
         for (let i = 0; i < subclasses.length; i++){
           subclasses[i].addEventListener('change', (e) => {
@@ -1042,7 +1105,7 @@
             equips.push(equipment.children[i])
             //console.log(equipment.children[i])
           }
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, cunning:cunning.value, fortitude:fortitude.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots, equipment: equips}
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, cunning:cunning.value, fortitude:fortitude.value, weave: weave.value, clarity: clarity, season: season.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots, equipment: equips}
           socket.emit('change', data);
         }
         function getstatincrease(stat, increase1, increase2){
@@ -1149,6 +1212,12 @@
                 body += 3;
                 senses += 3;
                 mind += 1;
+                fortune += 1
+              break;
+              case("verdant"):
+                body += 3;
+                senses += 2;
+                mind += 2;
                 fortune += 1
               break;
             }
@@ -1401,12 +1470,40 @@
           hp.value = data.chars[charnumber].hp
           mp.value = data.chars[charnumber].mp
           focus.value = data.chars[charnumber].focus
+          weave.value = data.chars[charnumber].weave
           //console.log(data.chars[charnumber].cunning)
           cunning.value = data.chars[charnumber].cunning
           fortitude.value = data.chars[charnumber].fortitude
+          season.value = data.chars[charnumber].season
           ap1.checked = data.chars[charnumber].ap1
           ap2.checked = data.chars[charnumber].ap2
           ap3.checked = data.chars[charnumber].ap3
+
+          if (season.value%4 == 1){
+            season1.style = "background-color: #AEF359"
+            season2.style = "background-color: #FFFFFF"
+            season3.style = "background-color: #FFFFFF"
+            season4.style = "background-color: #FFFFFF"
+          } else if (season.value%4 == 2){
+            season3.style = "background-color: #AEF359"
+            season1.style = "background-color: #FFFFFF"
+            season2.style = "background-color: #FFFFFF"
+            season4.style = "background-color: #FFFFFF"
+          } else if (season.value%4 == 3){
+            season4.style = "background-color: #AEF359"
+            season1.style = "background-color: #FFFFFF"
+            season2.style = "background-color: #FFFFFF"
+            season3.style = "background-color: #FFFFFF"
+          } else if (season.value%4 == 0){
+            season2.style = "background-color: #AEF359"
+            season1.style = "background-color: #FFFFFF"
+            season3.style = "background-color: #FFFFFF"
+            season4.style = "background-color: #FFFFFF"
+          }
+
+          for (let i = 0; i < clarity; i++){
+            clrchec.checked=true
+          }
           switch(data.chars[charnumber].masteryStat){
               case("body"):
                 bodyMastery.checked = true
@@ -1514,6 +1611,16 @@
             break;
             case("gladiator"):
               gladiator(datad);
+            break;
+            case("sanguine"):
+              sanguine(datad)
+            break;
+            case("chrono"):
+              chrono(datad)
+            break
+            case("shapeshifter"):
+              shapeshifter(datad)
+            break;
           }
         }
         function racefeatures(race){

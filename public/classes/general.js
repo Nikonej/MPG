@@ -62,7 +62,7 @@ function useSkill(skillmana, skillap){
     sendData()
 }
 
-function tohitf(ms, atk, ms2){
+function tohitf(ms, atk, ms2, basic=false){
     let hit=0;
     switch(ms){
         case("body"):
@@ -93,8 +93,16 @@ function tohitf(ms, atk, ms2){
             hit = 0
         break;
     }
+    if (basic){
+        hit = -1
+        if (body > hit){hit = body}
+        if (mind > hit){hit = mind}
+        if (senses > hit){hit = senses}
+        if (fortune > hit){hit = fortune}
+        if (atk){hit += parseInt((parseInt(lvl.value)+1)/2)}
+    }
     if (ms2 != undefined && ms2 != "stat"){
-        hit2 = tohitf(ms2, atk, "stat")
+        hit2 = tohitf(ms2, atk, "stat", basic)
         hit = parseInt((hit + hit2 + 1)/2)
     }
     if (classs.value == "pug" && atk && ms2!="stat"){

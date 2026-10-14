@@ -3,6 +3,7 @@ function scoundrelfeatures(data){
     document.getElementById("fortitudetable").style.display = "none"
     document.getElementById("focusTable").style.display = "none"
     document.getElementById("weavetable").style.display = "none"
+    document.getElementById("manifesttable").style.display = "none"
 
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
@@ -21,8 +22,8 @@ function spendres(amount, res){
 
 function pirate(data){
     data.basicname.textContent = "Pirate strike"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
-    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
+    data.tohit.textContent = "+" + tohitf(data.masteryStat, true,0,1)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,0,1)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
     data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently 0 damage.";

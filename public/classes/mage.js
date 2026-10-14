@@ -3,18 +3,19 @@ function magefeatures(data){
     document.getElementById("fortitudetable").style.display = "none"
     document.getElementById("focusTable").style.display = "none"
     document.getElementById("cunningtable").style.display = "none"
+    document.getElementById("manifesttable").style.display = "none"
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
 }
 
 function chrono(data){
-    data.basicname.textContent = "Big boy blade"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
-    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
-    data.range.textContent = "1 square"
+    data.basicname.textContent = "Deceleration"
+    data.tohit.textContent = "+" + tohitf(data.masteryStat, true, 0, 1)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false, "", 1)
+    data.range.textContent = "6 squares"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    data.effect.childNodes[0].textContent = "On hit, gain +1 crit chance \n Resets on crit";
-    data.effect.querySelector(".tooltiptext").textContent = "on hit with a non crit basic attack, gain extra crit chance on all your attacks equal to your mastery. \n \n This bonus crit chance is reset upon getting a critical hit on an attack roll";
+    data.effect.childNodes[0].textContent = "Shoot up to 3 rays of slowing energy. Each ray must target a unique enemy. On each hit, the targets evasion is reduced by 1 until the end of their next turn.";
+    data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals force damage. \n \n Shoot up to 2 rays of slowing energy. Each ray must target a unique enemy. \n \n On each hit, the targets evasion is reduced by 1 until the end of their next turn.";
     mageskills(skill1sel, 1)
     mageskills(data.skill2sel, 1)
     mageskills(data.skill3sel, 1)

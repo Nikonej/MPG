@@ -1,19 +1,23 @@
 function verdantfeatures(data){
     document.getElementById("fortitudetable").style.display = "none"
     document.getElementById("focusTable").style.display = "none"
+    document.getElementById("weavetable").style.display = "none"
     document.getElementById("cunningtable").style.display = "none"
+    document.getElementById("manifesttable").style.display = "none"
+    document.getElementById("seasontable").style.display = "table"
+
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
 }
 
 function shapeshifter(data){
-    data.basicname.textContent = "Big boy blade"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
-    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
+    data.basicname.textContent = "Pounce"
+    data.tohit.textContent = "+" + tohitf(data.masteryStat, true, "",1)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,"",1)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    data.effect.childNodes[0].textContent = "On hit, gain +1 crit chance \n Resets on crit";
-    data.effect.querySelector(".tooltiptext").textContent = "on hit with a non crit basic attack, gain extra crit chance on all your attacks equal to your mastery. \n \n This bonus crit chance is reset upon getting a critical hit on an attack roll";
+    data.effect.childNodes[0].textContent = "If you're in a different form granted by a Shapeshifter skill, damage increased to 1d12";
+    data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals slashing damage.\n \n If you're in a different form granted by a Shapeshifter skill, your basic attack damage is increased to 1d12";
     verdantskills(skill1sel, 1)
     verdantskills(data.skill2sel, 1)
     verdantskills(data.skill3sel, 1)
@@ -33,9 +37,9 @@ function shapeshifter(data){
 function verdantskills(skillid, tier){
     skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
-    skillid.options[skillid.options.length] = new Option('Whirlwind Slash (I)', 'whirlwindslash');
-    skillid.options[skillid.options.length] = new Option('Crippling Blow (I)', 'cripplingblow');
-    skillid.options[skillid.options.length] = new Option('Armor Up (I)', 'armorup');
+    skillid.options[skillid.options.length] = new Option('Nature\'s Grasp (I)', 'naturegrasp');
+    skillid.options[skillid.options.length] = new Option('Bloom (I)', 'bloom');
+    skillid.options[skillid.options.length] = new Option('Wild Growth (I)', 'wildgrowth');
     if (tier >= 2){
         skillid.options[skillid.options.length] = new Option('Feinting Strike (II)', 'feintingstrike');
         skillid.options[skillid.options.length] = new Option('Envenom (II)', 'envenom');

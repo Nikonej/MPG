@@ -1,22 +1,26 @@
 function eccfeatures(data){
-    hideCF()
+    document.getElementById("weavetable").style.display = "none"
+    document.getElementById("fortitudetable").style.display = "none"
+    document.getElementById("focusTable").style.display = "none"
+    document.getElementById("cunningtable").style.display = "none"
+    document.getElementById("manifesttable").style.display = "table"
+    let mastery = parseInt((parseInt(document.getElementById("lvl").value)+1)/2)
+    document.getElementById("OM1").childNodes[0].textContent = "every 2 DOTs consumed reduce damage by 1d4+" + mastery
+    document.getElementById("OM2").childNodes[0].textContent = "Consume 3 DOTs to reduce saving throw by " + mastery
+    document.getElementById("OM3").childNodes[0].textContent = "Once a turn, consume up to " + mastery + " DOTs to move by that much"
+
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
-    maxfor = parseInt(lvl.value*2.5+0.99);
-    maxfortitude.textContent = maxfor;
-    fortitude1.textContent = parseInt((maxfor+3)/4);
-    fortitude2.textContent = parseInt((maxfor+1)/2);
-    fortitude3.textContent = parseInt(maxfor);
 }
 
 function sanguine(data){
-    data.basicname.textContent = "Big boy blade"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
-    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
+    data.basicname.textContent = "Lacerate"
+    data.tohit.textContent = "+" + tohitf("", true,"", basic=true)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,data.masteryStat, true)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    data.effect.childNodes[0].textContent = "On hit, gain +1 crit chance \n Resets on crit";
-    data.effect.querySelector(".tooltiptext").textContent = "on hit with a non crit basic attack, gain extra crit chance on all your attacks equal to your mastery. \n \n This bonus crit chance is reset upon getting a critical hit on an attack roll";
+    data.effect.childNodes[0].textContent = "On hit, inflict bleeding on the target instead of dealing normal damage.";
+    data.effect.querySelector(".tooltiptext").textContent = "When you hit a target, you inflict 2d4 + Mastery bleeding instead of dealing normal damage.";
     eccskills(skill1sel, 1)
     eccskills(data.skill2sel, 1)
     eccskills(data.skill3sel, 1)
@@ -36,9 +40,9 @@ function sanguine(data){
 function eccskills(skillid, tier){
     skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
-    skillid.options[skillid.options.length] = new Option('Whirlwind Slash (I)', 'whirlwindslash');
-    skillid.options[skillid.options.length] = new Option('Crippling Blow (I)', 'cripplingblow');
-    skillid.options[skillid.options.length] = new Option('Armor Up (I)', 'armorup');
+    skillid.options[skillid.options.length] = new Option('Befuddling Blast (I)', 'befuddlingblast');
+    skillid.options[skillid.options.length] = new Option('Curse of Frailty (I)', 'cursefrailty');
+    skillid.options[skillid.options.length] = new Option('Beguile (I)', 'beguile');
     if (tier >= 2){
         skillid.options[skillid.options.length] = new Option('Feinting Strike (II)', 'feintingstrike');
         skillid.options[skillid.options.length] = new Option('Envenom (II)', 'envenom');
@@ -47,7 +51,8 @@ function eccskills(skillid, tier){
 }
 
 function sanguineskills(skillid, tier){
-
+    skillid.options[skillid.options.length] = new Option('Hemokinesis (I)', 'hemokinesis');
+    skillid.options[skillid.options.length] = new Option('Curse of Hemorrhaging (I)', 'cursehemo');
 }
 
 function eccpassives(skillid, tier){

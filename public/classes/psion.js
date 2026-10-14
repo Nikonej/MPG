@@ -3,6 +3,8 @@ function psionfeatures(data){
     document.getElementById("focusTable").style.display = "none"
     document.getElementById("cunningtable").style.display = "none"
     document.getElementById("weavetable").style.display = "none"
+    document.getElementById("manifesttable").style.display = "none"
+    document.getElementById("claritytable").style.display = "table"
 
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")

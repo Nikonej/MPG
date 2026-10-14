@@ -3,7 +3,7 @@ function warriorfeatures(data){
     document.getElementById("focusTable").style.display = "none"
     document.getElementById("cunningtable").style.display = "none"
     document.getElementById("weavetable").style.display = "none"
-
+    document.getElementById("manifesttable").style.display = "none"
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
     maxfor = parseInt(lvl.value*2.5+0.99);
@@ -15,8 +15,8 @@ function warriorfeatures(data){
 
 function gladiator(data){
     data.basicname.textContent = "Big boy blade"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
-    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
+    data.tohit.textContent = "+" + tohitf(data.masteryStat, true,0,1)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,0,1)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
     data.effect.childNodes[0].textContent = "On hit, gain +1 crit chance \n Resets on crit";
