@@ -31,6 +31,7 @@ function shapeshifter(data){
     shapeshifterskills(data.skill5sel, 2)
     shapeshifterskills(data.skill6sel, 2)
     verdantpassives(passive1sel,1)
+    shapeshifterpassives(passive1sel,1)
 
 }
 
@@ -54,8 +55,17 @@ function shapeshifterskills(skillid, tier){
 function verdantpassives(skillid, tier){
     skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
-    skillid.options[skillid.options.length] = new Option('Stand Behind Me!(I)', 'standbehindme');
-    skillid.options[skillid.options.length] = new Option('Whirling Defender (I)', 'whirlingdefender');
+    skillid.options[skillid.options.length] = new Option('All Bark No Bite(I)', 'allbark');
+    skillid.options[skillid.options.length] = new Option('Seasonal Cycle (I)', 'seasonalcycle');
+    if (tier >= 2){
+        skillid.options[skillid.options.length] = new Option('Lucky Strike (II)', 'luckystrike');
+        skillid.options[skillid.options.length] = new Option('Evasive (II)', 'evasive');
+    }
+}
+
+function shapeshifterpassives(skillid, tier){
+    skillid.options[skillid.options.length] = new Option('Mutable Form (I)', 'mutableform');
+    skillid.options[skillid.options.length] = new Option('Shifting Resilience (I)', 'shiftingresilience');
     if (tier >= 2){
         skillid.options[skillid.options.length] = new Option('Lucky Strike (II)', 'luckystrike');
         skillid.options[skillid.options.length] = new Option('Evasive (II)', 'evasive');

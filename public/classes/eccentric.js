@@ -58,7 +58,8 @@ function plague(data){
     plagueskills(data.skill4sel, 2)
     plagueskills(data.skill5sel, 2)
     plagueskills(data.skill6sel, 2)
-    eccpassives(passive1sel,1)
+    eccpassives(data.passive1sel,1)
+    plaguepassives(data.passive1sel,1)
 }
 
 function eccskills(skillid, tier){
@@ -87,10 +88,19 @@ function plagueskills(skillid, tier){
 function eccpassives(skillid, tier){
     skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
-    skillid.options[skillid.options.length] = new Option('Stand Behind Me!(I)', 'standbehindme');
-    skillid.options[skillid.options.length] = new Option('Whirling Defender (I)', 'whirlingdefender');
+    skillid.options[skillid.options.length] = new Option('Cursed Grimoire (I)', 'cursedgrimoire');
+    skillid.options[skillid.options.length] = new Option('Malediction-Monger (I)', 'malmonger');
     if (tier >= 2){
-        skillid.options[skillid.options.length] = new Option('Lucky Strike (II)', 'luckystrike');
-        skillid.options[skillid.options.length] = new Option('Evasive (II)', 'evasive');
+        skillid.options[skillid.options.length] = new Option('Unending Torment (II)', 'unendingtorment');
+        skillid.options[skillid.options.length] = new Option('Doom and Gloom (II)', 'doomgloom');
+    }
+}
+
+function plaguepassives(skillid, tier){
+    skillid.options[skillid.options.length] = new Option('Self-experimentation (I)', 'selfexp');
+    skillid.options[skillid.options.length] = new Option('Blinding Miasma (I)', 'blindingmiasma');
+    if (tier >= 2){
+        skillid.options[skillid.options.length] = new Option('Blood Clot (II)', 'bloodclot');
+        skillid.options[skillid.options.length] = new Option('Bloodletting (II)', 'bloodletting');
     }
 }

@@ -36,7 +36,6 @@ function gladiator(data){
     gladiatorskills(data.skill5sel, 2)
     gladiatorskills(data.skill6sel, 2)
     warriorpassives(passive1sel,1)
-
 }
 
 function warriorskills(skillid, tier){

@@ -358,7 +358,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
         break;
         case("befuddlingblast"):
             //skillsel.options[skillsel.options.length] = new Option('Treachery (II)', 'treachery')
-            skilldesc.childNodes[0].textContent = "+" + tohitf("mind", true, "fortune") + " to hit. Deal 4d4 damage and they must make a DC " + 8 + tohitf("mind", true, "fortune") + " Mind saving throw or become confused."
+            skilldesc.childNodes[0].textContent = "+" + tohitf("mind", true, "fortune") + " to hit. Deal 4d4 damage and they must make a DC " + parseInt(8 + tohitf("mind", true, "fortune")) + " Mind saving throw or become confused."
             skilldesc.querySelector(".tooltiptext").textContent = "Befuddling Blast \n Cost: 6 Mana, 1 AP \n Range: 10 squares \n \n You hurl a ball of chaotic energy towards an enemy, targeting their mind. On a hit, you deal 4d4 arcane damage and the target must succeed a Mind saving throw or become confused until the end of their next turn."
             skillmana.textContent = "6 Mana";
             skillap.textContent = "1 AP";
@@ -602,7 +602,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilldesc.querySelector(".tooltiptext").textContent = "Elixir of Vitality \nCost: 4 Mana, 1 AP \n Range: 1 square \n \nYou restore 3d4 Hit Points to an ally within range, any amount restored over the targets maximum turns into a magical shield. \n \nAs long as the target has a magical shield from this skill, they gain +1d4 to all their attack rolls and saving throws. \n \nThe magical shield lasts up to 10 minutes";
             skillmana.textContent = "4 Mana";
             skillap.textContent = "1 AP";
-            skilluses.textContent = "";
+            skilluses.textContent = "4";
         break;
         case("elixirvit+"):
             //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
@@ -610,7 +610,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilldesc.querySelector(".tooltiptext").textContent = "Elixir of Vitality+ \nCost: 9 Mana, 1 AP \nRange: 4 squares \n \nYou restore 4d4 Hit Points to an ally within range, any amount restored over the targets maximum turns into a magical shield. \n \nAs long as the target has at least 1 magical shield from this skill, they gain +1d6 to all their attack rolls and saving throws. \n \nThe magical shield lasts until you take a rest";
             skillmana.textContent = "9 Mana";
             skillap.textContent = "1 AP";
-            skilluses.textContent = "";
+            skilluses.textContent = "8";
         break;
         case("cursecontagion"):
             //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
@@ -661,6 +661,55 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilldesc.childNodes[0].textContent = "When you're at half health " + parseInt((parseInt(hp.value)+1)/2) + " or below, your first basic attack or skill each turn has advantage to hit and the Focus bonus to damage is doubled (" + focusbonus.textContent + ")"
             skilldesc.querySelector(".tooltiptext").textContent = "Bloodied Frenzy (passive) \n \nWhen you're at half health or below, your first basic attack or skill each turn has advantage to hit and the bonus to damage granted by your Focus is doubled";
         break;
+        case("cursedgrimoire"):
+            skilldesc.childNodes[0].textContent = "Once per turn when you inflict a curse, regain Health and Mana equal to the amount of your subclasses DOTs on the enemy, up to " + mpregen.textContent
+            skilldesc.querySelector(".tooltiptext").textContent = "Cursed Grimoire (passive) \n \nOnce per turn when you successfully inflict a target with a curse, you regain Health and Mana equal to each of your subclasses DOTs on the enemy, up to your Mana regen";
+        break;
+        case("malmonger"):
+            skilldesc.childNodes[0].textContent = "The first curse skill you use each combat costs 1 less AP"
+            skilldesc.querySelector(".tooltiptext").textContent = "Malediction-Monger (passive) \n \nThe first curse skill you use each combat costs 1 less AP";
+        break;
+        case("unendingtorment"):
+            skilldesc.childNodes[0].textContent = "Once per turn when you inflict DOTs on a cursed enemy, also inflict the same amount of Volatile"
+            skilldesc.querySelector(".tooltiptext").textContent = "Unending Torment (passive) \n \nOnce per turn when you inflict at least 1 DOT on an enemy that is under the effect of one of your curses, also inflict an amount of Volatile equal to the amount of DOTs inflicted on the enemy";
+        break;
+        case("doomgloom"):
+            skilldesc.childNodes[0].textContent = "Whenever your skills inflict weak or frail, also inflict the same amount of the other debuff"
+            skilldesc.querySelector(".tooltiptext").textContent = "Doom and Gloom (passive) \n \nWhenever your skills inflict weak or frail, also inflict the same amount of the other debuff";
+        break;
+        case("selfexp"):
+            skilldesc.childNodes[0].textContent = "When restoring Hit Points to an ally, you may inflict up to " + parseInt((parseInt(lvl.value)+1)/2) + "d4 Poison to yourself to increase healing by that amount. When using Otherworldly Manifestation, consume your own Poison first"
+            skilldesc.querySelector(".tooltiptext").textContent = "Self-experimentation (passive) \n \nOnce per turn when restoring Hit Points to an ally, you may inflict a number of d4's up to your Mastery Poison to yourself to increase healing by that amount (minimum of 1d4). \n \nWhen using your Otherworldly Manifestation level 1 class feature, you may consume your own turns of Poison before consuming a targets Poison. The target is still required to have Poison on them for you to use your class feature on them";
+        break;
+        case("blindingmiasma"):
+            skilldesc.childNodes[0].textContent = "The first time each creature of your choice has at least 10 turns of poison, they become blinded until the end of their next turn. This can trigger once for every creature in a combat"
+            skilldesc.querySelector(".tooltiptext").textContent = "Blinding Miasma (passive) \n \nThe first time each creature of your choice has at least 10 turns of poison, they become blinded until the end of their next turn.  \n \nThis can trigger once for every creature in a combat";
+        break;
+        case("bloodclot"):
+            skilldesc.childNodes[0].textContent = "Once per combat when all enemies in combat have at least 1 turn of bleeding, you may transfer all bleeding to one enemy, then advance their bleeding by one turn."
+            skilldesc.querySelector(".tooltiptext").textContent = "Blood Clot (passive) \n \nOnce per combat when all enemies in combat have at least 1 turn of bleeding, you may transfer all bleeding on all enemies to one target, then advance the targets bleeding by one turn.";
+        break;
+        case("bloodletting"):
+            skilldesc.childNodes[0].textContent = "Self damage also inflicts bleeding. Whenever you take damage from bleeding, reduce it to 1. At the end of turn, inflict bleeding to a target within 1 square equal to your own bleeding, up to 1."
+            skilldesc.querySelector(".tooltiptext").textContent = "Bloodletting (passive) \n \nWhen you damage yourself with skills or attacks, you also inflict bleeding to yourself equal to half the damage taken.  \n \nWhenever you would take bleeding damage, reduce it to be equal to your mastery if you would've taken more otherwise \n \nAt the start of each combat, you may deal a number of d4 damage to yourself, up to your level. \n \nAt the end of your turn, you may inflict a creature within 1 square of bleeding equal to your own bleeding, up to your level.";
+        break;
+        case("allbark"):
+            skilldesc.childNodes[0].textContent = "When hit, you may use 1 Armor Slot to negate the damage and turn into a tree until the end of your next turn. While in tree form, you are resistant to damage but cannot use basic attacks, only skills."
+            skilldesc.querySelector(".tooltiptext").textContent = "Mutable Form (passive) \n \nOn a rest, choose from a list of mutated forms that is active until your next rest: \n \nTough Hide: At the start of each combat, regain 1 lost Armor Slot. \n \nLong Limbs: Increase your range by 1 for all melee attacks and skills \n \nSpined Exterior: Whenever a creature attempts to attack you while within 1 square of you, they take 1d4 + Mastery Piercing damage first \n \nGliding Membranes: You are immune to falling damage, and for every square you fall, you may move 2 squares horizontally, up to twice your normal movement each turn. \n \nSwift Survivor: Gain additional movement equal to your Mastery. Also gain the ability to breathe underwater, and you can climb and swim as quickly as you can walk on land";
+        break;
+        case("seasonalcycle"):
+            skilldesc.childNodes[0].textContent = "At the start of each of your turns, you may choose to cycle your current Perennial Might season into the next one. If you do, you gain an additonal passive bonus that turn based on the season"
+            skilldesc.querySelector(".tooltiptext").textContent = "Seasonal Cycle (passive) \n \nAt the start of each of your turns, you may choose to cycle your current Perennial Might season into the next one (From Summer to Autumn, Autumn to Winter etc). If you choose to do so, you also gain an additional passive bonus that turn based on the season: \n \nSummer: You and allies gain additional Movement equal to your level \n \nAutumn: The Mana cost of your first skill this turn is halved \n \nWinter: Whenever you give or get a Magical Shield, you also give or get half as much Potential (The next time this ally restores Hit Points, they restore additional Hit Points equal to their Potential, they then loose all stacks of Potential) \n \nSpring: When you restore Hit Points to an ally, you restore additional Hit Points equal to your Level";
+        break;
+        case("mutableform"):
+            skilldesc.childNodes[0].textContent = "On a rest, choose from a list of mutated form and mutate until your next rest. These bonus passives are active while you are in a changed form"
+            skilldesc.querySelector(".tooltiptext").textContent = "Mutable Form (passive) \n \nOn a rest, choose from a list of mutated forms that is active until your next rest: \n \nTough Hide: At the start of each combat, regain 1 lost Armor Slot. \n \nLong Limbs: Increase your range by 1 for all melee attacks and skills \n \nSpined Exterior: Whenever a creature attempts to attack you while within 1 square of you, they take 1d4 + Mastery Piercing damage first \n \nGliding Membranes: You are immune to falling damage, and for every square you fall, you may move 2 squares horizontally, up to twice your normal movement each turn. \n \nSwift Survivor: Gain additional movement equal to your Mastery. Also gain the ability to breathe underwater, and you can climb and swim as quickly as you can walk on land";
+        break;
+        case("shiftingresilience"):
+            skilldesc.childNodes[0].textContent = "When you change form, gain resistance to bludgeoning, piercing and slashing damage until the start of your next turn."
+            skilldesc.querySelector(".tooltiptext").textContent = "Shifting Resilience (passive) \n \nWhen you change form, gain resistance to bludgeoning, piercing and slashing damage until the start of your next turn.";
+        break;
+        
 
 
     }
