@@ -46,6 +46,6 @@ io.on('connection', (socket) => {
     characters[data.sheet] = data;
   })
 });
-server.listen(3001)
+server.listen(3000)
 console.log("http://localhost:3000")
 
