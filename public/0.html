@@ -244,6 +244,27 @@
           <th>1</th>
         </tr>
         <tr>
+          <th>Krunk</th>
+          <th>0</th>
+          <th>2</th>
+          <th>0</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Drattus Rex</th>
+          <th>1</th>
+          <th>1</th>
+          <th>0</th>
+          <th>1</th>
+        </tr>
+        <tr>
+          <th>Chimera</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+        </tr>
+        <tr>
           <th>Custom</th>
           <th>0</th>
           <th>0</th>
@@ -270,6 +291,9 @@
         <option value="triac">Triac</option>
         <option value="half-Dragon">Half-Dragon</option>
         <option value="minotaur">Minotaur</option>
+        <option value="krunk">Krunk</option>
+        <option value="Drattus Rex">Drattus Rex</option>
+        <option value="chimera">Chimera</option>
         <option value="custom">Custom</option>
       </select> 
       <label for="classes" class="tooltip line2">Class: <span class="tooltiptext"><table>
@@ -739,12 +763,12 @@
 
     <table width="300px" class="skilltable" style="display: none;">  <!-- passive 1 -->
       <tr>
-        <td colspan="1" id="passive1"><select id="passive1sel" class="skillsel">  
+        <td colspan="3" id="passive1"><select id="passive1sel" class="skillsel">
           <option value="">Select passive 1</option>
         </select></td>
       </tr>
       <tr>
-        <td colspan="1" id="passive1desc" class="tooltip"><span>sadasddsadsadasdasdas</span><span class="tooltiptext" style="white-space: pre-line"></span></td>
+        <td colspan="3" id="passive1desc" class="tooltip"><span>sadasddsadsadasdasdas</span><span class="tooltiptext" style="white-space: pre-line"></span></td>
       </tr>
     </table>
     <br>
@@ -1105,7 +1129,7 @@
             equips.push(equipment.children[i])
             //console.log(equipment.children[i])
           }
-          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, focus:focus.value, cunning:cunning.value, fortitude:fortitude.value, weave: weave.value, clarity: clarity, season: season.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots, equipment: equips}
+          data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, passive1sel:passive1sel.value, focus:focus.value, cunning:cunning.value, fortitude:fortitude.value, weave: weave.value, clarity: clarity, season: season.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots, equipment: equips}
           socket.emit('change', data);
         }
         function getstatincrease(stat, increase1, increase2){
@@ -1322,6 +1346,24 @@
                 body += 2;
                 senses += 0;
                 mind += 0;
+                fortune += 1;
+              break;
+              case("krunk"):
+                body += 0;
+                senses += 2;
+                mind += 0;
+                fortune += 1;
+              break;
+              case("Drattus Rex"):
+                body += 1;
+                senses += 1;
+                mind += 0;
+                fortune += 1;
+              break;
+              case("chimera"):
+                body += 1;
+                senses += 1;
+                mind += 1;
                 fortune += 1;
               break;
               case("custom"):
@@ -1567,6 +1609,8 @@
           skill5sel.value = data.chars[charnumber].skill5sel
           skilldesc(data.chars[charnumber].skill6sel, skill6desc, skill6mana, skill6uses, skill6ap, skill6sel)
           skill6sel.value = data.chars[charnumber].skill6sel
+          skilldesc(data.chars[charnumber].passive1sel, passive1desc, "", "", "", "")
+          passive1sel.value = data.chars[charnumber].passive1sel
           showskills();
           updateskilltables(lvl.value);
           //console.log(skill1sel.value)
@@ -1615,11 +1659,17 @@
             case("sanguine"):
               sanguine(datad)
             break;
+            case("plague"):
+              plague(datad)
+            break;
             case("chrono"):
               chrono(datad)
             break
             case("shapeshifter"):
               shapeshifter(datad)
+            break;
+            case("diviner"):
+              diviner(datad)
             break;
           }
         }
@@ -1690,6 +1740,18 @@
               racefeature2.textContent="Choose a damage type. You gain resistance to that damage type, and your dragon's breath becomes that damage type."
             break;
             case("minotaur"):
+              racefeature1.textContent="If you move 4+ squares in a line, you may CHARGE: Gain 2/3/5 extra movement in that direction, and your next melee attack has +2 to hit."
+              racefeature2.textContent="After taking damage from an attack, you may reroll a number of damage dice up to your Mastery during your next attack that hits."
+            break;
+            case("krunk"):
+              racefeature1.textContent="You can use the Grapple action with your tongue, gaining 4 squares of reach. On a success, you can either pull yourself to the target, or pull the target to you, and into your mouth"
+              racefeature2.textContent="When you grapple a target, or someone grapples or hits you with an unarmed attack, they take 1d4+1 Poison DOT. For 1 AP, you may give this effect on a weapon for one turn or until applied"
+            break;
+            case("Drattus Rex"):
+              racefeature1.textContent="Once per turn when someone within 1 square of you uses one or more mana, you may restore 1d4+" + tohitf("", true) + " Mana yourself"
+              racefeature2.textContent="When you restore Mana, you may transfer some or all of the mana regained to an ally you can see"
+            break;
+            case("Chimera"):
               racefeature1.textContent="If you move 4+ squares in a line, you may CHARGE: Gain 2/3/5 extra movement in that direction, and your next melee attack has +2 to hit."
               racefeature2.textContent="After taking damage from an attack, you may reroll a number of damage dice up to your Mastery during your next attack that hits."
             break;

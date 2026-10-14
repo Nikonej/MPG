@@ -4,6 +4,7 @@ function psionfeatures(data){
     document.getElementById("cunningtable").style.display = "none"
     document.getElementById("weavetable").style.display = "none"
     document.getElementById("manifesttable").style.display = "none"
+    document.getElementById("seasontable").style.display = "none"
     document.getElementById("claritytable").style.display = "table"
 
     //husk at fjerne alle andre subclass features
@@ -11,13 +12,13 @@ function psionfeatures(data){
 }
 
 function diviner(data){
-    data.basicname.textContent = "Big boy blade"
-    data.tohit.textContent = "+" + tohitf(data.masteryStat, true)
+    data.basicname.textContent = "True Strike"
+    data.tohit.textContent = "DC " + parseInt(8 + tohitf(data.masteryStat, true,"", 1)) + " fortune"
     data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false)
-    data.range.textContent = "1 square"
+    data.range.textContent = "6 squares"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    data.effect.childNodes[0].textContent = "On hit, gain +1 crit chance \n Resets on crit";
-    data.effect.querySelector(".tooltiptext").textContent = "on hit with a non crit basic attack, gain extra crit chance on all your attacks equal to your mastery. \n \n This bonus crit chance is reset upon getting a critical hit on an attack roll";
+    data.effect.childNodes[0].textContent = "The target has a reduction in their evasion equal to your current Clarity. This effect lasts until they are hit by an attack, and cannot stack";
+    data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals psychic damage. \n \nThe target must make a Fortune saving throw. On a failure, they take damage they have a reduction in their evasion equal to your current Clarity. This effect lasts until they are hit by an attack, and cannot stack";
     psionskills(skill1sel, 1)
     psionskills(data.skill2sel, 1)
     psionskills(data.skill3sel, 1)
@@ -31,15 +32,16 @@ function diviner(data){
     divinerskills(data.skill5sel, 2)
     divinerskills(data.skill6sel, 2)
     psionpassives(passive1sel,1)
+    divinerpassives(passive1sel,1)
 
 }
 
 function psionskills(skillid, tier){
     skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
-    skillid.options[skillid.options.length] = new Option('Whirlwind Slash (I)', 'whirlwindslash');
-    skillid.options[skillid.options.length] = new Option('Crippling Blow (I)', 'cripplingblow');
-    skillid.options[skillid.options.length] = new Option('Armor Up (I)', 'armorup');
+    skillid.options[skillid.options.length] = new Option('Telekinesis (I)', 'telekinesis');
+    skillid.options[skillid.options.length] = new Option('Paralyzing Static (I)', 'parastatic');
+    skillid.options[skillid.options.length] = new Option('Psionic Paroxysm (I)', 'psiparoxysm');
     if (tier >= 2){
         skillid.options[skillid.options.length] = new Option('Feinting Strike (II)', 'feintingstrike');
         skillid.options[skillid.options.length] = new Option('Envenom (II)', 'envenom');
@@ -48,14 +50,25 @@ function psionskills(skillid, tier){
 }
 
 function divinerskills(skillid, tier){
+    skillid.options[skillid.options.length] = new Option('Vengeful Fate (I)', 'vengefulfate');
+    skillid.options[skillid.options.length] = new Option('Cut Through Fate (I)', 'cutfate');
 
 }
 
 function psionpassives(skillid, tier){
     skillid.options.length = 1;
     skillid.options[skillid.options.length] = new Option('', '');
-    skillid.options[skillid.options.length] = new Option('Stand Behind Me!(I)', 'standbehindme');
-    skillid.options[skillid.options.length] = new Option('Whirling Defender (I)', 'whirlingdefender');
+    skillid.options[skillid.options.length] = new Option('Potent Mind (I)', 'potentmind');
+    skillid.options[skillid.options.length] = new Option('Expanded Consciousness (I)', 'expcon');
+    if (tier >= 2){
+        skillid.options[skillid.options.length] = new Option('Lucky Strike (II)', 'luckystrike');
+        skillid.options[skillid.options.length] = new Option('Evasive (II)', 'evasive');
+    }
+}
+
+function divinerpassives(skillid, tier){
+    skillid.options[skillid.options.length] = new Option('Augury (I)', 'augury');
+    skillid.options[skillid.options.length] = new Option('Clairvoyance (I)', 'clairvoyance');
     if (tier >= 2){
         skillid.options[skillid.options.length] = new Option('Lucky Strike (II)', 'luckystrike');
         skillid.options[skillid.options.length] = new Option('Evasive (II)', 'evasive');

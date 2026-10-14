@@ -21,7 +21,7 @@ function rager(data){
     data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,"",true)
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
-    data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently +" + -ragebonus + " damage.";
+    data.effect.childNodes[0].textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently +" + focusbonus.textContent + " damage.";
     data.effect.querySelector(".tooltiptext").textContent = "Your basic attack deals bludgeoning damage. If you hit an enemy, you may attack again without using AP. \n \n When you would reset focus from taking damage while at 0 focus or less, instead lose one focus. Focus can become negative. You deal extra damage the more negative focus you have, up to your mastery.\n \n Some Pugilist skills and passives are changed for the Rager:\n \n Skills:\n Flurry of Blows+ \n Adrenaline rush -> Frenzy Rush \n \n passives: \n Momentum -> Raging Momentum \n Absolute Focus -> Absolute Rage \n Unwavering -> Unwavering Anger";
     pugskills(skill1sel, 2)
     ragerskills(skill1sel, 2)
@@ -35,6 +35,8 @@ function rager(data){
     ragerskills(data.skill5sel, 2)
     pugskills(data.skill6sel, 2)
     ragerskills(data.skill6sel, 2)
+    pugpassives(data.passive1sel, 1)
+    ragerpassives(data.passive1sel, 1)
 }
 
 function pugskills(skillid, tier){
@@ -56,6 +58,26 @@ function ragerskills(skillid, tier){
         skillid.options[skillid.options.length] = new Option('dfs (II)', 'dfs');
     }
 }
+
+function pugpassives(skillid, tier){
+    skillid.options.length = 1;
+    skillid.options[skillid.options.length] = new Option('', '');
+    skillid.options[skillid.options.length] = new Option('Momentum (I)', 'momentum');
+    skillid.options[skillid.options.length] = new Option('Deflect Attacks (I)', 'deflect');
+    if (tier >= 2){
+        skillid.options[skillid.options.length] = new Option('dfs (II)', 'dfs');
+    }
+}
+
+function ragerpassives(skillid, tier){
+    skillid.options[skillid.options.length] = new Option('Reckless Abandon (I)', 'recklessabandon');
+    skillid.options[skillid.options.length] = new Option('Bloodied Frenzy (I)', 'bloodiedfrenzy');
+    if (tier >= 2){
+        skillid.options[skillid.options.length] = new Option('dfs (II)', 'dfs');
+    }
+}
+
+
 function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
     switch(skillid){
         case(""):
@@ -72,11 +94,11 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skillap.textContent = "2 AP";
             skilluses.textContent = "";
         break;
-        case("flurryrager+"):
-            skillsel.options[skillsel.options.length] = new Option('Flurry of Blows+ (I)', 'flurryrager+')
+        case("flurry+"):
+            skillsel.options[skillsel.options.length] = new Option('Flurry of Blows+ (I)', 'flurry+')
             //skillid.value="flurryuprager"
-            skilldesc.childNodes[0].textContent = "Three attacks with +3 to hit. On a hit, each attack deals 1d6 + " + tohitf("senses", false) + " damage. Hits generate no Focus";
-            skilldesc.querySelector(".tooltiptext").textContent = "Flurry of Blows+ \n Cost: 9 Mana, 2 AP \n Range: 1 Square \n \n You unleash a flurry of rapid strikes, making three attacks against a single target. On a hit, each attack deals 1d6 + Senses damage. Hits generate no Focus";
+            skilldesc.childNodes[0].textContent = "Three attacks with +" + tohitf("senses", true) + " to hit. On a hit, each attack deals 1d6 + " + tohitf("senses", false) + " damage. Grants additional Focus";
+            skilldesc.querySelector(".tooltiptext").textContent = "Flurry of Blows+ \nCost: 9 Mana, 2 AP \nRange: 1 Square \n \nYou unleash a flurry of rapid strikes, making three attacks against a single target. On a hit, each attack deals 1d6 + Senses damage. Each hit grants 1 additional Focus on hit";
             skillmana.textContent = "9 Mana";
             skillap.textContent = "2 AP";
             skilluses.textContent = "";
@@ -158,7 +180,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
         break;
         case("rage"):
             skilldesc.childNodes[0].textContent = "Reduce Focus to zero, gain resistance to martial damage. Is active as long as you take damage.";
-            skilldesc.querySelector(".tooltiptext").textContent = "Rage \n Cost: 4 Mana, 1 AP \n Range: Self \n You enter a deep rage. You gain resistance to slashing, piercing and bludgeoning damage. If your Focus is above 0 when you use this skill, its reduced to 0 \n At the start of your next turn, you may use 1 AP to keep this effect, if you choose not to, the rage ends. If you took any damage between turns, the cost is reduced to 0 AP. When extending the rage in this way, you don't reduce your Focus";
+            skilldesc.querySelector(".tooltiptext").textContent = "Rage Minotaur\n Cost: 4 Mana, 1 AP \n Range: Self \n You enter a deep rage. You gain resistance to slashing, piercing and bludgeoning damage. If your Focus is above 0 when you use this skill, its reduced to 0 \n At the start of your next turn, you may use 1 AP to keep this effect, if you choose not to, the rage ends. If you took any damage between turns, the cost is reduced to 0 AP. When extending the rage in this way, you don't reduce your Focus";
             skillmana.textContent = "4 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
@@ -423,8 +445,8 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";
         break;
         case("naturegrasp+"):
-            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
-            skilldesc.childNodes[0].textContent = "DC" + parseInt(8+tohitf("body",true, "senses")) + "Body save or restrain, 1d4 Volatile and Weak. Exposes in Autumn. Change to Winter"
+            skillsel.options[skillsel.options.length] = new Option('Nature\'s Grasp+ (I)', 'naturegrasp+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("body",true, "senses")) + " Body save or restrain, 1d4 Volatile and Weak. Exposes in Autumn. Change to Winter"
             skilldesc.querySelector(".tooltiptext").textContent = "Nature's Grasp+ \n Cost: 11 Mana, 1 AP \n Range: 8 squares \n \n Grasping roots grow underneath a creature within range. They must make a Body saving throw, becoming restrained until the end of their next turn on a failure and gain 1d4 times Mastery Volatile and Weak and move the target up to 6 squares. \n \n If your Perennial Might is in autumn, the target also becomes exposed until the end of their next turn on a failed save \n \n After this skill is used, change your Perennial Might to Winter";
             skillmana.textContent = "11 Mana";
             skillap.textContent = "1 AP";
@@ -439,7 +461,7 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "3";
         break;
         case("bloom+"):
-            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skillsel.options[skillsel.options.length] = new Option('Bloom+ (I)', 'bloom+')
             skilldesc.childNodes[0].textContent = "3d8 + " + mind +" HP, overflowing into shield. Spring heals 2d8 in a 1 square radius. Change to Summer"
             skilldesc.querySelector(".tooltiptext").textContent = "Bloom+ \nCost: 15 Mana, 2 AP \nRange: 8 squares \n \nNature blooms around a target within range, restoring 3d8 + Mind hit points. All healing from this skill above a targets maximum health becomes a magical shield that lasts until the end of combat \n \nIf your Perennial Might is in Spring, creatures of your choice within 1 square of the target also restore 1d12 Hit Points \n \n After this skill is used, change your Perennial Might to Spring";
             skillmana.textContent = "15 Mana";
@@ -455,13 +477,191 @@ function skilldesc(skillid, skilldesc, skillmana, skilluses, skillap, skillsel){
             skilluses.textContent = "";
         break;
         case("wildgrowth+"):
-            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skillsel.options[skillsel.options.length] = new Option('Wild Growth+ (I)', 'wildgrowth+')
             skilldesc.childNodes[0].textContent = "Roll 1d4 to gain a random Perennial Might season, then activate a unique effect based on season"
             skilldesc.querySelector(".tooltiptext").textContent = "Wild Growth \nCost: 10 Mana, 1 AP \nRange: 8 squares \n \nRoll 1d4 to determine a new Perennial Might season and change to that season. Based on the new season, activate a unique effect: \n \n1, Summer: Summon a small ball of solar light in an unoccupied space within range. Until the start of your next turn, creatures starting their turn inside or who move within a 1 square radius of the ball take 2d6 burning DOT and Frail. \n \n2, Autumn: All creatures within a 3x3 square in front of you are pushed back 5 squares and fall prone. If they collide with something, they also gain 1 dazed \n \n3, Winter: Grant yourself or an ally a 2d8 Magical shield that reflects damage back to the attacker (up to the max health of the shield) if the attack is within 1 square. The shield lasts until the end of combat. Creatures of your choice within 3 squares of the target have half Movement until the end of their next turn \n \n4, Spring: Remove all stacks of one debuff on an ally, they then gain 3d6 Potential: The next time this ally restores Hit Points, they restore additional Hit Points equal to their Potential, they then loose all stacks of Potential.";
             skillmana.textContent = "10 Mana";
             skillap.textContent = "1 AP";
             skilluses.textContent = "";
         break;
+        case("wildshape"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Change into a beastial form, changing your stats and season, and gaining new Skills and Passives"
+            skilldesc.querySelector(".tooltiptext").textContent = "Wildshape \nCost: 6 Mana, 2 AP \nRange: Self \n \nChoose a form from the list of Wildshape forms available to you (Wing, Fang, Titan and Swarm forms), and transform into it, changing your stats and gaining unique features and skills based on the chosen form. \n \nThe form you choose also changes your Perennial Might season: \n \nWing = Summer, Fang = Autumn, Titan = Winter and Swarm = Spring \n \nYou cannot use most skills while you have changed form, unless stated otherwise by the individual skills. You still benefit from all your passives while in a changed form \n \nYou're able to use Wildshape while in a changed form \n \n You can stay in this form until the end of combat, you drop to 0 hit points, or until you choose to change back into your true form during your turn for no AP cost. \n \n While most of your stats change while in a Wildshape form, not all your stats do. Only stats on the Wildshape stat block override your old stats, your maximum Hit Points, maximum Mana and other stats not on the Wildshape stat block stay the same.";
+            skillmana.textContent = "6 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("wildshape+"):
+            skillsel.options[skillsel.options.length] = new Option('Wild Shape (I)', 'wildshape+')
+            skilldesc.childNodes[0].textContent = "Change into a beastial form, changing your stats and season, and gaining new Skills and Passives"
+            skilldesc.querySelector(".tooltiptext").textContent = "Wildshape \nCost: 18 Mana, 2 AP \nRange: Self \n \nChoose a form from the list of Wildshape forms available to you (Wing+, Fang+, Titan+ and Swarm+ forms), and transform into it, changing your stats and gaining unique features and skills based on the chosen form. \n \nThe form you choose also changes your Perennial Might season: \n \nWing+ = Summer, Fang+ = Autumn, Titan+ = Winter and Swarm+ = Spring \n \nYou cannot use most skills while you have changed form, unless stated otherwise by the individual skills. You still benefit from all your passives while in a changed form \n \nYou're able to use Wildshape while in a changed form \n \nYou can stay in this form until the end of combat, you drop to 0 hit points, or until you choose to change back into your true form during your turn for no AP cost. \n \nWhile most of your stats change while in a Wildshape form, not all your stats do. Only stats on the Wildshape stat block override your old stats, your maximum Hit Points, maximum Mana and other stats not on the Wildshape stat block stay the same.";
+            skillmana.textContent = "18 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("beastrend"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("body", true, "senses") + " to hit. On hit, deal 2d12+" + tohitf("body", false, "senses") + " damage. If youre in a beastial form, choose a bonus effect"
+            skilldesc.querySelector(".tooltiptext").textContent = "Beastial Rend \nCost: 6 Mana, 2 AP \nRange: 1 Square \n \nYou can use this skill while in a changed form \n \nYou make a wild attack against a creature within range. On hit, you deal 2d12 + Body/Senses bludgeoning, piercing or slashing damage (your choice). If you're in a changed form from the Wildshape skill or other skills, you may choose one bonus effect: \n \nReduce AP cost of this skill by 1 \n \nChoose another target within range, on hit (using the same attack roll) they take 1d12 + Body/Senses damage \n \nInflict Frail equal to half the damage dealt \n \nChange your Perennial Might season to any season of your choice";
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("beastrend+"):
+            skillsel.options[skillsel.options.length] = new Option('Beastial Rend+ (I)', 'beastrend+')
+            skilldesc.childNodes[0].textContent = "+" + tohitf("body", true, "senses") + " to hit. On hit, deal 2d12+" + tohitf("body", false, "senses") + " damage. If youre in a beastial form, choose a bonus effect"
+            skilldesc.querySelector(".tooltiptext").textContent = "Beastial Rend+ \nCost: 16 Mana, 1 AP \nRange: 1 Square \n \nYou can use this skill while in a changed form \n \nYou make a wild attack against a creature within range. On hit, you deal 2d12 + Body/Senses bludgeoning, piercing or slashing damage (your choice). If you're in a changed form from the Wildshape skill or other skills, you may choose one bonus effect: \n \nChoose two additional targets within range, on hit (using the same attack roll) they take 1d12 + Body/Senses damage \n \nInflict Frail and equal to the damage dealt \n \nChange your Perennial Might season to any season of your choice";
+            skillmana.textContent = "16 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("telekinesis"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true, "mind")) + " Body saving throw or deal 2d8 damage, restrain and move target."
+            skilldesc.querySelector(".tooltiptext").textContent = "Telekinesis \nCost: 4 Mana, 1 AP \nRange: 8 squares \n \nYou seize a creature with invisible force \n \nThe target must make a body saving throw. On a failure, the target takes 2d8 Bludgeoning damage, becomes restrained until the end of their next turn. On a success, the target takes half damage, and you may move the target 2 squares to an unoccupied space \n \nOnce on your turn, you may move the target up to 4 squares to an unoccupied space";
+            skillmana.textContent = "4 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("telekinesis+"):
+            skillsel.options[skillsel.options.length] = new Option('Telekinesis+ (I)', 'telekinesis+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true, "mind")) + " Body saving throw or deal 2d12 damage, restrain and move target. Reroll save each turn"
+            skilldesc.querySelector(".tooltiptext").textContent = "Telekinesis+ \nCost: 15 Mana, 1 AP\nRange: 8 squares\n \nYou seize a creature with invisible force \n \nThe target must make a body saving throw. On a failure, the target takes 2d12 Bludgeoning damage and becomes restrained. On a success, the target takes half damage, and you may move the target 2 squares \n \nAt the end of each of the creatures turns, they may remake the saving throw, ending the effect on a success. \n \nOnce on each of your turns, you may move the target up to 4 squares to an unoccupied space, and for 1 AP, you may force the target to make another Body saving throw, or take another 2d12 damage on a failure, or half on a success";
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("parastatic"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true, "mind")) + " Fortune saving throw in a 3 square cone or deal 5d4 damage and inflict 1d4 dazed"
+            skilldesc.querySelector(".tooltiptext").textContent = "Paralyzing Static\nCost: 6 Mana, 2 AP\nRange: 3 square cone\n \nPsychic lightning springs from your fingertips to zap the nervous systems of your enemies. \n \nAll creatures in a 3 square cone originating from you must make a Fortune saving throw or take 5d4 lightning damage and 1d4 dazed on a failure, or half damage only on a success";
+            skillmana.textContent = "6 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("parastatic+"):
+            skillsel.options[skillsel.options.length] = new Option('Paralying Static+ (I)', 'parastatic+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true, "mind")) + " Fortune saving throw in a 3 square cone or deal 8d4 damage and stun, daze on success"
+            skilldesc.querySelector(".tooltiptext").textContent = "Paralyzing Static+ \nCost: 18 Mana, 2 AP \nRange: 3 square cone \n \nPsychic lightning springs from your fingertips to zap the nervous systems of your enemies. \n \nAll creatures in a 3 square cone originating from you must make a Fortune saving throw or take 8d4 lightning damage and become stunned until the end of their next turn on a failure, or half damage only on a success";
+            skillmana.textContent = "18 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("psiparoxysm"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Gain +1 Clarity, afterwards an effect occurs depending on your new total Clarity"
+            skilldesc.querySelector(".tooltiptext").textContent = "Psionic Paroxysm \nCost: 7 Mana, 2 AP \nRange: self \n \nYou force your mind into a violent state of psychic overactivity.\n \nYou gain +1 Clarity. Depending on your new total clarity, a unique effect occurs: \n \n1 Clarity, Stall: Inflict 1 dazed to all creatures within 1 square of yourself \n \n2 Clarity, Rupture: Inflict 2 dazed and deal 2d4 Arcane damage to all creatures within 1 square of yourself \n \n3 Clarity, Detonation: Inflict 3 dazed and deal 2d6 Arcane damage to all creatures within 1 square of yourself. All targets then gain Weak, Frail and Volatile equal to half the damage dealt \n \nIf you were already at 3 Clarity when using this skill, you must spend 3 Clarity (applying the 3 Clarity bonus to the skill from your level 1 Class Feature). Then apply the effects of the \"3 Clarity, Detonation\" effect with double the range";
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("psiparoxysm+"):
+            skillsel.options[skillsel.options.length] = new Option('Psionic Paroxysm+ (I)', 'psiparoxysm+')
+            skilldesc.childNodes[0].textContent = "Gain +1 Clarity, afterwards an effect occurs depending on your new total Clarity"
+            skilldesc.querySelector(".tooltiptext").textContent = "Psionic Paroxysm+ \nCost: 17 Mana, 1 AP \n Range: self \n \nYou force your mind into a violent state of psychic overactivity. \n \nYou gain +1 Clarity. Depending on your new total clarity, a unique effect occurs: \n \n1 Clarity, Stall: Inflict 2 dazed to all creatures of your choice within 2 squares of yourself \n \n2 Clarity, Rupture: Inflict 3 dazed and deal 2d6 Arcane damage to all creatures of your choice within 2 squares of yourself \n \n3 Clarity, Detonation: Inflict 4 dazed and deal 2d8 Arcane damage to all creatures of your choice within 2 squares of yourself. All targets then gain Weak, Frail and Volatile equal to half the damage dealt\n \nIf you were already at 3 Clarity when using this skill, you must spend 3 Clarity (applying the 3 Clarity bonus to the skill from your level 1 Class Feature). Then apply the effects of the \"3 Clarity, Detonation\" effect with double the range";
+            skillmana.textContent = "17 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("vengefulfate"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Summon an echo that repeats the action an enemy has used, lasts 3 turns"
+            skilldesc.querySelector(".tooltiptext").textContent = "Vengeful Fate \nCost: 7 Mana, 2 AP \n Range: 8 squares \n \nA manifestation of destiny emerges to punish wrongdoing. \n \nAs a reaction to you seeing the target using an attack or skill, or during your own turn, summon a fate echo adjacent to the target. The echo remembers the last action the target used when the echo was created \n \nthe echo acts right after you end your turn. \n \nDuring the echos turn, it can move up to 6 squares, and repeat the action the echo remembered when it was created. You choose the target each time. After the echo has acted 3 times, it disappears \n \nthe echo is immune to all damage and conditions, and uses the same to hit bonus or save DC as the original action that was used to make the echo";
+            skillmana.textContent = "7 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("vengefulfate+"):
+            skillsel.options[skillsel.options.length] = new Option('Vengeful Fate+ (I)', 'vengefulfate+')
+            skilldesc.childNodes[0].textContent = "Summon an echo that repeats the last action an enemy has used, Advantage against the target"
+            skilldesc.querySelector(".tooltiptext").textContent = "Vengeful Fate \nCost: 15 Mana, 2 AP \nRange: 8 squares \n \nA manifestation of destiny emerges to punish wrongdoing. \n \nAs a reaction to you seeing the target using an attack or skill, or during your own turn, summon a fate echo adjacent to the target. The echo remembers the last action the target used when the echo was created \n \nthe echo acts right after you end your turn. \n \nDuring the echos turn, it can move up to 12 squares, and repeat the action the echo remembered when it was created. You choose the target each time. After the echo has acted 5 times, it disappears \n \nIf the echo targets the original creature that was used to make the echo, it has advantage on all attack rolls against the target, and the target has disadvantage on their saving throws against the echo \n \nthe echo is immune to all damage and conditions, and uses the same to hit bonus or save DC as the target that was used to make the echo";
+            skillmana.textContent = "6 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("cutfate"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true, "fortune")) + " Fortune saving throw or take 3d6 damage, and choose what strand of fate to cut"
+            skilldesc.querySelector(".tooltiptext").textContent = "Cut Through Fate \nCost: 6 Mana, 1 AP \nRange: 4 squares \n \nYou conjure a passage to a targets strands of fate, and attempt to cut them to change the course of their destiny \n \nThe target must make a Fortune saving throw or take 3d6 psychic damage, or half on a success. On a failure, also choose one of three threads to cut: \n \nThread of Opportunity: The target cannot have advantage on any rolls and they cant be the target of any ally skills \n \nThread of Momentum: The targets movement is halved, and their first action each turn costs 1 additional AP \n \n Thread of Triumph: The target gains 2d6 Frail and Volatile \n \nEach thread can only be chosen once for each creature, and the first time all three threads on a creature are cut, they become stunned until the end of their next turn and you gain +1 Clarity";
+            skillmana.textContent = "5 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("cutfate+"):
+            skillsel.options[skillsel.options.length] = new Option('Cut Through Fate+ (I)', 'cutfate+')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true, "fortune")) + " Fortune saving throw or take 3d8 damage and cut a strand of fate. Can be repeated"
+            skilldesc.querySelector(".tooltiptext").textContent = "Cut Through Fate+ \nCost: 13 Mana, 1 AP \nRange: 4 squares \n \n You conjure a passage to a targets strands of fate, and attempt to cut them to change the course of their destiny \n \nThe target must make a Fortune saving throw or take 3d8 psychic damage, or half on a success. On a failure, also choose one of three threads to cut: \n \nThread of Opportunity: The target cannot have advantage on any rolls and they cant be the target of any ally skills. Their first d20 roll each turn has disadvantage \n \nThread of Momentum: The targets movement is reduced to 1, and their first skill each turn costs 1 additional AP \n \nThread of Triumph: The target gains 2d6 Frail, Volatile and Weak \n \nYou can use this skill multiple times in one turn. Each thread can only be chosen once for each creature, and the first time all three threads on a creature are cut, they become stunned until the end of their next turn and you gain +1 Clarity";
+            skillmana.textContent = "11 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("elixirvit"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Restore 3d4 Hit points, overflowing into shield, to an ally. +1d4 to attacks and saves while shielded"
+            skilldesc.querySelector(".tooltiptext").textContent = "Elixir of Vitality \nCost: 4 Mana, 1 AP \n Range: 1 square \n \nYou restore 3d4 Hit Points to an ally within range, any amount restored over the targets maximum turns into a magical shield. \n \nAs long as the target has a magical shield from this skill, they gain +1d4 to all their attack rolls and saving throws. \n \nThe magical shield lasts up to 10 minutes";
+            skillmana.textContent = "4 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("elixirvit+"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "Restore 4d4 Hit points, overflowing into shield, to an ally. +1d6 to attacks and saves while shielded"
+            skilldesc.querySelector(".tooltiptext").textContent = "Elixir of Vitality+ \nCost: 9 Mana, 1 AP \nRange: 4 squares \n \nYou restore 4d4 Hit Points to an ally within range, any amount restored over the targets maximum turns into a magical shield. \n \nAs long as the target has at least 1 magical shield from this skill, they gain +1d6 to all their attack rolls and saving throws. \n \nThe magical shield lasts until you take a rest";
+            skillmana.textContent = "9 Mana";
+            skillap.textContent = "1 AP";
+            skilluses.textContent = "";
+        break;
+        case("cursecontagion"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true)) + " Body saving throw or gain 1d6+1 Poison at the start of their turns and spread to another"
+            skilldesc.querySelector(".tooltiptext").textContent = "Curse of Contagion \nCost: 6 Mana, 2 AP \nRange: 6 squares \n \nYou choose one target within range and inflict them with a highly viral poison until the end of combat \n \nThe target must make a Body saving throw or gain 1d6 + Mastery turns of Poison now and at the start of each of the targets turns, and the nearest creature of your choice within 1 square then also gains poison equal to half the original targets total poison at the start of each of their turns \n \nIf the target succeeds on the saving throw, The target and the nearest creature of your choice within 1 square gain 1d6 turns of poison";
+            skillmana.textContent = "6 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("cursecontagion+"):
+            //skillsel.options[skillsel.options.length] = new Option('Backstab (I)', 'backstab')
+            skilldesc.childNodes[0].textContent = "DC " + parseInt(8+tohitf("mind",true)) + " Body saving throw or gain 1d8+1 Poison at the start of their turns and spread to all nearby"
+            skilldesc.querySelector(".tooltiptext").textContent = "Curse of Contagion+ \nCost: 15 Mana, 2 AP \nRange: 6 squares \n \nYou choose one target within range and inflict them with a highly viral poison until the end of combat \n \nThe target must make a Body saving throw or gain 1d8 + Mastery turns of Poison now and at the start of each of the targets turns, and all creatures of your choice within 1 square also gains poison equal to half the original targets total poison each turn. \n \nIf the target succeeds on the saving throw, The target and all creatures of your choice within 1 square gain 1d8 turns of poison";
+            skillmana.textContent = "15 Mana";
+            skillap.textContent = "2 AP";
+            skilluses.textContent = "";
+        break;
+        case("potentmind"):
+            skilldesc.childNodes[0].textContent = "If an enemy succeeds their saving throw against your basic attack, you instead deal half damage . If they fail, attack a second target within range for half damage"
+            skilldesc.querySelector(".tooltiptext").textContent = "Potent Mind(passive) \n \nIf an enemy succeeds their saving throw against your basic attack, you instead deal half damage and still apply your extra basic attack effect. \n \nIf they fail their saving throw, choose another target within range and attack them with a free basic attack. The second target automatically succeeds on your basic attack, taking half damage";
+        break;
+        case("expcon"):
+            //console.log("hiya")
+            skilldesc.childNodes[0].textContent = "At the start of combat, gain +1 Clarity"
+            skilldesc.querySelector(".tooltiptext").textContent = "Expanded Consciousness (passive) \n \nAt the start of combat, gain +1 Clarity. This is in addition to the Clarity you gain at the start of each turn";
+        break;
+        case("augury"):
+            skilldesc.childNodes[0].textContent = "roll 1d4 after a rest to get an omen from the gods. The omen is active until your next rest, where you gain a new omen."
+            skilldesc.querySelector(".tooltiptext").textContent = "Augury (passive) \n \nAt the end of each rest, roll 1d4 to receive an omen granted by the gods. Your omen remains active until your next rest or until it is replaced by another omen. You cannot gain the same omen twice in a row, rerolling if you gain the omen you already have\n \n1. Weal: A fortunate future lies ahead.\nGain +1 Clarity at the start of combats. The first time you use Clarity while having this omen, restore Hit Points equal to your Level\n\n2. Woe: Misfortune circles your path\nGain a Magical Shield equal to your Level until your next rest, but whenever you take damage, suffer additional damage equal to your Mastery\n \n3. Weal and Woe: Great gain and great loss walk hand in hand.\nOnce per turn you may make an enemy reroll a d20 roll, but every time you do this, the GM may do the same to you \n \n4. Emptiness: The strands of fate are hidden from you. Make your own fate.\nGain no immediate benefit. \n The next time you reach 3 Clarity, recover Mana equal to 2 x your Level and draw a new omen (rerolling if you roll 4), immediately gaining its effect until your next rest";
+        break;
+        case("clairvoyance"):
+            skilldesc.childNodes[0].textContent = "The first basic attack you successfully hit each turn always applies the maximum reduction to Evasion, regardless of your Clarity. On hit, also inflict Weak equal to half the damage dealt"
+            skilldesc.querySelector(".tooltiptext").textContent = "Clairvoyance (passive)\n \nThe first basic attack you successfully hit each turn always applies the maximum reduction to Evasion, regardless of your Clarity. On hit, also inflict Weak equal to half the damage dealt";
+        break;
+        case("momentum"):
+            skilldesc.childNodes[0].textContent = "The first focus you gain each turn is permanent for the rest of combat, and cannot be removed (can still be removed by your own features and skills)"
+            skilldesc.querySelector(".tooltiptext").textContent = "Momentum (passive) \n \nThe first focus you gain each turn is permanent for the rest of combat, and cannot be removed (can still be consumed as a resource by your own features and skills)";
+        break;
+        case("deflect"):
+            skilldesc.childNodes[0].textContent = "Once per turn when you're hit with an attack, you may use 1 Focus to reduce damage by 1d12+4 damage. If you reduce damage to 0, reflect it to another target. DC " + parseInt(8 + tohitf("body", true, "senses")) + " Senses saving throw"
+            skilldesc.querySelector(".tooltiptext").textContent = "Deflect Attacks (passive) \n \nOnce per turn when you're hit with an attack, you may use 1 Focus to reduce damage by 1d12+ Body/Senses damage. \n \nIf you reduce damage to 0, you may reflect it to another target. Choose a creature you can see within 1 square of yourself if the attack was a melee attack, or a creature you can see within 10 squares if the attack was a ranged attack. The target must make a Senses saving throw or be hit by the attack as if it was the original target of the attack you were hit with.";
+        break;
+        case("recklessabandon"):
+            skilldesc.childNodes[0].textContent = "During your turn, you may choose to become reckless until the start of your next turn: All your attack are made with advantage, but all attacks against you are also made with advantage"
+            skilldesc.querySelector(".tooltiptext").textContent = "Reckless Abandon (passive) \n \nAt the start of your turn or if you miss with an attack during your turn, you may choose to become reckless until the start of your next turn: All your attack are made with advantage (including the triggering attack), but all attacks against you are also made with advantage";
+        break;
+        case("bloodiedfrenzy"):
+            skilldesc.childNodes[0].textContent = "When you're at half health " + parseInt((parseInt(hp.value)+1)/2) + " or below, your first basic attack or skill each turn has advantage to hit and the Focus bonus to damage is doubled (" + focusbonus.textContent + ")"
+            skilldesc.querySelector(".tooltiptext").textContent = "Bloodied Frenzy (passive) \n \nWhen you're at half health or below, your first basic attack or skill each turn has advantage to hit and the bonus to damage granted by your Focus is doubled";
+        break;
+
 
     }
 }
@@ -555,6 +755,46 @@ function upgradeskill(skill){
         case("cursehemo"):
             skill.options[skill.options.length] = new Option('Curse of Hemorrhaging+ (I)', 'cursehemo+')
             skill.value="cursehemo+"
+        break;
+        case("naturegrasp"):
+            skill.options[skill.options.length] = new Option('Nature\'s Grasp+ (I)', 'naturegrasp+')
+            skill.value="naturegrasp+"
+        break;
+        case("bloom"):
+            skill.options[skill.options.length] = new Option('Bloom+ (I)', 'bloom+')
+            skill.value="bloom+"
+        break;
+        case("wildgrasp"):
+            skill.options[skill.options.length] = new Option('Wild Grasp+ (I)', 'wildgrasp+')
+            skill.value="wildgrasp+"
+        break;
+        case("telekinesis"):
+            skill.options[skill.options.length] = new Option('Telekinesis+ (I)', 'telekinesis+')
+            skill.value="telekinesis+"
+        break;
+        case("parastatic"):
+            skill.options[skill.options.length] = new Option('Paralyzing static+ (I)', 'parastatic+')
+            skill.value="parastatic+"
+        break;
+        case("psiparoxysm"):
+            skill.options[skill.options.length] = new Option('Psionic Paroxysm+ (I)', 'psiparoxysm+')
+            skill.value="psiparoxysm+"
+        break;
+        case("vengefulfate"):
+            skill.options[skill.options.length] = new Option('Vengeful Fate+ (I)', 'vengefulfate+')
+            skill.value="vengefulfate+"
+        break;
+        case("cutfate"):
+            skill.options[skill.options.length] = new Option('Cut Through Fate+ (I)', 'cutfate+')
+            skill.value="cutfate+"
+        break;
+        case("elixirvit"):
+            skill.options[skill.options.length] = new Option('Elixir of Vitality+ (I)', 'elixirvit+')
+            skill.value="elixirvit+"
+        break;
+        case("cursecontagion"):
+            skill.options[skill.options.length] = new Option('Curse of Contagion+ (I)', 'cursecontagion+')
+            skill.value="cursecontagion+"
         break;
     }
     sendData();

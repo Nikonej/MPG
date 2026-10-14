@@ -3,6 +3,8 @@ function eccfeatures(data){
     document.getElementById("fortitudetable").style.display = "none"
     document.getElementById("focusTable").style.display = "none"
     document.getElementById("cunningtable").style.display = "none"
+    document.getElementById("seasontable").style.display = "none"
+    document.getElementById("claritytable").style.display = "none"
     document.getElementById("manifesttable").style.display = "table"
     let mastery = parseInt((parseInt(document.getElementById("lvl").value)+1)/2)
     document.getElementById("OM1").childNodes[0].textContent = "every 2 DOTs consumed reduce damage by 1d4+" + mastery
@@ -20,7 +22,7 @@ function sanguine(data){
     data.range.textContent = "1 square"
     //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
     data.effect.childNodes[0].textContent = "On hit, inflict bleeding on the target instead of dealing normal damage.";
-    data.effect.querySelector(".tooltiptext").textContent = "When you hit a target, you inflict 2d4 + Mastery bleeding instead of dealing normal damage.";
+    data.effect.querySelector(".tooltiptext").textContent = "When you hit a target, you inflict 1d4 + Mastery bleeding instead of dealing normal damage.";
     eccskills(skill1sel, 1)
     eccskills(data.skill2sel, 1)
     eccskills(data.skill3sel, 1)
@@ -34,7 +36,29 @@ function sanguine(data){
     sanguineskills(data.skill5sel, 2)
     sanguineskills(data.skill6sel, 2)
     eccpassives(passive1sel,1)
+}
 
+function plague(data){
+    data.basicname.textContent = "Toxicity"
+    data.tohit.textContent = "+" + tohitf("", true,"", basic=true)
+    data.dmg.textContent = "1d4+" + tohitf(data.masteryStat, false,data.masteryStat, true)
+    data.range.textContent = "1 square"
+    //effect.textContent = "If the first attack hits, attack again. You can go into negative focus, dealing more damage the lower it is (up to your mastery). Currently" +" damage."
+    data.effect.childNodes[0].textContent = "On hit, inflict Poisoned on the target instead of dealing normal damage.";
+    data.effect.querySelector(".tooltiptext").textContent = "When you hit a target, you inflict 1d4 + Mastery Poisoned instead of dealing normal damage.";
+    eccskills(skill1sel, 1)
+    eccskills(data.skill2sel, 1)
+    eccskills(data.skill3sel, 1)
+    eccskills(data.skill4sel, 2)
+    eccskills(data.skill5sel, 2)
+    eccskills(data.skill6sel, 2)
+    plagueskills(skill1sel, 1)
+    plagueskills(data.skill2sel, 1)
+    plagueskills(data.skill3sel, 1)
+    plagueskills(data.skill4sel, 2)
+    plagueskills(data.skill5sel, 2)
+    plagueskills(data.skill6sel, 2)
+    eccpassives(passive1sel,1)
 }
 
 function eccskills(skillid, tier){
@@ -53,6 +77,11 @@ function eccskills(skillid, tier){
 function sanguineskills(skillid, tier){
     skillid.options[skillid.options.length] = new Option('Hemokinesis (I)', 'hemokinesis');
     skillid.options[skillid.options.length] = new Option('Curse of Hemorrhaging (I)', 'cursehemo');
+}
+
+function plagueskills(skillid, tier){
+    skillid.options[skillid.options.length] = new Option('Elixir of Vitality (I)', 'elixirvit');
+    skillid.options[skillid.options.length] = new Option('Curse of Contagion (I)', 'cursecontagion');
 }
 
 function eccpassives(skillid, tier){

@@ -4,6 +4,8 @@ function warriorfeatures(data){
     document.getElementById("cunningtable").style.display = "none"
     document.getElementById("weavetable").style.display = "none"
     document.getElementById("manifesttable").style.display = "none"
+    document.getElementById("seasontable").style.display = "none"
+    document.getElementById("claritytable").style.display = "none"
     //husk at fjerne alle andre subclass features
     let lvl = document.getElementById("lvl")
     maxfor = parseInt(lvl.value*2.5+0.99);

@@ -21,6 +21,9 @@ for (let i = 0; i < skillsel.length; i++){
         case("skill6sel"):
             skilldesc(skill6sel, skill6desc, skill6mana, skill6uses, skill6ap)
         break;
+        case("passive1sel"):
+            skilldesc(passive1sel, passive1desc,"","","")
+        break;
     }
     sendData();
 });}
@@ -105,11 +108,12 @@ function tohitf(ms, atk, ms2, basic=false){
         hit2 = tohitf(ms2, atk, "stat", basic)
         hit = parseInt((hit + hit2 + 1)/2)
     }
-    if (classs.value == "pug" && atk && ms2!="stat"){
+    if (classs.value == "pug" && atk && ms2!="stat" && subclass != "rager"){
         hit += parseInt(focusbonus.textContent)
     }
     if (subclass == "rager" && !atk && ms2!="stat"){
-        hit -= parseInt(focus.value<0?(focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value):0)
+        hit += parseInt(focusbonus.textContent)
+        //hit += parseInt(focus.value<0?(focus.value<-1*parseInt((parseInt(lvl.value)+1)/2)?-1*parseInt((parseInt(lvl.value)+1)/2):focus.value):0)
     }
     return(hit)
 }
