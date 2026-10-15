@@ -116,6 +116,42 @@ function itemtype(item){
         case("Greatclub"):
             return(["Heavy", "Once per rest on hit, the target becomes exposed until the end of their next turn.","Passive: If you miss with a basic attack, you still deal 4 damage", ""])
         break;
+        case("Page Burner"):
+            return(["Magic", "Once per rest, you may use a skill you have learned but not equipped","Once per rest, you may use an unupgraded skill as an upgraded skill, with the original Mana and AP cost.", "Once per round when you deal fire damage with a skill, refund half the mana spent on the skill."])
+        break;
+        case("Heart of the Titans"):
+            return(["Magic", "Once per rest, you may gain twice your normal mana regeneration at the start of your turn.","Once per rest, you may use your mana regen instead of your armor when using an armor slot.", "You can use the Judgment of the Titans skill once per rest. You can use this skill even if it is unequipped"])
+        break;
+        case("Dagger of Venom"):
+            return(["Light", "Passive: Basic attacks can be thrown with a range of 4 squares when using the dagger","Once per rest, you can make a free basic attack after you use a skill or basic attack", "Once per turn, deal +1d4 poison damage \nOnce per rest, deal poison DOT instead of normal damage on a hit"])
+        break;
+        case("Staff of the Serpent"):
+            return(["Magic", "Once per rest, you may reroll a missed attack roll.","Once per rest, you may double the range of one skill or basic attack.", "Once per rest, for 1 AP, you may charm a snake or Naga within 1 square. The target must make a DC " + parseint(8 + tohitf("", true, "", 1)) + " Mind saving throw or become charmed by you until you attack it or after 1 hour"])
+        break;
+        case("Coilbinder"):
+            return(["Balanced", "Once per turn on a hit, you may move your target up two 2 squares.","Passive: Your attack range is increased by 1 square", "Once per turn, you may grapple the target on a hit. While grappling someone with the whip, you can’t use it again until the grapple ends."])
+        break;
+        case("The Axe"):
+            return(["Balanced", "Once per rest on hit, you can inflict 1d6 bleeding	","Once per rest, you may target 3 creatures within range with your basic attack", ""])
+        break;
+        case("Sanctity"):
+            return(["Heavy", "Once per turn when a creature leaves your basic attack range, you may attack them with a free basic attack","Once per rest, you may target 4 creatures within range with your basic attack", "+3 to attack and damage rolls. Once per turn when you kill a creature, you may move the creature up to its own movement and make it make one attack or skill it would be able to use."])
+        break;
+        case("Moonblade"):
+            return(["Balanced", "Once per turn when a creature leaves your basic attack range, you may attack them with a free basic attack","Once per rest on hit, the target becomes exposed until the end of their next turn.", "This weapon gains effects as its wielder becomes more powerful (every other level)."])
+        break;
+        case("Stonehowl"):
+            return(["Magic", "Once per rest when you use a skill, you may fill all remaining Wordsmith slots with one note (Harmonarch)","Once per rest, you may gain twice your normal mana regeneration at the start of your turn.", "You can use the Echo of Command skill once per rest. You can use this skill even if it is unequipped."])
+        break;
+        case("Musket"):
+            return(["Heavy", "Passive: While prone, you dont suffer disadvantage from using your basic attack multiple times","Once per rest on hit, the target becomes exposed until the end of their next turn.", ""])
+        break;
+        case("Blunderbuss"):
+            return(["Heavy", "Once per rest, you may target enemies in a 3 square cone with a basic attack","Once per rest on hit, inflict 1d4 dazed. If within 1 square, inflict 2d4 instead", ""])
+        break;
+        case("Flintlock"):
+            return(["Light", "Each turn, you can use your basic attack twice before gaining disadvantage.","Once per rest, you can use a basic attack after you use a skill or basic attack at no cost.", ""])
+        break;
         case("Leather Armor"):
             armorscorebonus += 1;
             armorcountbonus += 1;
@@ -150,8 +186,123 @@ function itemtype(item){
             armorscorebonus += 1;
             armorcountbonus += 2;
             movementbonus += 0;
-            return(["Unarmored", "","", "+1 armor and +2 armor slots"])
+            return(["Unarmored", "+1 armor and +2 armor slots","", ""])
         break;
+        case("Lord Kahlazatl's Crown"):
+            armorscorebonus += 1;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Light Helmet", "Gain the Hemokinesis skill","", ""])
+        break;
+        case("Brood Matron's Circlet"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Unarmored Helmet", "Gain advantage on saving throws against poison damage","", ""])
+        break;
+        case("Skull of Terror"):
+            armorscorebonus += 1;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Unarmored Helmet", "When you get a critical hit with an attack roll, all enemies within 1 square of you become frightened by you until the end of their next turn","", ""])
+        break;
+        case("Cloak of Protection"):
+            armorscorebonus += 1;
+            armorcountbonus += 1;
+            movementbonus += 0;
+            return(["Cape", "+1 armor and armor slot","", ""])
+        break;
+        case("Cape of Cunning Flame"):
+            armorscorebonus += 1;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Cape", "+1 Evasion. ","The first creature that damages you each turn gains 1d4 burning", ""])
+        break;
+        case("Molted Cloak"):
+            armorscorebonus += 1;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Cape", "Once per rest when you take damage, you can shed this cloak to reduce damage by 1d12 + Your Level, leaving it behind. It regenerates after a rest.","", ""])
+        break;
+        case("Cloak of Billowing"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Cape", "While wearing this cloak, you can make it billow dramatically, gaining advantage to intimidate or inspire","", ""])
+        break;
+        case("Frostborne Gauntlets"):
+            armorscorebonus += 1;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Light Gloves", "Whenever you reduce the movement of an enemy, also deal that much cold damage, +1 armor","", ""])
+        break;
+        case("Chain Gauntlets"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Light Gloves", "Once per round, give a melee attack +2 range","", ""])
+        break;
+        case("Serpent’s Whisper"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Amulet", "You can speak to snakes and Nagas.","Once per rest when you would take poison damage, take no damage and restore that many hit points instead", ""])
+        break;
+        case("Amulet of the Stag"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Amulet", "Your next crit has +2 crit damage. To recharge the effect after its used, you must have an equal amount of Hit Points and Mana during one of your turns","", ""])
+        break;
+        case("Quicksilver Ampule"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Amulet", "When you rest, you may restore 2 Armor Slots to an ally or yourself","", ""])
+        break;
+        case("Sszindaleth’s Eye"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Ring", "You can hold your breath for 30 minutes, and gain no movement penalty underwater","", ""])
+        break;
+        case("Nullifying Ring"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Ring", "Once per combat, turn a friendly critical hit into a regular hit. Until the end of your turn, none of your attacks can miss.","", ""])
+        break;
+        case("Ring of Omoglesh"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Ring", "You have +1 Evasion.","Cursed: A powerful fiend has become your nemesis and knows your location at all times. Until they are killed, you cannot remove the ring", ""])
+        break;
+        case("Molten Belt"):
+            armorscorebonus += 1;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Medium Belt", "Resistance to fire damage.","First time you take fire damage each combat, gain +1 AP at the start of turn", "+1 armor"])
+        break;
+        case("Scales of Sszindaleth"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Light Belt", "1 AP action to gain Immunity to acid, poison, psychic or necrotic damage (your choice) until the start of your next turn. Afterwards, immediately take 1d6 damage of that damage type","", ""])
+        break;
+        case("Boots of Speed"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Light Boots", "Once per rest, double your speed","", ""])
+        break;
+        case("Boots of Gripping"):
+            armorscorebonus += 0;
+            armorcountbonus += 0;
+            movementbonus += 0;
+            return(["Unarmored Boots", "You can walk on walls and ceilings","", ""])
+        break;
+
 
     }
 }

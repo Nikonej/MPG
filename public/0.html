@@ -899,6 +899,25 @@
         <li><input type="button" width="20px" value="+" id="musket" onclick="additem('Musket')"></input> <label for="musket">Musket		</label></li>
         <li><input type="button" width="20px" value="+" id="blunderbuss" onclick="additem('Blunderbuss')"></input> <label for="blunderbuss">Blunderbuss		</label></li>
         <li><input type="button" width="20px" value="+" id="flintlock" onclick="additem('Flintlock')"></input> <label for="flintlock">Flintlock		</label></li>
+        <li><input type="button" width="20px" value="+" id="lordkahlazatlscrown" onclick="additem('Lord Kahlazatl\'s Crown')"></input> <label for="lordkahlazatlscrown">Lord Kahlazatl's Crown</label></li>
+        <li><input type="button" width="20px" value="+" id="broodmatronscirclet" onclick="additem('Brood Matron\'s Circlet')"></input> <label for="broodmatronscirclet">Brood Matron’s Circlet</label></li>
+        <li><input type="button" width="20px" value="+" id="skullofterror" onclick="additem('Skull of Terror')"></input> <label for="skullofterror">Skull of Terror</label></li>
+        <li><input type="button" width="20px" value="+" id="cloakofprotection" onclick="additem('Cloak of Protection')"></input> <label for="cloakofprotection">Cloak of Protection</label></li>
+        <li><input type="button" width="20px" value="+" id="capeofcunningflame" onclick="additem('Cape of Cunning Flame')"></input> <label for="capeofcunningflame">Cape of Cunning Flame</label></li>
+        <li><input type="button" width="20px" value="+" id="moltedcloak" onclick="additem('Molted Cloak')"></input> <label for="moltedcloak">Molted Cloak</label></li>
+        <li><input type="button" width="20px" value="+" id="cloakofbillowing" onclick="additem('Cloak of Billowing')"></input> <label for="cloakofbillowing">Cloak of Billowing</label></li>
+        <li><input type="button" width="20px" value="+" id="frostbornegauntlets" onclick="additem('Frostborne Gauntlets')"></input> <label for="frostbornegauntlets">Frostborne Gauntlets	</label></li>
+        <li><input type="button" width="20px" value="+" id="chaingauntlets" onclick="additem('Chain Gauntlets')"></input> <label for="chaingauntlets">Chain Gauntlets	</label></li>
+        <li><input type="button" width="20px" value="+" id="serpentswhisper" onclick="additem('Serpent’s Whisper')"></input> <label for="serpentswhisper">Serpent’s Whisper	</label></li>
+        <li><input type="button" width="20px" value="+" id="amuletofthestag" onclick="additem('Amulet of the Stag')"></input> <label for="amuletofthestag">Amulet of the Stag	</label></li>
+        <li><input type="button" width="20px" value="+" id="quicksilverampule" onclick="additem('Quicksilver Ampule')"></input> <label for="quicksilverampule">Quicksilver Ampule	</label></li>
+        <li><input type="button" width="20px" value="+" id="sszindaleths eye" onclick="additem('Sszindaleth’s Eye')"></input> <label for="sszindaleths eye">Sszindaleth’s Eye	</label></li>
+        <li><input type="button" width="20px" value="+" id="nullifyingring" onclick="additem('Nullifying Ring')"></input> <label for="nullifyingring">Nullifying Ring	</label></li>
+        <li><input type="button" width="20px" value="+" id="ringofomoglesh" onclick="additem('Ring of Omoglesh')"></input> <label for="ringofomoglesh">Ring of Omoglesh	</label></li>
+        <li><input type="button" width="20px" value="+" id="moltenbelt" onclick="additem('Molten Belt')"></input> <label for="moltenbelt">Molten Belt	</label></li>
+        <li><input type="button" width="20px" value="+" id="scalesofsszindaleth" onclick="additem('Scales of Sszindaleth')"></input> <label for="scalesofsszindaleth">Scales of Sszindaleth	</label></li>
+        <li><input type="button" width="20px" value="+" id="boots of speed" onclick="additem('Boots of Speed')"></input> <label for="boots of speed">Boots of Speed	</label></li>
+        <li><input type="button" width="20px" value="+" id="boots of gripping" onclick="additem('Boots of Gripping')"></input> <label for="boots of gripping">Boots of Gripping	</label></li>
       </ul>
     </td></table>
     <table id="equipped" style="display: table;"> 
@@ -939,6 +958,20 @@
         <td id="helmet1">42</td>
         <td id="helmet2">43</td>
         <td id="helmeteff">44</td>
+      </tr>
+      <tr>
+        <td>gloves</td>
+        <td id="glovesitem">41</td>
+        <td id="gloves1">42</td>
+        <td id="gloves2">43</td>
+        <td id="gloveseff">44</td>
+      </tr>
+      <tr>
+        <td>boots</td>
+        <td id="bootsitem">41</td>
+        <td id="boots1">42</td>
+        <td id="boots2">43</td>
+        <td id="bootseff">44</td>
       </tr>
       <tr>
         <td>cape</td>
@@ -1659,7 +1692,7 @@
           }
           //equipment.children[0].remove()
           //ownequipment.length = 0;
-          let mainhandinuse = false, offhandinuse = false, armorinuse = false;
+          let mainhandinuse = false, offhandinuse = false, armorinuse = false, capeinuse = false, glovesinuse = false, amuletinuse = false, ringinuse1 = false, ringinuse2 = false, ringinuse3 = false, beltinuse = false, bootsinuse = false, helmetinuse = false;;
           for (let i = 0; i < data.chars[charnumber].equipment.length; i++){
             item = data.chars[charnumber].equipment[i][0].split(";")[0]
             ownequipment.push(item)
@@ -1681,20 +1714,83 @@
                 document.getElementById("main2").textContent = prop2;
                 document.getElementById("maineff").textContent = eff;
                 mainhandinuse = true;
-              } else if ((itemstype == "Magic" || itemstype == "Light" || itemstype == "Balanced"|| itemstype == "Heavy")){
+                if (itemstype == "Heavy"){
+                  offhandinuse = true;
+                  document.getElementById("offitem").textContent = "";
+                  document.getElementById("off1").textContent = "";
+                  document.getElementById("off2").textContent = "";
+                  document.getElementById("offeff").textContent = "";
+                }
+              } else if ((itemstype == "Magic" || itemstype == "Light" || itemstype == "Balanced") && !offhandinuse){
                 document.getElementById("offitem").textContent = item;
                 document.getElementById("off1").textContent = prop1;
                 document.getElementById("off2").textContent = prop2;
                 document.getElementById("offeff").textContent = eff;
                 offhandinuse = true;
-              } else if (itemstype == "Light Armor" || itemstype == "Medium Armor" || itemstype == "Heavy Armor" || itemstype == "Unarmored"){
-                document.getElementById("armoritem").textContent = item;
-                document.getElementById("armorprop1").textContent = prop1;
-                document.getElementById("armorprop2").textContent = prop2;
-                document.getElementById("armoreff").textContent = eff;
+              } else if ((itemstype == "Cape") && !capeinuse){
+                document.getElementById("capeitem").textContent = item;
+                document.getElementById("cape1").textContent = prop1;
+                document.getElementById("cape2").textContent = prop2;
+                document.getElementById("capeeff").textContent = eff;
                 //console.log(document.getElementById("armor1").textContent)
-                armorinuse = true;
-              }
+                capeinuse = true;
+              } else if ((itemstype == "Light Gloves" || itemstype == "Medium Gloves" || itemstype == "Heavy Gloves" || itemstype == "Unarmored Gloves") && !glovesinuse){
+                document.getElementById("glovesitem").textContent = item;
+                document.getElementById("gloves1").textContent = prop1;
+                document.getElementById("gloves2").textContent = prop2;
+                document.getElementById("gloveseff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                glovesinuse = true;
+              } else if ((itemstype == "Light Helmet" || itemstype == "Medium Helmet" || itemstype == "Heavy Helmet" || itemstype == "Unarmored Helmet") && !helmetinuse){
+                document.getElementById("helmetitem").textContent = item;
+                document.getElementById("helmet1").textContent = prop1;
+                document.getElementById("helmet2").textContent = prop2;
+                document.getElementById("helmeteff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                helmetinuse = true;
+              }else if (itemstype == "Amulet" && !amuletinuse){
+                document.getElementById("amuletitem").textContent = item;
+                document.getElementById("amulet1").textContent = prop1;
+                document.getElementById("amulet2").textContent = prop2;
+                document.getElementById("amuleteff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                amuletinuse = true;
+              } else if (itemstype == "Ring" && !ringinuse1){
+                document.getElementById("ring1item").textContent = item;
+                document.getElementById("ring11").textContent = prop1;
+                document.getElementById("ring12").textContent = prop2;
+                document.getElementById("ring1eff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                ringinuse1 = true;
+              } else if (itemstype == "Ring" && !ringinuse2){
+                document.getElementById("ring2item").textContent = item;
+                document.getElementById("ring21").textContent = prop1;
+                document.getElementById("ring22").textContent = prop2;
+                document.getElementById("ring2eff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                ringinuse2 = true;
+              } else if (itemstype == "Ring" && !ringinuse3){
+                document.getElementById("ring3item").textContent = item;
+                document.getElementById("ring31").textContent = prop1;
+                document.getElementById("ring32").textContent = prop2;
+                document.getElementById("ring3eff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                ringinuse3 = true;
+              } else if ((itemstype == "Light Belt" || itemstype == "Medium Belt" || itemstype == "Heavy Belt" || itemstype == "Unarmored Belt") && !beltinuse){
+                document.getElementById("beltitem").textContent = item;
+                document.getElementById("belt1").textContent = prop1;
+                document.getElementById("belt2").textContent = prop2;
+                document.getElementById("belteff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                beltinuse = true;
+              } else if ((itemstype == "Light Boots" || itemstype == "Medium Boots" || itemstype == "Heavy Boots" || itemstype == "Unarmored Boots") && !bootsinuse){
+                document.getElementById("bootsitem").textContent = item;
+                document.getElementById("boots1").textContent = prop1;
+                document.getElementById("boots2").textContent = prop2;
+                document.getElementById("bootseff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                bootsinuse = true;
+              } 
               if (!offhandinuse){
                 document.getElementById("offitem").textContent = "";
                 document.getElementById("off1").textContent = "";
@@ -1707,12 +1803,70 @@
               document.getElementById("main1").textContent = "";
               document.getElementById("main2").textContent = "";
               document.getElementById("maineff").textContent = "";
+              document.getElementById("offitem").textContent = "";
+              document.getElementById("off1").textContent = "";
+              document.getElementById("off2").textContent = "";
+              document.getElementById("offeff").textContent = "";
             }
             if (!armorinuse){
               document.getElementById("armoritem").textContent = "";
               document.getElementById("armorprop1").textContent = "";
               document.getElementById("armorprop2").textContent = "";
               document.getElementById("armoreff").textContent = "";
+            }
+            if (!bootsinuse){
+              document.getElementById("bootsitem").textContent = "";
+              document.getElementById("boots1").textContent = "";
+              document.getElementById("boots2").textContent = "";
+              document.getElementById("bootseff").textContent = "";
+            }
+            if (!helmetinuse){
+              document.getElementById("helmetitem").textContent = "";
+              document.getElementById("helmet1").textContent = "";
+              document.getElementById("helmet2").textContent = "";
+              document.getElementById("helmeteff").textContent = "";
+            }
+            if (!amuletinuse){
+              document.getElementById("amuletitem").textContent = "";
+              document.getElementById("amulet1").textContent = "";
+              document.getElementById("amulet2").textContent = "";
+              document.getElementById("amuleteff").textContent = "";
+            }
+            if (!beltinuse){
+              document.getElementById("beltitem").textContent = "";
+              document.getElementById("belt1").textContent = "";
+              document.getElementById("belt2").textContent = "";
+              document.getElementById("belteff").textContent = "";
+            }
+            if (!glovesinuse){
+              document.getElementById("glovesitem").textContent = "";
+              document.getElementById("gloves1").textContent = "";
+              document.getElementById("gloves2").textContent = "";
+              document.getElementById("gloveseff").textContent = "";
+            }
+            if (!capeinuse){
+              document.getElementById("capeitem").textContent = "";
+              document.getElementById("cape1").textContent = "";
+              document.getElementById("cape2").textContent = "";
+              document.getElementById("capeeff").textContent = "";
+            }
+            if (!ringinuse1){
+              document.getElementById("ring1item").textContent = "";
+              document.getElementById("ring11").textContent = "";
+              document.getElementById("ring12").textContent = "";
+              document.getElementById("ring1eff").textContent = "";
+            }
+            if (!ringinuse2){
+              document.getElementById("ring2item").textContent = "";
+              document.getElementById("ring21").textContent = "";
+              document.getElementById("ring22").textContent = "";
+              document.getElementById("ring2eff").textContent = "";
+            }
+            if (!ringinuse3){
+              document.getElementById("ring3item").textContent = "";
+              document.getElementById("ring31").textContent = "";
+              document.getElementById("ring32").textContent = "";
+              document.getElementById("ring3eff").textContent = "";
             }
             check.setAttribute("id",item+";"+equipment.children.length)
             entry.appendChild(check)
