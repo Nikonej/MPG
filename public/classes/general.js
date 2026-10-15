@@ -29,6 +29,132 @@ for (let i = 0; i < skillsel.length; i++){
 });}
 }
 
+function itemtype(item){
+    switch(item){
+        case("Wand"):
+            console.log("works")
+            return(["Magic", "Once per rest, you may target an additional target within range when using your basic attack", "Once per rest, you can use your basic attack twice before gaining disadvantage.", ""])
+        break;
+        case("Staff"):
+            return(["Magic", "Once per rest, you may reroll a missed attack roll.", "Once per rest, you may double the range of one skill or basic attack.", ""])
+        break;
+        case("Rod"):
+            return(["Magic", "Passive: You have +1 armor while holding this weapon", "Passive: You have +1 armor slot while holding this weapon.	", ""])
+        break;
+        case("Orb"):
+            return(["Magic", "Once per rest, you may gain twice your normal mana regeneration at the start of your turn.", "Once per rest, you may use your mana regen instead of your armor when using an armor slot.", ""])
+        break;
+        case("Tome"):
+            return(["Magic", "Once per rest, you may use a skill you have learned but not equipped", "Once per rest, you may use an unupgraded skill as an upgraded skill, with the original Mana and AP cost.", ""])
+        break;
+        case("Crystal"):
+            return(["Magic", "Once per rest, you may regain 1 AP.", "You can go into negative mana once, up to 3 (level+mana regen). You regain the ability to do so every time you get max mana	", ""])
+        break;
+        case("Scepter"):
+            return(["Magic", "Once per rest, you may make an enemy reroll a saving throw on one of your attacks or skills.","Once per rest, you may reroll the damage of one skill or basic attack.", ""])
+        break;
+        case("Dagger"):
+            return(["Light", "Passive: Basic attacks can be thrown with a range of 4 squares when using the dagger", "Once per rest, you can make a free basic attack after you use a skill or basic attack",""])
+        break;
+        case("Handaxe"):
+            return(["Light", "Passive: Basic attacks can be thrown with a range of 4 squares when using the handaxe","Once per rest, you can use your basic attack twice before gaining disadvantage.",""])
+        break;
+        case("Mace"):
+            return(["Light", "Once per rest on hit, reduce the target’s movement by half until the end of their next turn.","Once per rest on hit, you can inflict 1d4 turns of dazed",""])
+        break;
+        case("Sickle"):
+            return(["Light", "Once per rest, you may target 2 creatures within range with your basic attack", "Once per rest, you may deal turns of bleeding instead of a basic attacks normal damage type.", ""])
+        break;
+        case("Scimitar"):
+            return(["Light", "Once per rest, you can use your basic attack twice before gaining disadvantage.", "Once per rest on hit, you can inflict 1d6 weak.", ""])
+        break;
+        case("Shortsword"):
+            return(["Light", "Once per turn when a creature leaves your basic attack range, you may attack them with a free basic attack		Once per rest when a creature misses you with an attack, you may attack them with a free basic attack. On a hit, they can't attack you again until the end of their turn.", ""])
+        break;
+        case("Whip"):
+            return(["Light","Once per turn on a hit, you may move your target up two 2 squares.", "Passive: Your attack range is increased by 1 square", ""])
+        break;
+        case("Quarterstaff"):
+            return(["Balanced", "Once per rest on hit, you may attempt to topple the target prone (DC " + tohitf("",true,"",1) + ")", "Once per rest on hit, you can inflict 1d4 turns of dazed",""])
+        break;
+        case("Spear"):
+            return(["Balanced", "Passive: Basic attacks can be thrown with a range of 6 squares when using the spear", "Passive: Your attack range is increased by 1 square", ""])
+        break;
+        case("Flail"):
+            return(["Balanced", "Once per rest on hit, you may attempt to disarm the target (DC " + tohitf("",true,"",1) + ")", "Passive: If you miss with a basic attack, you still deal 4 damage	", ""])
+        break;
+        case("Longsword"):
+            return(["Balanced","Once per turn when a creature leaves your basic attack range, you may attack them with a free basic attack","Once per rest on hit, the target becomes exposed until the end of their next turn.", ""])
+        break;
+        case("Rapier"):
+            return(["Balanced","Once per rest on hit, you can inflict 1d6 weak.","Once per rest, you may gain advantage on your attack.",""])
+        break;
+        case("Trident"):
+            return(["Balanced", "Once per rest, your attack range is increased by 1 square, and you may target up to two targets in a straight line with a basic attack.", "Once per rest on hit, you may attempt to disarm the target (DC " + tohitf("",true,"",1) + ")", ""])
+        break;
+        case("Waraxe"):
+            return(["Balanced", "Once per rest on hit, you can inflict 1d6 bleeding", "Once per rest, you may target 3 creatures within range with your basic attack",""])
+        break;
+        case("Warhammer"):
+            return(["Balanced", "Once per round on hit, you may push the target 2 squares away from you","Once per rest on hit, you can inflict 1d4 frail",""])
+        break;
+        case("Glaive"):
+            return(["Heavy", "Passive: Your attack range is increased by 1 square","Once per rest, you may target 3 creatures within range with your basic attack",""])
+        break;
+        case("Greataxe"):
+            return(["Heavy", "Once per rest on hit, you can inflict 2d4 bleeding", "Once per rest, you may target 4 creatures within range with your basic attack",""])
+        break;
+        case("Greatsword"):
+            return(["Heavy", "Once per turn when a creature leaves your basic attack range, you may attack them with a free basic attack", "Once per rest, you may target 4 creatures within range with your basic attack",""])
+        break;
+        case("Greathammer"):
+            return(["Heavy", "Once per rest on hit, you can inflict 1d6 turns of dazed", "Once per rest on hit, the target becomes crippled until the end of their next turn.", ""])
+        break;
+        case("Lance"):
+            return(["Heavy", "Once per rest, you deal double damage on a basic attack if you move at least 4 squares in a straight line immediately before attacking.","Passive: Your attack range is increased by 1 square, and once per rest you may target up to two targets in a straight line with a basic attack.", ""])
+        break;
+        case("Greatclub"):
+            return(["Heavy", "Once per rest on hit, the target becomes exposed until the end of their next turn.","Passive: If you miss with a basic attack, you still deal 4 damage", ""])
+        break;
+        case("Leather Armor"):
+            armorscorebonus += 1;
+            armorcountbonus += 1;
+            movementbonus += 0;
+            return(["Light Armor", "","", ""])
+        break;
+        case("Elven Armor"):
+            armorscorebonus += 1;
+            armorcountbonus += 2;
+            movementbonus += 0;
+            return(["Medium Armor", "","", ""])
+        break;
+        case("Chain Shirt"):
+            armorscorebonus += 2;
+            armorcountbonus += 2;
+            movementbonus -= 1;
+            return(["Medium Armor", "-1 movement","", ""])
+        break;
+        case("Scale Mail"):
+            armorscorebonus += 2;
+            armorcountbonus += 3;
+            movementbonus -= 2;
+            return(["Heavy Armor", "-2 movement","", ""])
+        break;
+        case("Plate Armor"):
+            armorscorebonus += 3;
+            armorcountbonus += 3;
+            movementbonus -= 3;
+            return(["Heavy Armor", "-3 movement","", ""])
+        break;
+        case("Bloody Binds"):
+            armorscorebonus += 1;
+            armorcountbonus += 2;
+            movementbonus += 0;
+            return(["Unarmored", "","", "+1 armor and +2 armor slots"])
+        break;
+
+    }
+}
 function useSkill(skillmana, skillap){
     if (mp.value >= parseInt(skillmana)){
         let freeap = 0;

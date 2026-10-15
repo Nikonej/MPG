@@ -850,13 +850,139 @@
       <ul id="equipment">
       </ul>
     </td></table>
-    <table id="items"> <td>
+    <table id="items" style="display: none;"> <td>
       Items
       <ul>
         <li><input type="button" width="20px" value="+" id="whip" onclick="additem('Whip')"></input> <label for="whip">Whip</label></li>
         <li><input type="button" width="20px" value="+" id="wand" onclick="additem('Wand')"></input> <label for="wand">Wand</label></li>
+        <li><input type="button" width="20px" value="+" id="staff" onclick="additem('Staff')"></input> <label for="staff">Staff</label></li>
+        <li><input type="button" width="20px" value="+" id="rod" onclick="additem('Rod')"></input> <label for="rod">Rod</label></li>
+        <li><input type="button" width="20px" value="+" id="orb" onclick="additem('Orb')"></input> <label for="orb">Orb	</label></li>
+        <li><input type="button" width="20px" value="+" id="tome" onclick="additem('Tome')"></input> <label for="tome">Tome	</label></li>
+        <li><input type="button" width="20px" value="+" id="crystal" onclick="additem('Crystal')"></input> <label for="crystal">Crystal	</label></li>
+        <li><input type="button" width="20px" value="+" id="scepter" onclick="additem('Scepter')"></input> <label for="scepter">Scepter	</label></li>
+        <li><input type="button" width="20px" value="+" id="dagger" onclick="additem('Dagger')"></input> <label for="dagger">Dagger	</label></li>
+        <li><input type="button" width="20px" value="+" id="handaxe" onclick="additem('Handaxe')"></input> <label for="handaxe">Handaxe	</label></li>
+        <li><input type="button" width="20px" value="+" id="mace" onclick="additem('Mace')"></input> <label for="mace">Mace	</label></li>
+        <li><input type="button" width="20px" value="+" id="sickle" onclick="additem('Sickle')"></input> <label for="sickle">Sickle	</label></li>
+        <li><input type="button" width="20px" value="+" id="scimitar" onclick="additem('Scimitar')"></input> <label for="scimitar">Scimitar	</label></li>
+        <li><input type="button" width="20px" value="+" id="shortsword" onclick="additem('Shortsword')"></input> <label for="shortsword">Shortsword	</label></li>
+        <li><input type="button" width="20px" value="+" id="quarterstaff" onclick="additem('Quarterstaff')"></input> <label for="quarterstaff">Quarterstaff	</label></li>
+        <li><input type="button" width="20px" value="+" id="spear" onclick="additem('Spear')"></input> <label for="spear">Spear	</label></li>
+        <li><input type="button" width="20px" value="+" id="flail" onclick="additem('Flail')"></input> <label for="flail">Flail	</label></li>
+        <li><input type="button" width="20px" value="+" id="longsword" onclick="additem('Longsword')"></input> <label for="longsword">Longsword	</label></li>
+        <li><input type="button" width="20px" value="+" id="rapier" onclick="additem('Rapier')"></input> <label for="rapier">Rapier	</label></li>
+        <li><input type="button" width="20px" value="+" id="trident" onclick="additem('Trident')"></input> <label for="trident">Trident	</label></li>
+        <li><input type="button" width="20px" value="+" id="waraxe" onclick="additem('Waraxe')"></input> <label for="waraxe">Waraxe	</label></li>
+        <li><input type="button" width="20px" value="+" id="warhammer" onclick="additem('Warhammer')"></input> <label for="warhammer">Warhammer	</label></li>
+        <li><input type="button" width="20px" value="+" id="glaive" onclick="additem('Glaive')"></input> <label for="glaive">Glaive	</label></li>
+        <li><input type="button" width="20px" value="+" id="greataxe" onclick="additem('Greataxe')"></input> <label for="greataxe">Greataxe		</label></li>
+        <li><input type="button" width="20px" value="+" id="greatsword" onclick="additem('Greatsword')"></input> <label for="greatsword">Greatsword		</label></li>
+        <li><input type="button" width="20px" value="+" id="greathammer" onclick="additem('Greathammer')"></input> <label for="greathammer">Greathammer		</label></li>
+        <li><input type="button" width="20px" value="+" id="lance" onclick="additem('Lance')"></input> <label for="lance">Lance		</label></li>
+        <li><input type="button" width="20px" value="+" id="greatclub" onclick="additem('Greatclub')"></input> <label for="greatclub">Greatclub		</label></li>
+        <li><input type="button" width="20px" value="+" id="leatherarmor" onclick="additem('Leather Armor')"></input> <label for="leatherarmor">Leather Armor		</label></li>
+        <li><input type="button" width="20px" value="+" id="chainshirt" onclick="additem('Chain Shirt')"></input> <label for="chainshirt">Chain Shirt		</label></li>
+        <li><input type="button" width="20px" value="+" id="scalemail" onclick="additem('Scale Mail')"></input> <label for="scalemail">Scale Mail		</label></li>
+        <li><input type="button" width="20px" value="+" id="platearmor" onclick="additem('Plate Armor')"></input> <label for="platearmor">Plate Armor		</label></li>
+        <li><input type="button" width="20px" value="+" id="elvenarmor" onclick="additem('Elven Armor')"></input> <label for="elvenarmor">Elven Armor		</label></li>
+        <li><input type="button" width="20px" value="+" id="bloodybinds" onclick="additem('Bloody Binds')"></input> <label for="bloodybinds">Bloody Binds		</label></li>
+        <li><input type="button" width="20px" value="+" id="pageburner" onclick="additem('Page Burner')"></input> <label for="pageburner">Page Burner		</label></li>
+        <li><input type="button" width="20px" value="+" id="heartofthetitans" onclick="additem('Heart of the Titans')"></input> <label for="heartofthetitans">Heart of the Titans		</label></li>
+        <li><input type="button" width="20px" value="+" id="daggerofvenom" onclick="additem('Dagger of Venom')"></input> <label for="daggerofvenom">Dagger of Venom		</label></li>
+        <li><input type="button" width="20px" value="+" id="staffoftheserpent" onclick="additem('Staff of the Serpent')"></input> <label for="staffoftheserpent">Staff of the Serpent		</label></li>
+        <li><input type="button" width="20px" value="+" id="coilbinder" onclick="additem('Coilbinder')"></input> <label for="coilbinder">Coilbinder		</label></li>
+        <li><input type="button" width="20px" value="+" id="theaxe" onclick="additem('The Axe')"></input> <label for="theaxe">The Axe		</label></li>
+        <li><input type="button" width="20px" value="+" id="sanctity" onclick="additem('Sanctity')"></input> <label for="sanctity">Sanctity		</label></li>
+        <li><input type="button" width="20px" value="+" id="moonblade" onclick="additem('Moonblade')"></input> <label for="moonblade">Moonblade		</label></li>
+        <li><input type="button" width="20px" value="+" id="stonehowl" onclick="additem('Stonehowl')"></input> <label for="stonehowl">Stonehowl		</label></li>
+        <li><input type="button" width="20px" value="+" id="musket" onclick="additem('Musket')"></input> <label for="musket">Musket		</label></li>
+        <li><input type="button" width="20px" value="+" id="blunderbuss" onclick="additem('Blunderbuss')"></input> <label for="blunderbuss">Blunderbuss		</label></li>
+        <li><input type="button" width="20px" value="+" id="flintlock" onclick="additem('Flintlock')"></input> <label for="flintlock">Flintlock		</label></li>
       </ul>
     </td></table>
+    <table id="equipped" style="display: table;"> 
+      <tr>
+        <td colspan="5" align="center">Equipped Items:</td>
+      </tr>
+      <tr>
+        <td>slot</td>
+        <td>item</td>
+        <td>property 1</td>
+        <td>property 2</td>
+        <td>effect</td>
+      </tr>
+      <tr>
+        <td>main hand</td>
+        <td id="mainitem">11</td>
+        <td id="main1">12</td>
+        <td id="main2">13</td>
+        <td id="maineff">14</td>
+      </tr>
+      <tr>
+        <td>off hand</td>
+        <td id="offitem">21</td>
+        <td id="off1">22</td>
+        <td id="off2">23</td>
+        <td id="offeff">24</td>
+      </tr>
+      <tr>
+        <td>armor</td>
+        <td id="armoritem">31</td>
+        <td id="armorprop1">32</td>
+        <td id="armorprop2">33</td>
+        <td id="armoreff">34</td>
+      </tr>
+      <tr>
+        <td>helmet</td>
+        <td id="helmetitem">41</td>
+        <td id="helmet1">42</td>
+        <td id="helmet2">43</td>
+        <td id="helmeteff">44</td>
+      </tr>
+      <tr>
+        <td>cape</td>
+        <td id="capeitem">51</td>
+        <td id="cape1">52</td>
+        <td id="cape2">53</td>
+        <td id="capeeff">54</td>
+      </tr>
+      <tr>
+        <td>belt</td>
+        <td id="beltitem">61</td>
+        <td id="belt1">62</td>
+        <td id="belt2">63</td>
+        <td id="belteff">64</td>
+      </tr>
+      <tr>
+        <td>amulet</td>
+        <td id="amuletitem">71</td>
+        <td id="amulet1">72</td>
+        <td id="amulet2">73</td>
+        <td id="amuleteff">74</td>
+      </tr>
+      <tr>
+        <td>ring 1</td>
+        <td id="ring1item">81</td>
+        <td id="ring11">82</td>
+        <td id="ring12">83</td>
+        <td id="ring1eff">84</td>
+      </tr>
+      <tr>
+        <td>ring 2</td>
+        <td id="ring2item">91</td>
+        <td id="ring21">92</td>
+        <td id="ring22">93</td>
+        <td id="ring2eff">94</td>
+      </tr>
+      <tr>
+        <td>ring 3</td>
+        <td id="ring3item">101</td>
+        <td id="ring31">102</td>
+        <td id="ring32">103</td>
+        <td id="ring3eff">104</td>
+      </tr>
+    </table>
     <script src="/socket.io/socket.io.js"></script>
       <script src="/classes/general.js"></script>
     <script src="/classes/pug.js"></script>
@@ -953,7 +1079,7 @@
         const passive1sel = document.getElementById('passive1sel'), passive1desc = document.getElementById('passive1desc');
         var subclass = "", masteryStat = "", freeupgrades = 0, statincreases = ["","","","","",""], armorcount = 1, armorslots = [false, false, false, false, false, false, false, false, false, false], ownequipment = [];
         var body = 0, senses = 0, mind = 0, fortune = 0, mastery = 1, maxhp = 0, maxmp = 0, mov=0, init=0, critchance=0, critdamage=0, clarity = 0;
-        var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0;
+        var hpbonus = 0, mpbonus = 0, critchancebonus = 0, critdamagebonus = 0, movementbonus = 0, initbonus=0, armorscorebonus=0,armorcountbonus=0;
         var sheet=0 // change for new sheet
         warrior.style.display = "none"
         wlabel.style.display = "none"
@@ -1007,10 +1133,10 @@
           mp.value = mpmax;
           sendData()
         });
-
         for (let i = 0; i < write.length; i++){
           write[i].addEventListener('change', (e) => {
             e.preventDefault();
+            console.log(write.length)
             document.getElementsByTagName("TITLE")[0].text = name.value;
             if (write[i].id=="hpchange"){
               hp.value-=parseInt(write[i].value);
@@ -1086,6 +1212,7 @@
         for (let i = 0; i < masteries.length; i++){
           masteries[i].addEventListener('change', (e) => {
            e.preventDefault();
+          console.log(write.length)
           updateStats();
           sendData();
         });}
@@ -1100,6 +1227,8 @@
         })
         function removeitem(number){
           equipment.children[number].remove()
+          //ownequipment.splice(number, 1)
+          sendData()
           
         }
         function additem(item){
@@ -1119,16 +1248,22 @@
           button.setAttribute("onclick","removeitem("+equipment.children.length+ ")")
           entry.appendChild(button);
           equipment.appendChild(entry);
+          sendData()
         }
         function itemmenu(){
-
+          if (items.style.display == "none"){
+            items.style.display = "table"
+          } else {
+            items.style.display = "none"
+          }
         }
         function sendData(){
           let equips = []
           for (let i = 0; i < equipment.children.length; i++){
-            equips.push(equipment.children[i])
-            //console.log(equipment.children[i])
+            equips.push([equipment.children[i].children[0].id, equipment.children[i].children[0].checked])
+            //console.log(equipment.children[i].children[0].id)
           }
+          //console.log(ownequipment)
           data = {name: name.value, sheet: sheet, race: race.value, classs:classs.value, subclass:subclass, body: body, senses: senses, mind: mind, fortune: fortune, masteryStat: masteryStat, lvl:lvl.value, hp:hp.value, mp:mp.value, skill1sel:skill1sel.value, skill2sel:skill2sel.value, skill3sel:skill3sel.value, skill4sel:skill4sel.value, skill5sel:skill5sel.value, skill6sel:skill6sel.value, passive1sel:passive1sel.value, focus:focus.value, cunning:cunning.value, fortitude:fortitude.value, weave: weave.value, clarity: clarity, season: season.value, ap1:ap1.checked, ap2:ap2.checked, ap3:ap3.checked, statincreases: statincreases, armorcount: armorcount, armorslots: armorslots, equipment: equips}
           socket.emit('change', data);
         }
@@ -1375,6 +1510,7 @@
             }
             if (bodyMastery.checked){
               masteryStat = "body";
+              armorscorebonus += mastery;
               //body += mastery
             } else if (sensesMastery.checked){
               masteryStat = "senses";
@@ -1450,6 +1586,7 @@
           mpregen.textContent = parseInt((mpmax+9)/10)+parseInt(lvll/2)+ (mindMastery.checked?parseInt((lvll+1)/2):0);
         }
         function update(data){
+          armorscorebonus = 0; armorcountbonus = 0; movementbonus = 0
           charnumber = 0;
           if (data.l!=1){
             charnumber=sheet;
@@ -1517,6 +1654,79 @@
           cunning.value = data.chars[charnumber].cunning
           fortitude.value = data.chars[charnumber].fortitude
           season.value = data.chars[charnumber].season
+         for (let i = 0; i < equipment.children.length; i){
+            equipment.children[i].remove()
+          }
+          //equipment.children[0].remove()
+          //ownequipment.length = 0;
+          let mainhandinuse = false, offhandinuse = false, armorinuse = false;
+          for (let i = 0; i < data.chars[charnumber].equipment.length; i++){
+            item = data.chars[charnumber].equipment[i][0].split(";")[0]
+            ownequipment.push(item)
+            let entry = document.createElement('li');
+            let check = document.createElement("input");
+            check.type = "checkbox";
+            check.addEventListener('change', (e) => {
+              sendData()
+            })
+            check.checked = data.chars[charnumber].equipment[i][1]
+            if (check.checked){
+              let stuff = itemtype(item);
+              let itemstype = stuff[0], prop1 = stuff[1], prop2 = stuff[2], eff = stuff[3];
+              //let itemstype, prop1, prop2, eff = itemtype(item);
+              console.log(item, itemstype, prop1, prop2, eff)
+              if ((itemstype == "Magic" || itemstype == "Light" || itemstype == "Balanced"|| itemstype == "Heavy") && !mainhandinuse){
+                document.getElementById("mainitem").textContent = item;
+                document.getElementById("main1").textContent = prop1;
+                document.getElementById("main2").textContent = prop2;
+                document.getElementById("maineff").textContent = eff;
+                mainhandinuse = true;
+              } else if ((itemstype == "Magic" || itemstype == "Light" || itemstype == "Balanced"|| itemstype == "Heavy")){
+                document.getElementById("offitem").textContent = item;
+                document.getElementById("off1").textContent = prop1;
+                document.getElementById("off2").textContent = prop2;
+                document.getElementById("offeff").textContent = eff;
+                offhandinuse = true;
+              } else if (itemstype == "Light Armor" || itemstype == "Medium Armor" || itemstype == "Heavy Armor" || itemstype == "Unarmored"){
+                document.getElementById("armoritem").textContent = item;
+                document.getElementById("armorprop1").textContent = prop1;
+                document.getElementById("armorprop2").textContent = prop2;
+                document.getElementById("armoreff").textContent = eff;
+                //console.log(document.getElementById("armor1").textContent)
+                armorinuse = true;
+              }
+              if (!offhandinuse){
+                document.getElementById("offitem").textContent = "";
+                document.getElementById("off1").textContent = "";
+                document.getElementById("off2").textContent = "";
+                document.getElementById("offeff").textContent = "";
+              }
+            }
+            if (!mainhandinuse){
+              document.getElementById("mainitem").textContent = "";
+              document.getElementById("main1").textContent = "";
+              document.getElementById("main2").textContent = "";
+              document.getElementById("maineff").textContent = "";
+            }
+            if (!armorinuse){
+              document.getElementById("armoritem").textContent = "";
+              document.getElementById("armorprop1").textContent = "";
+              document.getElementById("armorprop2").textContent = "";
+              document.getElementById("armoreff").textContent = "";
+            }
+            check.setAttribute("id",item+";"+equipment.children.length)
+            entry.appendChild(check)
+            let label = document.createElement("label");
+            label.innerHTML = item;
+            label.setAttribute("for",item + ";"+equipment.children.length)
+            entry.appendChild(label);
+            let button = document.createElement("button");
+            button.innerHTML = "-";
+            button.setAttribute("id",item + ":"+equipment.children.length)
+            button.setAttribute("onclick","removeitem("+equipment.children.length+ ")")
+            entry.appendChild(button);
+            equipment.appendChild(entry);
+          }
           ap1.checked = data.chars[charnumber].ap1
           ap2.checked = data.chars[charnumber].ap2
           ap3.checked = data.chars[charnumber].ap3
@@ -1548,6 +1758,7 @@
           }
           switch(data.chars[charnumber].masteryStat){
               case("body"):
+                armorscorebonus += mastery;
                 bodyMastery.checked = true
                 sensesMastery.checked = false
                 mindMastery.checked = false
@@ -1578,11 +1789,12 @@
                 fortuneMastery.checked = false
               break;
             }
-          armorscore.textContent=parseInt(parseInt(bodytxt.textContent)/2) + parseInt(parseInt(lvl.value)/2) 
+          console.log(armorscorebonus, data.chars[charnumber].body)
+          armorscore.textContent=(parseInt((parseInt(data.chars[charnumber].body)+1)/2) + armorscorebonus)
             if (bodyMastery.checked){
-            armorcount=2;
+            armorcount=2+armorcountbonus;
           } else {
-            armorcount=1;
+            armorcount=1+armorcountbonus;
           }
           for (let i = 0; i < 10; i++){
             armorslot[i].style.display = "inline"
@@ -1592,6 +1804,7 @@
           for (let i = 9; i > armorcount - 1;i--){
             armorslot[i].style.display = "none"
           }
+          movtxt.textContent = 6 + movementbonus
           displaySubclasses(data.chars[charnumber].classs, data);
           updateStats()
           classfeatures();
