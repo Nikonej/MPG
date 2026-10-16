@@ -1724,7 +1724,8 @@
               } else if ((itemstype == "Magic" || itemstype == "Light" || itemstype == "Balanced") && !offhandinuse){
                 document.getElementById("offitem").textContent = item;
                 document.getElementById("off1").textContent = prop1;
-                document.getElementById("off2").textContent = prop2;
+                document.getElementById("off2").textContent = "";
+                document.getElementById("main2").textContent = "";
                 document.getElementById("offeff").textContent = eff;
                 offhandinuse = true;
               } else if ((itemstype == "Cape") && !capeinuse){
